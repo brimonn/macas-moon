@@ -26,7 +26,10 @@ export function ReviewsSection() {
     <section id="experiencia" className="scroll-mt-24 bg-cream">
       <Container className="py-24 sm:py-32">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading title={reviewSummary.label} />
+          <SectionHeading
+            title={reviewSummary.label}
+            description="Palabras de quienes ya se quedaron, publicadas en Google Maps."
+          />
           <div className="flex items-center gap-4">
             <div>
               <p className="font-serif text-5xl leading-none font-semibold text-ink">{reviewSummary.rating}</p>
@@ -34,6 +37,9 @@ export function ReviewsSection() {
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Star key={index} className="h-4 w-4 fill-current" />
                 ))}
+              </p>
+              <p className="mt-2 text-xs font-medium tracking-wide text-muted uppercase">
+                {reviewSummary.source}
               </p>
             </div>
             <div className="ml-4 hidden gap-2 sm:flex">
@@ -75,7 +81,7 @@ export function ReviewsSection() {
                 “{review.quote}”
               </blockquote>
               <p className="mt-6 text-sm font-semibold text-olive-800">{review.name}</p>
-              <p className="text-sm text-muted">{review.country}</p>
+              <p className="text-sm text-muted">{review.source}</p>
             </article>
           ))}
         </div>

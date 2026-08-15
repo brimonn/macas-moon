@@ -10,6 +10,8 @@ type ModalProps = {
   title: string;
   children: React.ReactNode;
   className?: string;
+  headerClassName?: string;
+  bodyClassName?: string;
   size?: "md" | "lg" | "full";
 };
 
@@ -19,6 +21,8 @@ export function Modal({
   title,
   children,
   className,
+  headerClassName,
+  bodyClassName,
   size = "lg",
 }: ModalProps) {
   const titleId = useId();
@@ -67,7 +71,12 @@ export function Modal({
           className,
         )}
       >
-        <div className="flex items-center justify-between gap-4 border-b border-border-soft px-5 py-4 sm:px-8">
+        <div
+          className={cn(
+            "flex items-center justify-between gap-4 border-b border-border-soft px-5 py-4 sm:px-8",
+            headerClassName,
+          )}
+        >
           <h2 id={titleId} className="heading-card text-2xl text-ink">
             {title}
           </h2>
@@ -81,7 +90,14 @@ export function Modal({
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">{children}</div>
+        <div
+          className={cn(
+            "overflow-y-auto px-5 py-6 sm:px-8 sm:py-8",
+            bodyClassName,
+          )}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

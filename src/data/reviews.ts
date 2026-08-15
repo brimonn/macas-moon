@@ -2,62 +2,45 @@ export type Review = {
   id: string;
   quote: string;
   name: string;
-  country: string;
+  source: "Google Maps";
   rating: 5;
 };
 
 export const reviewSummary = {
-  rating: "4.9",
+  rating: "5.0",
   label: "Experiencias de nuestros huéspedes",
+  source: "Google Maps",
 };
 
 export const reviews: Review[] = [
   {
-    id: "1",
+    id: "maricela-gutierrez",
     quote:
-      "Dormimos con el sonido del bosque y nos despertamos entre nubes. Fue exactamente la pausa que necesitábamos.",
-    name: "Elena M.",
-    country: "España",
+      "El lugar es precioso! Ideal para descansar y conectar con la naturaleza !",
+    name: "Maricela Gutierrez",
+    source: "Google Maps",
     rating: 5,
   },
   {
-    id: "2",
-    quote:
-      "El jacuzzi al atardecer y la privacidad del domo hicieron que Monteverde se sintiera todavía más especial.",
-    name: "Noah K.",
-    country: "Estados Unidos",
+    id: "fab-solis",
+    quote: "Excelente lugar para compartir en pareja",
+    name: "Fab Solis",
+    source: "Google Maps",
     rating: 5,
   },
   {
-    id: "3",
-    quote:
-      "Llegamos cansados y en unas horas ya estábamos en silencio, con café y vista al verde. Un refugio de verdad.",
-    name: "Camila R.",
-    country: "Costa Rica",
+    id: "jhuneysi-c",
+    quote: "Recomendadisimo",
+    name: "Jhuneysi C",
+    source: "Google Maps",
     rating: 5,
   },
   {
-    id: "4",
+    id: "brian",
     quote:
-      "Viajamos con amigos y el espacio nos alcanzó para estar juntos sin perder la calma de la montaña.",
-    name: "Lucas P.",
-    country: "Argentina",
-    rating: 5,
-  },
-  {
-    id: "5",
-    quote:
-      "Monteverde se ve distinto cuando te quedas entre los árboles. Volveríamos solo por las noches estrelladas.",
-    name: "Sophie L.",
-    country: "Francia",
-    rating: 5,
-  },
-  {
-    id: "6",
-    quote:
-      "Todo se siente cuidado y sereno. No es un hotel: es un lugar para quedarse y bajar el ritmo.",
-    name: "Mateo S.",
-    country: "México",
+      "Excelentes instalaciones y los dueños son encantadores. Si buscas una experiencia única en la zona de Monteverde, ¡esta es una opción imperdible!",
+    name: "Brian",
+    source: "Google Maps",
     rating: 5,
   },
 ];

@@ -5,7 +5,8 @@ export const site = {
     area: "Monteverde",
     province: "Puntarenas",
     country: "Costa Rica",
-    mapsUrl: "https://maps.google.com/?q=Monteverde,+Puntarenas,+Costa+Rica",
+    mapsUrl:
+      "https://www.google.com/maps/place/Macas+Moon+Glamping/@10.3342648,-84.8540335,17z/data=!4m6!3m5!1s0x8fa01b00010bd2c1:0x46f1f988a6642100!8m2!3d10.3342648!4d-84.8540335!16s%2Fg%2F11y367hsc5",
   },
   contact: {
     whatsappUrl:

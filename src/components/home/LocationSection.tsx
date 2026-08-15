@@ -3,7 +3,6 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { unsplash } from "@/lib/images";
 import { site } from "@/lib/site";
 
 export function LocationSection() {
@@ -14,11 +13,11 @@ export function LocationSection() {
         <div className="mt-12 overflow-hidden rounded-[28px] border border-border-soft bg-sand-50">
           <div className="relative min-h-[280px] overflow-hidden sm:min-h-[380px] lg:min-h-[460px]">
             <Image
-              src={unsplash("photo-1464822759023-fed622ff2c3b")}
-              alt="Montañas alrededor de Monteverde, Costa Rica"
+              src="/assets/otros/bosque-nuboso.webp"
+              alt="Bosque nuboso de Monteverde"
               fill
               sizes="100vw"
-              className="object-cover"
+              className="location-image object-cover"
             />
             <div className="absolute inset-0 bg-olive-900/25" />
             <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">

@@ -164,6 +164,10 @@ body {
   );
 }
 
+.location-image {
+  filter: saturate(1.18) contrast(1.08) brightness(0.96);
+}
+
 @media (max-width: 639px) {
   .cta-photo-overlay {
     background: linear-gradient(

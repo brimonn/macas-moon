@@ -41,12 +41,20 @@ export function StayInfoSection() {
           <ArrowRight className="h-4 w-4" />
         </button>
       </Container>
-      <Modal open={open} onClose={() => setOpen(false)} title="Reglas del alojamiento" size="md">
-        <ul className="space-y-6">
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Reglas del alojamiento"
+        size="md"
+        headerClassName="py-[18px] sm:py-4"
+      >
+        <ul className="max-sm:divide-y max-sm:divide-border-soft/55 sm:space-y-6">
           {houseRules.map((rule) => (
-            <li key={rule.id}>
+            <li key={rule.id} className="max-sm:py-[22px] max-sm:first:pt-0 max-sm:last:pb-0">
               <h3 className="font-semibold text-ink">{rule.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">{rule.text}</p>
+              <p className="mt-1.5 text-sm leading-[1.55] text-muted sm:leading-relaxed">
+                {rule.text}
+              </p>
             </li>
           ))}
         </ul>
