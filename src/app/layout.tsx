@@ -3,6 +3,7 @@ import { Lora, Nunito_Sans } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -52,12 +53,14 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${lora.variable} ${nunito.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-warm-white font-sans text-main antialiased">
-        <Navbar />
-        <main id="contenido" className="flex-1 pb-16 md:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
+        <LanguageProvider>
+          <Navbar />
+          <main id="contenido" className="flex-1 pb-16 md:pb-0">
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </LanguageProvider>
       </body>
     </html>
   );

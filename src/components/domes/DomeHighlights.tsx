@@ -1,8 +1,13 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Dome } from "@/types/dome";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function DomeHighlights({ dome }: { dome: Dome }) {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-cream">
       <Container className="py-24 sm:py-28">
@@ -10,8 +15,8 @@ export function DomeHighlights({ dome }: { dome: Dome }) {
         <div className="mt-14 grid gap-10 sm:grid-cols-3">
           {dome.highlights.map((item) => (
             <div key={item.title} className="max-w-sm">
-              <h3 className="heading-card text-2xl text-ink">{item.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 className="heading-card text-2xl text-ink">{t(item.title)}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{t(item.text)}</p>
             </div>
           ))}
         </div>

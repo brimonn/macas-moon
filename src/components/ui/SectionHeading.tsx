@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/cn";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 type SectionHeadingProps = {
   eyebrow?: string;
@@ -17,6 +20,8 @@ export function SectionHeading({
   className,
   id,
 }: SectionHeadingProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       className={cn(
@@ -27,18 +32,18 @@ export function SectionHeading({
     >
       {eyebrow ? (
         <p className="eyebrow mb-3 text-olive-700">
-          {eyebrow}
+          {t(eyebrow)}
         </p>
       ) : null}
       <h2
         id={id}
         className="heading-section text-ink"
       >
-        {title}
+        {t(title)}
       </h2>
       {description ? (
         <p className="mt-4 text-base leading-relaxed font-normal text-muted sm:text-lg">
-          {description}
+          {t(description)}
         </p>
       ) : null}
     </div>

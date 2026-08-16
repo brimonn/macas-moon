@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { monteverdePlaces } from "@/data/monteverdePlaces";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function ExperiencesSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="min-h-screen bg-warm-white">
       <Container className="pt-32 pb-24 sm:pt-40 sm:pb-32">
@@ -33,11 +38,11 @@ export function ExperiencesSection() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <Badge>{place.category}</Badge>
-                <h3 className="heading-card mt-4 text-2xl text-ink">{place.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{place.description}</p>
+                <h3 className="heading-card mt-4 text-2xl text-ink">{t(place.name)}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{t(place.description)}</p>
                 <p className="mt-5 flex items-center gap-2 text-sm font-medium text-olive-800">
                   <MapPin className="h-4 w-4" strokeWidth={1.6} />
-                  {place.travelTime}
+                  {t(place.travelTime)}
                 </p>
                 <a
                   href={place.mapsUrl}
@@ -45,7 +50,7 @@ export function ExperiencesSection() {
                   rel="noopener noreferrer"
                   className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-olive-700 transition-colors hover:text-olive-900"
                 >
-                  Ver ubicación
+                  {t("Ver ubicación")}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>

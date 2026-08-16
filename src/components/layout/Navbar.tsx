@@ -8,6 +8,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { domes } from "@/data/domes";
+import { languageOptions, useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 
@@ -36,15 +37,18 @@ function HashLink({
 
 export function Navbar() {
   const pathname = usePathname();
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [domesOpen, setDomesOpen] = useState(false);
+  const [experiencesOpen, setExperiencesOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [language, setLanguage] = useState<"ES" | "EN">("ES");
   const [activePath, setActivePath] = useState(pathname);
   const domeMenuId = useId();
+  const experiencesMenuId = useId();
   const langMenuId = useId();
   const domeWrapRef = useRef<HTMLDivElement>(null);
+  const experiencesWrapRef = useRef<HTMLDivElement>(null);
   const langWrapRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
@@ -65,6 +69,7 @@ export function Navbar() {
     setActivePath(pathname);
     setMobileOpen(false);
     setDomesOpen(false);
+    setExperiencesOpen(false);
     setLangOpen(false);
   }
 
@@ -80,6 +85,9 @@ export function Navbar() {
       if (domeWrapRef.current && !domeWrapRef.current.contains(event.target as Node)) {
         setDomesOpen(false);
       }
+      if (experiencesWrapRef.current && !experiencesWrapRef.current.contains(event.target as Node)) {
+        setExperiencesOpen(false);
+      }
       if (langWrapRef.current && !langWrapRef.current.contains(event.target as Node)) {
         setLangOpen(false);
       }
@@ -87,6 +95,7 @@ export function Navbar() {
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setDomesOpen(false);
+        setExperiencesOpen(false);
         setLangOpen(false);
         setMobileOpen(false);
       }
@@ -121,7 +130,7 @@ export function Navbar() {
         href="#contenido"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-warm-white focus:px-4 focus:py-2"
       >
-        Saltar al contenido
+        {t("Saltar al contenido")}
       </a>
       <Container className="flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
         <Link
@@ -151,10 +160,11 @@ export function Navbar() {
               aria-controls={domeMenuId}
               onClick={() => {
                 setDomesOpen((open) => !open);
+                setExperiencesOpen(false);
                 setLangOpen(false);
               }}
             >
-              Domos
+              {t("Domos")}
               <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", domesOpen && "rotate-180")} />
             </button>
             {domesOpen ? (
@@ -172,10 +182,10 @@ export function Navbar() {
                     className="block rounded-xl px-3 py-3 text-sm text-ink transition-colors duration-200 hover:bg-sand-200"
                   >
                     <span className="block font-semibold">
-                      {dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico"}
+                      {t(dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico")}
                     </span>
                     <span className="mt-0.5 block text-xs text-muted">
-                      Hasta {dome.capacity} huéspedes
+                      {t("Hasta {count} huéspedes", { count: dome.capacity })}
                     </span>
                   </Link>
                 ))}
@@ -184,20 +194,67 @@ export function Navbar() {
                   onClick={() => setDomesOpen(false)}
                   className="mt-1 block border-t border-sand-300 px-3 pt-3 pb-2 text-xs font-bold tracking-wide text-olive-700 uppercase"
                 >
-                  Comparar ambos domos
+                  {t("Comparar ambos domos")}
                 </HashLink>
               </div>
             ) : null}
           </div>
 
-          <Link href="/experiencias" className={linkClass}>
-            Experiencias
-          </Link>
+          <div className="relative" ref={experiencesWrapRef}>
+            <div className="inline-flex items-center gap-1">
+              <HashLink
+                hash="#monteverde"
+                className={linkClass}
+                onClick={() => setExperiencesOpen(false)}
+              >
+                {t("Experiencias")}
+              </HashLink>
+              <button
+                type="button"
+                className={cn(
+                  "rounded-full p-0.5 transition-colors duration-300",
+                  solid ? "text-ink hover:bg-sand-200" : "text-warm-white hover:bg-white/10",
+                )}
+                aria-label={t("Todas las experiencias")}
+                aria-expanded={experiencesOpen}
+                aria-controls={experiencesMenuId}
+                onClick={() => {
+                  setExperiencesOpen((open) => !open);
+                  setDomesOpen(false);
+                  setLangOpen(false);
+                }}
+              >
+                <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", experiencesOpen && "rotate-180")} />
+              </button>
+            </div>
+            {experiencesOpen ? (
+              <div
+                id={experiencesMenuId}
+                role="menu"
+                className="absolute left-0 top-full mt-3 min-w-[250px] rounded-2xl border border-sand-300 bg-sand-50 p-2 shadow-soft"
+              >
+                <HashLink
+                  hash="#monteverde"
+                  onClick={() => setExperiencesOpen(false)}
+                  className="block rounded-xl px-3 py-3 text-sm font-semibold text-ink transition-colors hover:bg-sand-200"
+                >
+                  {t("Descubre Monteverde")}
+                </HashLink>
+                <Link
+                  href="/experiencias"
+                  onClick={() => setExperiencesOpen(false)}
+                  className="block rounded-xl px-3 py-3 text-sm font-semibold text-ink transition-colors hover:bg-sand-200"
+                >
+                  {t("Todas las experiencias")}
+                </Link>
+              </div>
+            ) : null}
+          </div>
           <HashLink hash="#resenas" className={linkClass}>
-            Reseñas
+            {t("Reseñas")}
           </HashLink>
           <HashLink hash="#ubicacion" className={linkClass}>
-            Ubicación
+            {t("Ubicación")}
           </HashLink>
 
           <div className="relative" ref={langWrapRef}>
@@ -206,13 +263,14 @@ export function Navbar() {
               className={cn(linkClass, "inline-flex items-center gap-1")}
               aria-expanded={langOpen}
               aria-controls={langMenuId}
-              aria-label="Seleccionar idioma"
+              aria-label={t("Seleccionar idioma")}
               onClick={() => {
                 setLangOpen((open) => !open);
                 setDomesOpen(false);
+                setExperiencesOpen(false);
               }}
             >
-              {language}
+              {language.toUpperCase()}
               <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", langOpen && "rotate-180")} />
             </button>
             {langOpen ? (
@@ -221,30 +279,21 @@ export function Navbar() {
                 role="menu"
                 className="absolute right-0 top-full mt-3 min-w-[160px] rounded-2xl border border-border-soft bg-warm-white p-2 shadow-soft"
               >
-                <button
-                  type="button"
-                  role="menuitem"
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-ink hover:bg-olive-50"
-                  onClick={() => {
-                    setLanguage("ES");
-                    setLangOpen(false);
-                  }}
-                >
-                  Español
-                  {language === "ES" ? <span className="text-olive-500">●</span> : null}
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-muted hover:bg-sand-50"
-                  onClick={() => {
-                    setLanguage("EN");
-                    setLangOpen(false);
-                  }}
-                >
-                  English
-                  <span className="text-[0.65rem] tracking-wider text-olive-700 uppercase">Pronto</span>
-                </button>
+                {languageOptions.map((option) => (
+                  <button
+                    key={option.code}
+                    type="button"
+                    role="menuitem"
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-ink hover:bg-olive-50"
+                    onClick={() => {
+                      setLanguage(option.code);
+                      setLangOpen(false);
+                    }}
+                  >
+                    {t(option.label)}
+                    {language === option.code ? <span className="text-olive-500">●</span> : null}
+                  </button>
+                ))}
               </div>
             ) : null}
           </div>
@@ -262,7 +311,7 @@ export function Navbar() {
               "flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
               solid ? "text-ink hover:bg-sand-100" : "bg-warm-white/88 text-ink",
             )}
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label={t(mobileOpen ? "Cerrar menú" : "Abrir menú")}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
           >
@@ -276,7 +325,7 @@ export function Navbar() {
           <nav className="flex min-h-[calc(100svh-4.5rem)] flex-col px-6 py-10" aria-label="Móvil">
             <div className="flex flex-col gap-6 text-3xl font-semibold text-ink">
               <div>
-                <p className="mb-3 text-3xl">Domos</p>
+                <p className="mb-3 text-3xl">{t("Domos")}</p>
                 <div className="flex flex-col gap-3 font-sans text-lg text-muted">
                   {orderedDomes.map((dome) => (
                     <Link
@@ -285,42 +334,43 @@ export function Navbar() {
                       className="hover:text-olive-700"
                       onClick={() => setMobileOpen(false)}
                     >
-                      {dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico"}
+                      {t(dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico")}
                     </Link>
                   ))}
                 </div>
               </div>
-              <Link href="/experiencias" onClick={() => setMobileOpen(false)}>
-                Experiencias
-              </Link>
+              <div>
+                <p className="mb-3 text-3xl">{t("Experiencias")}</p>
+                <div className="flex flex-col gap-3 font-sans text-lg text-muted">
+                  <HashLink hash="#monteverde" onClick={() => setMobileOpen(false)}>
+                    {t("Descubre Monteverde")}
+                  </HashLink>
+                  <Link href="/experiencias" onClick={() => setMobileOpen(false)}>
+                    {t("Todas las experiencias")}
+                  </Link>
+                </div>
+              </div>
               <HashLink hash="#resenas" onClick={() => setMobileOpen(false)}>
-                Reseñas
+                {t("Reseñas")}
               </HashLink>
               <HashLink hash="#ubicacion" onClick={() => setMobileOpen(false)}>
-                Ubicación
+                {t("Ubicación")}
               </HashLink>
             </div>
-            <div className="mt-10 flex gap-3 text-sm">
-              <button
-                type="button"
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-semibold",
-                  language === "ES" ? "bg-olive-500 text-white" : "bg-white text-ink",
-                )}
-                onClick={() => setLanguage("ES")}
-              >
-                Español
-              </button>
-              <button
-                type="button"
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-semibold",
-                  language === "EN" ? "bg-olive-500 text-white" : "bg-white text-muted",
-                )}
-                onClick={() => setLanguage("EN")}
-              >
-                English · Pronto
-              </button>
+            <div className="mt-10 flex flex-wrap gap-2 text-sm">
+              {languageOptions.map((option) => (
+                <button
+                  key={option.code}
+                  type="button"
+                  className={cn(
+                    "rounded-full px-4 py-2 text-sm font-semibold",
+                    language === option.code ? "bg-olive-500 text-white" : "bg-white text-ink",
+                  )}
+                  onClick={() => setLanguage(option.code)}
+                >
+                  {option.short}
+                </button>
+              ))}
             </div>
             <div className="mt-auto pt-12 pb-8">
               <Button href={cta.href} size="lg" className="w-full" onClick={() => setMobileOpen(false)}>

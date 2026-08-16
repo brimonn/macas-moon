@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 import type { Dome, Space } from "@/types/dome";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 function SpaceBlock({ space, className, imageClassName }: { space: Space; className?: string; imageClassName?: string }) {
+  const { t } = useLanguage();
+
   return (
     <article className={className}>
       <div className={cn("relative overflow-hidden rounded-[24px]", imageClassName)}>
@@ -16,8 +21,8 @@ function SpaceBlock({ space, className, imageClassName }: { space: Space; classN
           className="object-cover"
         />
       </div>
-      <h3 className="heading-card mt-5 text-2xl text-ink sm:text-3xl">{space.name}</h3>
-      <p className="mt-2 max-w-xl text-[0.98rem] leading-relaxed text-muted">{space.description}</p>
+      <h3 className="heading-card mt-5 text-2xl text-ink sm:text-3xl">{t(space.name)}</h3>
+      <p className="mt-2 max-w-xl text-[0.98rem] leading-relaxed text-muted">{t(space.description)}</p>
     </article>
   );
 }

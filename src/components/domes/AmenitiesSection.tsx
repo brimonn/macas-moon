@@ -6,10 +6,12 @@ import { Container } from "@/components/ui/Container";
 import { Modal } from "@/components/ui/Modal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { icons } from "@/lib/icons";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import type { Dome } from "@/types/dome";
 
 export function AmenitiesSection({ dome }: { dome: Dome }) {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
   const preview = dome.amenities.slice(0, 8);
 
   return (
@@ -22,7 +24,7 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
             return (
               <li key={amenity.id} className="flex items-start gap-3">
                 <Icon className="mt-0.5 h-5 w-5 shrink-0 text-olive-500" strokeWidth={1.5} />
-                <span className="text-sm font-medium text-ink">{amenity.label}</span>
+                <span className="text-sm font-medium text-ink">{t(amenity.label)}</span>
               </li>
             );
           })}
@@ -40,7 +42,7 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
             return (
               <li key={amenity.id} className="flex items-center gap-3">
                 <Icon className="h-5 w-5 text-olive-500" strokeWidth={1.5} />
-                <span className="text-sm font-medium text-ink">{amenity.label}</span>
+                <span className="text-sm font-medium text-ink">{t(amenity.label)}</span>
               </li>
             );
           })}

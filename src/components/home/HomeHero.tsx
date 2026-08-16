@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function HomeHero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative isolate min-h-svh overflow-hidden">
       <Image
@@ -21,10 +26,10 @@ export function HomeHero() {
             Monteverde, Costa Rica
           </p>
           <h1 className="heading-hero">
-            Tu refugio entre las montañas de Monteverde
+            {t("Tu refugio entre las montañas de Monteverde")}
           </h1>
           <p className="hero-subtitle mt-6 max-w-xl text-sand-100">
-            Una experiencia entre naturaleza, tranquilidad y comodidad.
+            {t("Una experiencia entre naturaleza, tranquilidad y comodidad.")}
           </p>
           <div className="mt-10">
             <Button href="#domos" size="lg">
@@ -37,9 +42,9 @@ export function HomeHero() {
       <a
         href="#introduccion"
         className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1 text-sand-200 sm:flex"
-        aria-label="Desplazarse a la siguiente sección"
+        aria-label={t("Explorar")}
       >
-        <span className="eyebrow text-sand-200">Explorar</span>
+        <span className="eyebrow text-sand-200">{t("Explorar")}</span>
         <ChevronDown className="h-5 w-5 motion-safe:animate-bounce" />
       </a>
     </section>

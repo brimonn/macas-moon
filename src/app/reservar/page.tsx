@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ReservationForm } from "@/components/reservar/ReservationForm";
 import { Container } from "@/components/ui/Container";
 import { getDome } from "@/data/domes";
+import { TranslatedText } from "@/i18n/LanguageProvider";
 
 export const metadata: Metadata = {
   title: "Solicita tu reserva",
@@ -24,14 +25,14 @@ export default async function ReservarPage({ searchParams }: ReservarPageProps) 
           <p className="eyebrow text-olive-700">
             Macas Moon Glamping
           </p>
-          <h1 className="heading-section mt-3 text-ink">Solicita tu reserva</h1>
+          <h1 className="heading-section mt-3 text-ink"><TranslatedText>Solicita tu reserva</TranslatedText></h1>
           <p className="mt-4 max-w-md text-[0.98rem] leading-relaxed text-muted">
-            Cuéntanos las fechas y el espacio que te gustaría. Revisamos disponibilidad y te
-            escribimos para continuar.
+            <TranslatedText>Cuéntanos las fechas y el espacio que te gustaría. Revisamos disponibilidad y te escribimos para continuar.</TranslatedText>
           </p>
           {selected ? (
             <p className="mt-6 text-sm text-olive-800">
-              Estás solicitando: <span className="font-semibold">{selected.name}</span>
+              <TranslatedText>Estás solicitando:</TranslatedText>{" "}
+              <span className="font-semibold"><TranslatedText>{selected.name}</TranslatedText></span>
             </p>
           ) : null}
         </div>

@@ -7,6 +7,7 @@ import { Modal } from "@/components/ui/Modal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { houseRules } from "@/data/houseRules";
 import { site } from "@/lib/site";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 const facts = [
   { icon: Clock3, label: "Check-in", value: site.checkIn },
@@ -16,6 +17,7 @@ const facts = [
 
 export function StayInfoSection() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section className="bg-olive-50">
@@ -26,9 +28,9 @@ export function StayInfoSection() {
             <div key={fact.label} className="rounded-[24px] bg-warm-white px-6 py-8">
               <fact.icon className="h-6 w-6 text-olive-500" strokeWidth={1.5} />
               <p className="eyebrow mt-5 text-olive-700">
-                {fact.label}
+                {t(fact.label)}
               </p>
-              <p className="heading-card mt-2 text-2xl text-ink">{fact.value}</p>
+              <p className="heading-card mt-2 text-2xl text-ink">{t(fact.value)}</p>
             </div>
           ))}
         </div>
@@ -37,7 +39,7 @@ export function StayInfoSection() {
           onClick={() => setOpen(true)}
           className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-olive-700 transition-colors duration-200 hover:text-olive-900"
         >
-          Ver reglas del alojamiento
+          {t("Ver reglas del alojamiento")}
           <ArrowRight className="h-4 w-4" />
         </button>
       </Container>
@@ -51,9 +53,9 @@ export function StayInfoSection() {
         <ul className="max-sm:divide-y max-sm:divide-border-soft/55 sm:space-y-6">
           {houseRules.map((rule) => (
             <li key={rule.id} className="max-sm:py-[22px] max-sm:first:pt-0 max-sm:last:pb-0">
-              <h3 className="font-semibold text-ink">{rule.title}</h3>
+              <h3 className="font-semibold text-ink">{t(rule.title)}</h3>
               <p className="mt-1.5 text-sm leading-[1.55] text-muted sm:leading-relaxed">
-                {rule.text}
+                {t(rule.text)}
               </p>
             </li>
           ))}

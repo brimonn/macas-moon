@@ -1,5 +1,9 @@
+"use client";
+
+import { Children } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 const variants = {
   primary:
@@ -43,7 +47,9 @@ export function Button({
   disabled,
   ariaLabel,
 }: ButtonProps) {
+  const { t } = useLanguage();
   const classes = cn(base, variants[variant], sizes[size], className);
+  const content = Children.map(children, (child) => (typeof child === "string" ? t(child) : child));
 
   if (href) {
     const isHash = href.startsWith("#");
@@ -60,14 +66,14 @@ export function Button({
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
         >
-          {children}
+          {content}
         </a>
       );
     }
 
     return (
       <Link href={href} className={classes} aria-label={ariaLabel} onClick={onClick}>
-        {children}
+        {content}
       </Link>
     );
   }
@@ -80,7 +86,7 @@ export function Button({
       disabled={disabled}
       aria-label={ariaLabel}
     >
-      {children}
+      {content}
     </button>
   );
 }

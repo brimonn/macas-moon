@@ -4,12 +4,14 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { domes } from "@/data/domes";
 import { submitReservationRequest } from "@/lib/reservations";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 type ReservationFormProps = {
   initialDome?: string;
 };
 
 export function ReservationForm({ initialDome }: ReservationFormProps) {
+  const { t } = useLanguage();
   const selectedDefault = domes.some((dome) => dome.slug === initialDome)
     ? initialDome
     : "";
@@ -50,10 +52,9 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   if (submittedUrl) {
     return (
       <div className="rounded-[24px] border border-border-soft bg-olive-50 px-6 py-10 text-center sm:px-10">
-        <p className="heading-card text-3xl text-ink">Continúa tu solicitud en WhatsApp.</p>
+        <p className="heading-card text-3xl text-ink">{t("Continúa tu solicitud en WhatsApp.")}</p>
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
-          Abrimos una conversación con los datos que completaste. Revisa el mensaje y presiona
-          enviar para solicitar disponibilidad.
+          {t("Abrimos una conversación con los datos que completaste. Revisa el mensaje y presiona enviar para solicitar disponibilidad.")}
         </p>
         <Button href={submittedUrl} size="lg" className="mt-6">
           Abrir WhatsApp nuevamente
@@ -68,7 +69,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-6">
       <label className="block">
-        <span className="text-sm font-medium text-ink">Domo seleccionado</span>
+        <span className="text-sm font-medium text-ink">{t("Domo seleccionado")}</span>
         <select
           required
           value={domeSlug}
@@ -76,11 +77,11 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           className={fieldClass}
         >
           <option value="" disabled>
-            Elige un domo
+            {t("Elige un domo")}
           </option>
           {domes.map((dome) => (
             <option key={dome.slug} value={dome.slug}>
-              {dome.name}
+              {t(dome.name)}
             </option>
           ))}
         </select>
@@ -88,7 +89,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
-          <span className="text-sm font-medium text-ink">Fecha de llegada</span>
+          <span className="text-sm font-medium text-ink">{t("Fecha de llegada")}</span>
           <input
             required
             type="date"
@@ -98,7 +99,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           />
         </label>
         <label className="block">
-          <span className="text-sm font-medium text-ink">Fecha de salida</span>
+          <span className="text-sm font-medium text-ink">{t("Fecha de salida")}</span>
           <input
             required
             type="date"
@@ -110,7 +111,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       </div>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Huéspedes</span>
+        <span className="text-sm font-medium text-ink">{t("Huéspedes")}</span>
         <input
           required
           type="number"
@@ -121,12 +122,12 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           className={fieldClass}
         />
         {selectedDome ? (
-          <span className="mt-1 block text-xs text-muted">Máximo {maxGuests} en este domo.</span>
+          <span className="mt-1 block text-xs text-muted">{t("Máximo {count} en este domo.", { count: maxGuests })}</span>
         ) : null}
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Nombre completo</span>
+        <span className="text-sm font-medium text-ink">{t("Nombre completo")}</span>
         <input
           required
           type="text"
@@ -138,7 +139,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
-          <span className="text-sm font-medium text-ink">Correo electrónico</span>
+          <span className="text-sm font-medium text-ink">{t("Correo electrónico")}</span>
           <input
             required
             type="email"
@@ -148,7 +149,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           />
         </label>
         <label className="block">
-          <span className="text-sm font-medium text-ink">Teléfono</span>
+          <span className="text-sm font-medium text-ink">{t("Teléfono")}</span>
           <input
             required
             type="tel"
@@ -160,7 +161,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       </div>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Mensaje adicional</span>
+        <span className="text-sm font-medium text-ink">{t("Mensaje adicional")}</span>
         <textarea
           rows={4}
           value={message}
@@ -170,8 +171,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       </label>
 
       <p className="rounded-2xl bg-sand-50 px-4 py-3 text-sm leading-relaxed text-muted">
-        Esta solicitud no confirma automáticamente tu reserva. Nos pondremos en contacto contigo
-        para verificar disponibilidad y continuar con el proceso.
+        {t("Esta solicitud no confirma automáticamente tu reserva. Nos pondremos en contacto contigo para verificar disponibilidad y continuar con el proceso.")}
       </p>
 
       <Button type="submit" size="lg" className="w-full sm:w-auto">

@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { domes } from "@/data/domes";
 import { site } from "@/lib/site";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-olive-900 text-sand-100">
       <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:py-20">
@@ -19,19 +24,19 @@ export function Footer() {
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-sand-300">
-            Un refugio entre las montañas de Monteverde.
+            {t("Un refugio entre las montañas de Monteverde.")}
           </p>
         </div>
 
         <div>
-          <p className="eyebrow text-sand-400">Domos</p>
+          <p className="eyebrow text-sand-400">{t("Domos")}</p>
           <ul className="mt-4 space-y-3 text-sm">
             {domes.map((dome) => (
               <li key={dome.slug}>
                 <Link href={`/domos/${dome.slug}`} className="transition-colors duration-200 hover:text-white">
-                  {dome.category === "ESCAPADA PARA DOS"
+                  {t(dome.category === "ESCAPADA PARA DOS"
                     ? "Domo 2 · Escapada para dos"
-                    : "Domo 1 · Más espacio para compartir"}
+                    : "Domo 1 · Más espacio para compartir")}
                 </Link>
               </li>
             ))}
@@ -39,33 +44,33 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="eyebrow text-sand-400">Explora</p>
+          <p className="eyebrow text-sand-400">{t("Explora")}</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
               <Link href="/experiencias" className="transition-colors duration-200 hover:text-white">
-                Experiencias
+                {t("Experiencias")}
               </Link>
             </li>
             <li>
               <Link href="/#resenas" className="transition-colors duration-200 hover:text-white">
-                Reseñas
+                {t("Reseñas")}
               </Link>
             </li>
             <li>
               <Link href="/#ubicacion" className="transition-colors duration-200 hover:text-white">
-                Ubicación
+                {t("Ubicación")}
               </Link>
             </li>
             <li>
               <Link href="/#domos" className="transition-colors duration-200 hover:text-white">
-                Elegir domo
+                {t("Elegir domo")}
               </Link>
             </li>
           </ul>
         </div>
 
         <div>
-          <p className="eyebrow text-sand-400">Contacto</p>
+          <p className="eyebrow text-sand-400">{t("Contacto")}</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
               <a

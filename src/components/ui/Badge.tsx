@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/cn";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 type BadgeProps = {
   children: React.ReactNode;
@@ -7,6 +10,9 @@ type BadgeProps = {
 };
 
 export function Badge({ children, tone = "olive", className }: BadgeProps) {
+  const { t } = useLanguage();
+  const content = typeof children === "string" ? t(children) : children;
+
   return (
     <span
       className={cn(
@@ -16,7 +22,7 @@ export function Badge({ children, tone = "olive", className }: BadgeProps) {
         className,
       )}
     >
-      {children}
+      {content}
     </span>
   );
 }

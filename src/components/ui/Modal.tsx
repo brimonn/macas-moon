@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef } from "react";
 import { X } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 
 type ModalProps = {
@@ -25,6 +26,7 @@ export function Modal({
   bodyClassName,
   size = "lg",
 }: ModalProps) {
+  const { t } = useLanguage();
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
@@ -55,7 +57,7 @@ export function Modal({
     <div className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-6">
       <button
         type="button"
-        aria-label="Cerrar"
+        aria-label={t("Cerrar")}
         className="absolute inset-0 bg-ink/45 transition-opacity duration-300"
         onClick={onClose}
       />
@@ -78,14 +80,14 @@ export function Modal({
           )}
         >
           <h2 id={titleId} className="heading-card text-2xl text-ink">
-            {title}
+            {t(title)}
           </h2>
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
             className="flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-200 hover:bg-sand-100"
-            aria-label="Cerrar modal"
+            aria-label={t("Cerrar modal")}
           >
             <X className="h-5 w-5" />
           </button>

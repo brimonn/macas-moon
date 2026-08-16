@@ -6,10 +6,12 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { reviews, reviewSummary } from "@/data/reviews";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function ReviewsSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
+  const { t } = useLanguage();
 
   function scrollByCard(direction: -1 | 1) {
     const root = scrollerRef.current;
@@ -47,7 +49,7 @@ export function ReviewsSection() {
                 type="button"
                 onClick={() => scrollByCard(-1)}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-warm-white text-ink transition-colors duration-200 hover:bg-olive-50"
-                aria-label="Reseña anterior"
+                aria-label={t("Reseña anterior")}
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -55,7 +57,7 @@ export function ReviewsSection() {
                 type="button"
                 onClick={() => scrollByCard(1)}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-warm-white text-ink transition-colors duration-200 hover:bg-olive-50"
-                aria-label="Siguiente reseña"
+                aria-label={t("Siguiente reseña")}
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

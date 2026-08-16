@@ -6,6 +6,7 @@ import { GalleryModal } from "@/components/gallery/GalleryModal";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { Dome, GalleryCategory } from "@/types/dome";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 const categoryLabels: Record<GalleryCategory, string> = {
   habitacion: "Habitación",
@@ -22,6 +23,7 @@ function findByCategory(dome: Dome, category: GalleryCategory) {
 
 export function DomeGallery({ dome }: { dome: Dome }) {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
   const tiles = useMemo(
     () => [
       { image: dome.gallery[0], label: null as string | null, className: "sm:col-span-2 sm:row-span-2" },
@@ -53,7 +55,7 @@ export function DomeGallery({ dome }: { dome: Dome }) {
               />
               {tile.label ? (
                 <span className="absolute right-3 bottom-3 rounded-full bg-warm-white/92 px-3 py-1 text-[0.72rem] font-bold tracking-[0.2em] text-olive-800 uppercase">
-                  {tile.label}
+                  {t(tile.label)}
                 </span>
               ) : null}
             </button>
@@ -69,8 +71,10 @@ export function DomeGallery({ dome }: { dome: Dome }) {
         open={open}
         onClose={() => setOpen(false)}
         images={dome.gallery}
-        labels={categoryLabels}
-        title={dome.name}
+        labels={Object.fromEntries(
+          Object.entries(categoryLabels).map(([key, label]) => [key, t(label)]),
+        ) as Record<GalleryCategory, string>}
+        title={t(dome.name)}
       />
     </section>
   );
