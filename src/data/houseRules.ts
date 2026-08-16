@@ -8,7 +8,7 @@ export const houseRules: HouseRule[] = [
   {
     id: "guests",
     title: "Máximo de huéspedes",
-    text: "La capacidad depende del domo reservado: 2 personas en el Romantic Dome y 4 en el Family Dome. No se admiten huéspedes adicionales sin aviso previo.",
+    text: "La capacidad depende del alojamiento reservado: 2 personas en el Domo 2 romántico y 4 en el Domo 1 amplio. No se admiten huéspedes adicionales sin aviso previo.",
   },
   {
     id: "pets",

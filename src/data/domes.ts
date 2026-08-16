@@ -1,4 +1,3 @@
-import { unsplash } from "@/lib/images";
 import type { Amenity, Dome, GalleryImage } from "@/types/dome";
 
 const sharedAmenities: Amenity[] = [
@@ -17,135 +16,43 @@ const sharedAmenities: Amenity[] = [
 ];
 
 const romanticGallery: GalleryImage[] = [
-  {
-    src: unsplash("photo-1449158743715-0a90ebb4d4d6"),
-    alt: "Domo romántico iluminado al atardecer entre el bosque",
-    category: "exterior",
-  },
-  {
-    src: unsplash("photo-1522771739844-6a9f6d5f14af"),
-    alt: "Habitación íntima con cama vestida en tonos cálidos",
-    category: "habitacion",
-  },
-  {
-    src: unsplash("photo-1540555700478-4be289fbecef"),
-    alt: "Jacuzzi privado rodeado de vegetación",
-    category: "jacuzzi",
-  },
-  {
-    src: unsplash("photo-1556912173-46c336c7fd55"),
-    alt: "Cocina compacta de madera con luz natural",
-    category: "cocina",
-  },
-  {
-    src: unsplash("photo-1470770841072-f978cf4d019e"),
-    alt: "Terraza del domo con vista al bosque de Monteverde",
-    category: "exterior",
-  },
-  {
-    src: unsplash("photo-1552321554-5fefe8c9ef14"),
-    alt: "Baño privado con acabados cálidos y agua caliente",
-    category: "bano",
-  },
-  {
-    src: unsplash("photo-1419242902214-272b3f66ee7a"),
-    alt: "Cielo estrellado sobre las montañas de Monteverde",
-    category: "vistas",
-  },
-  {
-    src: unsplash("photo-1510798831971-5953656ade9c"),
-    alt: "Interior acogedor del domo con luz de atardecer",
-    category: "habitacion",
-  },
-  {
-    src: unsplash("photo-1584622650111-993a426fbf0a"),
-    alt: "Momento de descanso en el jacuzzi al aire libre",
-    category: "jacuzzi",
-  },
-  {
-    src: unsplash("photo-1448375240586-882707db888b"),
-    alt: "Bosque nublado alrededor del alojamiento",
-    category: "vistas",
-  },
-  {
-    src: unsplash("photo-1556909114-f6e7ad7d3136"),
-    alt: "Detalles de la cocina para preparar un desayuno tranquilo",
-    category: "cocina",
-  },
-  {
-    src: unsplash("photo-1600566752355-35792bedcfea"),
-    alt: "Detalle del baño con toallas y luz suave",
-    category: "bano",
-  },
+  { src: "/assets/domo2/IMG_5477.webp", alt: "Domo 2 de Macas Moon", category: "exterior" },
+  { src: "/assets/domo2/IMG_5479.webp", alt: "Habitación del Domo 2", category: "habitacion" },
+  { src: "/assets/domo2/IMG_5481.webp", alt: "Interior del Domo 2", category: "habitacion" },
+  { src: "/assets/domo2/IMG_5482.webp", alt: "Cocina del Domo 2", category: "cocina" },
+  { src: "/assets/domo2/IMG_5483.webp", alt: "Baño del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_5484.webp", alt: "Detalles del Domo 2", category: "habitacion" },
+  { src: "/assets/domo2/IMG_5494.webp", alt: "Jacuzzi del Domo 2", category: "jacuzzi" },
+  { src: "/assets/domo2/IMG_5495.webp", alt: "Exterior del Domo 2", category: "exterior" },
+  { src: "/assets/domo2/IMG_5500.webp", alt: "Entorno natural del Domo 2", category: "vistas" },
+  { src: "/assets/domo2/IMG_5501.webp", alt: "Vista del Domo 2", category: "vistas" },
 ];
 
 const amplioGallery: GalleryImage[] = [
-  {
-    src: unsplash("photo-1521401830884-6c03c1c87ebb"),
-    alt: "Domo amplio abierto hacia el bosque de Monteverde",
-    category: "exterior",
-  },
-  {
-    src: unsplash("photo-1600210492486-724fe5c67fb0"),
-    alt: "Espacio interior amplio con luz natural",
-    category: "habitacion",
-  },
-  {
-    src: unsplash("photo-1584622650111-993a426fbf0a"),
-    alt: "Jacuzzi con vista hacia la vegetación",
-    category: "jacuzzi",
-  },
-  {
-    src: unsplash("photo-1556909114-f6e7ad7d3136"),
-    alt: "Cocina amplia para compartir comidas",
-    category: "cocina",
-  },
-  {
-    src: unsplash("photo-1478131143081-80f7f84ca84d"),
-    alt: "Terraza amplia entre árboles y montaña",
-    category: "exterior",
-  },
-  {
-    src: unsplash("photo-1600566753190-17f0baa2a6c3"),
-    alt: "Baño luminoso con acabados naturales",
-    category: "bano",
-  },
-  {
-    src: unsplash("photo-1464822759023-fed622ff2c3b"),
-    alt: "Vistas de montaña desde los alrededores del domo",
-    category: "vistas",
-  },
-  {
-    src: unsplash("photo-1616594039964-ae9021a400a0"),
-    alt: "Zona de descanso con dos ambientes para dormir",
-    category: "habitacion",
-  },
-  {
-    src: unsplash("photo-1540555700478-4be289fbecef"),
-    alt: "Jacuzzi para disfrutar al aire libre",
-    category: "jacuzzi",
-  },
-  {
-    src: unsplash("photo-1511497584788-876760111969"),
-    alt: "Bosque nublado de Monteverde al amanecer",
-    category: "vistas",
-  },
-  {
-    src: unsplash("photo-1556912173-46c336c7fd55"),
-    alt: "Cocina lista para preparar y compartir",
-    category: "cocina",
-  },
-  {
-    src: unsplash("photo-1552321554-5fefe8c9ef14"),
-    alt: "Baño con agua caliente y luz natural",
-    category: "bano",
-  },
+  { src: "/assets/domo1/IMG_7050.webp", alt: "Domo 1 de Macas Moon", category: "exterior" },
+  { src: "/assets/domo1/IMG_7051.webp", alt: "Exterior del Domo 1", category: "exterior" },
+  { src: "/assets/domo1/IMG_7052.webp", alt: "Entorno natural del Domo 1", category: "vistas" },
+  { src: "/assets/domo1/IMG_7055.webp", alt: "Habitación del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_7056.webp", alt: "Interior del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_7061.webp", alt: "Cocina del Domo 1", category: "cocina" },
+  { src: "/assets/domo1/IMG_7066.webp", alt: "Detalles del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_7067.webp", alt: "Baño del Domo 1", category: "bano" },
+  { src: "/assets/domo1/IMG_7068.webp", alt: "Interior amplio del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_7076.webp", alt: "Jacuzzi del Domo 1", category: "jacuzzi" },
+  { src: "/assets/domo1/IMG_7078.webp", alt: "Terraza del Domo 1", category: "exterior" },
+  { src: "/assets/domo1/IMG_7079.webp", alt: "Vista desde el Domo 1", category: "vistas" },
+  { src: "/assets/domo1/IMG_7080.webp", alt: "Espacio para compartir en el Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_7081.webp", alt: "Cocina equipada del Domo 1", category: "cocina" },
+  { src: "/assets/domo1/IMG_7085.webp", alt: "Baño privado del Domo 1", category: "bano" },
+  { src: "/assets/domo1/IMG_7087.webp", alt: "Jacuzzi y naturaleza en el Domo 1", category: "jacuzzi" },
+  { src: "/assets/domo1/IMG_7092.webp", alt: "Exterior entre el bosque del Domo 1", category: "exterior" },
+  { src: "/assets/domo1/IMG_7098.webp", alt: "Vista del bosque desde el Domo 1", category: "vistas" },
 ];
 
 export const domes: Dome[] = [
   {
     slug: "domo-romantico",
-    name: "Macas Moon Romantic Dome",
+    name: "Macas Moon Domo 2 · Romántico",
     category: "ESCAPADA PARA DOS",
     tagline: "Privacidad, tranquilidad y conexión en pareja.",
     heroTitle: "Una escapada para dos",
@@ -154,12 +61,12 @@ export const domes: Dome[] = [
     capacity: 2,
     beds: 1,
     bathrooms: 1,
-    heroImage: unsplash("photo-1449158743715-0a90ebb4d4d6"),
-    cardImage: "/assets/domo1/IMG_7055.webp",
+    heroImage: "/assets/domo2/IMG_5477.webp",
+    cardImage: "/assets/domo2/IMG_5495.webp",
     shortDescription:
       "Un refugio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
     longDescription:
-      "Un espacio recogido, silencioso y cercano al bosque. El Romantic Dome está pensado para quienes buscan privacidad, noches despacio y la sensación de estar lejos de todo, sin renunciar al confort de un buen refugio.",
+      "Un espacio recogido, silencioso y cercano al bosque. El Domo 2 está pensado para quienes buscan privacidad, noches despacio y la sensación de estar lejos de todo, sin renunciar al confort de un buen refugio.",
     conceptTitle: "Hecho para desconectar juntos",
     highlights: [
       {
@@ -195,7 +102,7 @@ export const domes: Dome[] = [
         name: "Habitación",
         description:
           "Un cuarto sereno, con cama cómoda y la vegetación como único vecino. Pensado para despertar despacio.",
-        image: unsplash("photo-1522771739844-6a9f6d5f14af"),
+        image: "/assets/domo2/IMG_5479.webp",
         layout: "full",
       },
       {
@@ -203,7 +110,7 @@ export const domes: Dome[] = [
         name: "Jacuzzi",
         description:
           "Un rincón privado para quedarse en silencio, hablar o mirar el bosque mientras el día se apaga.",
-        image: unsplash("photo-1540555700478-4be289fbecef"),
+        image: "/assets/domo2/IMG_5494.webp",
         layout: "half",
       },
       {
@@ -211,7 +118,7 @@ export const domes: Dome[] = [
         name: "Cocina",
         description:
           "Lo esencial para un desayuno largo o una cena sencilla, sin salir del refugio.",
-        image: unsplash("photo-1556912173-46c336c7fd55"),
+        image: "/assets/domo2/IMG_5482.webp",
         layout: "half",
       },
       {
@@ -219,7 +126,7 @@ export const domes: Dome[] = [
         name: "Exterior",
         description:
           "Terraza, aire fresco y la sensación de estar dentro del bosque de Monteverde.",
-        image: unsplash("photo-1470770841072-f978cf4d019e"),
+        image: "/assets/domo2/IMG_5495.webp",
         layout: "wide",
       },
       {
@@ -227,7 +134,7 @@ export const domes: Dome[] = [
         name: "Baño",
         description:
           "Un baño privado, cálido y funcional, con agua caliente después del clima de montaña.",
-        image: unsplash("photo-1552321554-5fefe8c9ef14"),
+        image: "/assets/domo2/IMG_5483.webp",
         layout: "half",
       },
     ],
@@ -242,7 +149,7 @@ export const domes: Dome[] = [
   },
   {
     slug: "domo-amplio",
-    name: "Macas Moon Family Dome",
+    name: "Macas Moon Domo 1 · Amplio",
     category: "MÁS ESPACIO PARA COMPARTIR",
     tagline: "Mayor amplitud y comodidad para disfrutar juntos.",
     heroTitle: "Un espacio para compartir",
@@ -250,12 +157,12 @@ export const domes: Dome[] = [
     capacity: 4,
     beds: 2,
     bathrooms: 1,
-    heroImage: unsplash("photo-1521401830884-6c03c1c87ebb"),
-    cardImage: "/assets/domo2/IMG_5495.webp",
+    heroImage: "/assets/domo1/IMG_7050.webp",
+    cardImage: "/assets/domo1/IMG_7055.webp",
     shortDescription:
       "Un espacio amplio entre naturaleza, pensado para disfrutar Monteverde con mayor comodidad.",
     longDescription:
-      "Más aire, más luz y más lugar para estar juntos. El Family Dome está pensado para quienes viajan en pareja, con amigos o en un pequeño grupo y quieren la calma de Monteverde sin sentirse justos.",
+      "Más aire, más luz y más lugar para estar juntos. El Domo 1 está pensado para quienes viajan en pareja, con amigos o en un pequeño grupo y quieren la calma de Monteverde sin sentirse justos.",
     conceptTitle: "Espacio para disfrutar juntos",
     highlights: [
       {
@@ -291,7 +198,7 @@ export const domes: Dome[] = [
         name: "Habitación",
         description:
           "Un ambiente más amplio para descansar, con dos camas y la sensación de espacio que pide un viaje compartido.",
-        image: unsplash("photo-1616594039964-ae9021a400a0"),
+        image: "/assets/domo1/IMG_7055.webp",
         layout: "full",
       },
       {
@@ -299,7 +206,7 @@ export const domes: Dome[] = [
         name: "Jacuzzi",
         description:
           "Para soltar el día después de caminar, observar aves o simplemente no hacer nada.",
-        image: unsplash("photo-1584622650111-993a426fbf0a"),
+        image: "/assets/domo1/IMG_7076.webp",
         layout: "half",
       },
       {
@@ -307,7 +214,7 @@ export const domes: Dome[] = [
         name: "Cocina",
         description:
           "Un espacio más cómodo para preparar café, desayunos y comidas sin prisa.",
-        image: unsplash("photo-1556909114-f6e7ad7d3136"),
+        image: "/assets/domo1/IMG_7061.webp",
         layout: "half",
       },
       {
@@ -315,7 +222,7 @@ export const domes: Dome[] = [
         name: "Exterior",
         description:
           "Una terraza amplia para estar afuera, escuchar el bosque y ver pasar las nubes de Monteverde.",
-        image: unsplash("photo-1478131143081-80f7f84ca84d"),
+        image: "/assets/domo1/IMG_7078.webp",
         layout: "wide",
       },
       {
@@ -323,7 +230,7 @@ export const domes: Dome[] = [
         name: "Baño",
         description:
           "Baño privado, luminoso y práctico, listo después de un día en la montaña.",
-        image: unsplash("photo-1600566753190-17f0baa2a6c3"),
+        image: "/assets/domo1/IMG_7067.webp",
         layout: "half",
       },
     ],

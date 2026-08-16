@@ -22,8 +22,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
+  const [submittedUrl, setSubmittedUrl] = useState("");
 
   const selectedDome = useMemo(
     () => domes.find((dome) => dome.slug === domeSlug),
@@ -32,10 +31,9 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
 
   const maxGuests = selectedDome?.capacity ?? 4;
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSending(true);
-    await submitReservationRequest({
+    const result = submitReservationRequest({
       domeSlug,
       checkIn,
       checkOut,
@@ -45,18 +43,21 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       phone,
       message,
     });
-    setSending(false);
-    setSubmitted(true);
+    setSubmittedUrl(result.whatsappUrl);
+    window.open(result.whatsappUrl, "_blank", "noopener,noreferrer");
   }
 
-  if (submitted) {
+  if (submittedUrl) {
     return (
       <div className="rounded-[24px] border border-border-soft bg-olive-50 px-6 py-10 text-center sm:px-10">
-        <p className="heading-card text-3xl text-ink">Solicitud enviada correctamente.</p>
+        <p className="heading-card text-3xl text-ink">Continúa tu solicitud en WhatsApp.</p>
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
-          Recibimos tu solicitud. Pronto te escribiremos para confirmar disponibilidad y continuar
-          con la reserva.
+          Abrimos una conversación con los datos que completaste. Revisa el mensaje y presiona
+          enviar para solicitar disponibilidad.
         </p>
+        <Button href={submittedUrl} size="lg" className="mt-6">
+          Abrir WhatsApp nuevamente
+        </Button>
       </div>
     );
   }
@@ -173,8 +174,8 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         para verificar disponibilidad y continuar con el proceso.
       </p>
 
-      <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
-        {sending ? "Enviando..." : "Enviar solicitud de reserva"}
+      <Button type="submit" size="lg" className="w-full sm:w-auto">
+        Enviar solicitud por WhatsApp
       </Button>
     </form>
   );

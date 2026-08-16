@@ -170,8 +170,8 @@ export function Navbar() {
                       className="block rounded-xl px-3 py-2.5 text-sm text-ink transition-colors duration-200 hover:bg-olive-50"
                     >
                       {dome.category === "ESCAPADA PARA DOS"
-                        ? "Escapada para dos"
-                        : "Más espacio para compartir"}
+                        ? "Domo 2 · Escapada para dos"
+                        : "Domo 1 · Más espacio para compartir"}
                     </Link>
                   ))}
                 </div>
@@ -272,8 +272,8 @@ export function Navbar() {
                     {domes.map((dome) => (
                       <Link key={dome.slug} href={`/domos/${dome.slug}`} className="hover:text-olive-700">
                         {dome.category === "ESCAPADA PARA DOS"
-                          ? "Escapada para dos"
-                          : "Más espacio para compartir"}
+                          ? "Domo 2 · Escapada para dos"
+                          : "Domo 1 · Más espacio para compartir"}
                       </Link>
                     ))}
                   </div>

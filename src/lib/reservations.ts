@@ -1,3 +1,6 @@
+import { domes } from "@/data/domes";
+import { site } from "@/lib/site";
+
 export type ReservationRequest = {
   domeSlug: string;
   checkIn: string;
@@ -11,13 +14,31 @@ export type ReservationRequest = {
 
 export type ReservationResult = {
   ok: true;
+  whatsappUrl: string;
 };
 
-export async function submitReservationRequest(
+export function submitReservationRequest(
   payload: ReservationRequest,
-): Promise<ReservationResult> {
-  // Futuro: Server Action / API → Supabase → correo de confirmación.
-  void payload;
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  return { ok: true };
+): ReservationResult {
+  const selectedDome = domes.find((dome) => dome.slug === payload.domeSlug);
+  const lines = [
+    "Hola, quisiera consultar la disponibilidad en Macas Moon.",
+    "",
+    `Domo: ${selectedDome?.name ?? payload.domeSlug}`,
+    `Llegada: ${payload.checkIn}`,
+    `Salida: ${payload.checkOut}`,
+    `Huéspedes: ${payload.guests}`,
+    "",
+    `Nombre: ${payload.name}`,
+    `Correo: ${payload.email}`,
+    `Teléfono: ${payload.phone}`,
+    payload.message ? `Mensaje: ${payload.message}` : "",
+  ].filter(Boolean);
+
+  const separator = site.contact.whatsappUrl.includes("?") ? "&" : "?";
+  const whatsappUrl = `${site.contact.whatsappUrl}${separator}text=${encodeURIComponent(
+    lines.join("\n"),
+  )}`;
+
+  return { ok: true, whatsappUrl };
 }

@@ -30,8 +30,8 @@ export function Footer() {
               <li key={dome.slug}>
                 <Link href={`/domos/${dome.slug}`} className="transition-colors duration-200 hover:text-white">
                   {dome.category === "ESCAPADA PARA DOS"
-                    ? "Escapada para dos"
-                    : "Más espacio para compartir"}
+                    ? "Domo 2 · Escapada para dos"
+                    : "Domo 1 · Más espacio para compartir"}
                 </Link>
               </li>
             ))}
