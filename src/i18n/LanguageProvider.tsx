@@ -52,6 +52,7 @@ const catalog: Record<string, Translation> = {
   "Experiencias en Monteverde": { en: "Experiences in Monteverde", fr: "Expériences à Monteverde", de: "Erlebnisse in Monteverde" },
   "Ideas para explorar el bosque nuboso, descubrir sabores locales y disfrutar la montaña durante tu estadía.": { en: "Ideas for exploring the cloud forest, discovering local flavors, and enjoying the mountains during your stay.", fr: "Des idées pour explorer la forêt nuageuse, découvrir les saveurs locales et profiter de la montagne pendant votre séjour.", de: "Ideen, um den Nebelwald zu erkunden, lokale Aromen zu entdecken und die Berge während Ihres Aufenthalts zu genießen." },
   "Ver ubicación": { en: "View location", fr: "Voir l’emplacement", de: "Standort ansehen" },
+  "Visitar sitio oficial": { en: "Visit official website", fr: "Visiter le site officiel", de: "Offizielle Website besuchen" },
   "Experiencias de nuestros huéspedes": { en: "Guest experiences", fr: "Expériences de nos hôtes", de: "Erfahrungen unserer Gäste" },
   "Palabras de quienes ya se quedaron, publicadas en Google Maps.": { en: "Words from previous guests, published on Google Maps.", fr: "Les mots de nos anciens hôtes, publiés sur Google Maps.", de: "Stimmen früherer Gäste, veröffentlicht auf Google Maps." },
   "Reseña anterior": { en: "Previous review", fr: "Avis précédent", de: "Vorherige Bewertung" },

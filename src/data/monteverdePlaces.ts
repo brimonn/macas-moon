@@ -4,8 +4,7 @@ export type PlaceCategory =
   | "Naturaleza"
   | "Gastronomía"
   | "Café"
-  | "Aventura"
-  | "Mirador";
+  | "Aventura";
 
 export type MonteverdePlace = {
   id: string;
@@ -13,8 +12,8 @@ export type MonteverdePlace = {
   category: PlaceCategory;
   description: string;
   image: string;
-  travelTime: string;
-  mapsUrl: string;
+  highlight: string;
+  websiteUrl: string;
 };
 
 export const monteverdePlaces: MonteverdePlace[] = [
@@ -23,49 +22,59 @@ export const monteverdePlaces: MonteverdePlace[] = [
     name: "Reserva Bosque Nuboso",
     category: "Naturaleza",
     description:
-      "Caminos entre musgo, nubes bajas y el silencio húmedo que define a Monteverde.",
+      "Senderos y caminatas para conocer uno de los ecosistemas más singulares de Costa Rica.",
     image: "/assets/otros/bosque-nuboso.webp",
-    travelTime: "18 min en carro",
-    mapsUrl: "https://maps.google.com/?q=Reserva+Bosque+Nuboso+Monteverde",
+    highlight: "Bosque nuboso y senderos",
+    websiteUrl: "https://cloudforestmonteverde.com/es/",
   },
   {
-    id: "soda-cerro",
-    name: "Soda El Cerro",
-    category: "Gastronomía",
-    description:
-      "Comida casera, café recién hecho y la conversación tranquila de pueblo de montaña.",
-    image: unsplash("photo-1414235077428-338989a2e8c0"),
-    travelTime: "12 min en carro",
-    mapsUrl: "https://maps.google.com/?q=Santa+Elena+Monteverde+restaurantes",
-  },
-  {
-    id: "cafe-bruma",
-    name: "Café Bruma",
-    category: "Café",
-    description:
-      "Un tostado local para quedarse un rato, mirar el verde y planear el resto del día.",
-    image: unsplash("photo-1495474472287-4d71bcdd2085"),
-    travelTime: "10 min en carro",
-    mapsUrl: "https://maps.google.com/?q=cafe+Monteverde+Costa+Rica",
-  },
-  {
-    id: "puentes-dosel",
-    name: "Puentes en el dosel",
+    id: "treetopia-park",
+    name: "Treetopia Park",
     category: "Aventura",
     description:
-      "Caminar entre las copas de los árboles y ver Monteverde desde otra altura.",
+      "Puentes colgantes, teleférico y tirolesas para recorrer el dosel del bosque.",
     image: "/assets/otros/hanging-bridges-monteverde.webp",
-    travelTime: "20 min en carro",
-    mapsUrl: "https://maps.google.com/?q=sky+walk+Monteverde",
+    highlight: "Puentes, teleférico y canopy",
+    websiteUrl: "https://treetopiapark.com/",
   },
   {
-    id: "mirador-nubes",
-    name: "Mirador de las nubes",
-    category: "Mirador",
+    id: "extremo-canopy",
+    name: "Extremo Canopy",
+    category: "Aventura",
     description:
-      "Un punto alto para ver el golfo a lo lejos, cuando el clima abre un claro.",
-    image: unsplash("photo-1506905925346-21bda4d32df4"),
-    travelTime: "15 min en carro",
-    mapsUrl: "https://maps.google.com/?q=mirador+Monteverde+Puntarenas",
+      "Canopy, salto bungee, columpio Tarzán y experiencias de adrenalina entre el bosque.",
+    image: unsplash("photo-1500530855697-b586d89ba3ee"),
+    highlight: "Canopy y aventura extrema",
+    websiteUrl: "https://monteverdeextremo.com/",
+  },
+  {
+    id: "selvatura-park",
+    name: "Selvatura Park",
+    category: "Aventura",
+    description:
+      "Aventura y naturaleza en el bosque nuboso con canopy, puentes y recorridos para explorar.",
+    image: "/assets/otros/hanging-bridges-monteverde.webp",
+    highlight: "Aventura en el bosque nuboso",
+    websiteUrl: "https://www.selvatura.com/",
+  },
+  {
+    id: "tour-cafe",
+    name: "Tour de Café Monteverde",
+    category: "Café",
+    description:
+      "Conoce el proceso del café de Monteverde, desde la finca hasta la taza.",
+    image: unsplash("photo-1495474472287-4d71bcdd2085"),
+    highlight: "Cultura y degustación de café",
+    websiteUrl: "https://cafedemonteverde.com/tour/",
+  },
+  {
+    id: "kapi-kapi",
+    name: "Kapi Kapi Restaurante",
+    category: "Gastronomía",
+    description:
+      "Una opción para disfrutar una cena especial y sabores de alta calidad en Monteverde.",
+    image: unsplash("photo-1414235077428-338989a2e8c0"),
+    highlight: "Cena de alta calidad",
+    websiteUrl: "https://www.kapikapirestaurante.com/",
   },
 ];

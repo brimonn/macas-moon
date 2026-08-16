@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -47,8 +47,8 @@ export function MonteverdeSection() {
                 <p className="eyebrow text-sand-300">{t(place.category)}</p>
                 <h3 className="heading-card mt-2 text-2xl">{t(place.name)}</h3>
                 <p className="mt-3 flex items-center gap-2 text-sm text-sand-100">
-                  <MapPin className="h-4 w-4" strokeWidth={1.6} />
-                  {t(place.travelTime)}
+                  <Compass className="h-4 w-4" strokeWidth={1.6} />
+                  {t(place.highlight)}
                 </p>
               </div>
             </article>

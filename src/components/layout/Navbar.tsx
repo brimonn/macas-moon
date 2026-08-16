@@ -233,13 +233,6 @@ export function Navbar() {
                 role="menu"
                 className="absolute left-0 top-full mt-3 min-w-[250px] rounded-2xl border border-sand-300 bg-sand-50 p-2 shadow-soft"
               >
-                <HashLink
-                  hash="#monteverde"
-                  onClick={() => setExperiencesOpen(false)}
-                  className="block rounded-xl px-3 py-3 text-sm font-semibold text-ink transition-colors hover:bg-sand-200"
-                >
-                  {t("Descubre Monteverde")}
-                </HashLink>
                 <Link
                   href="/experiencias"
                   onClick={() => setExperiencesOpen(false)}
@@ -340,11 +333,14 @@ export function Navbar() {
                 </div>
               </div>
               <div>
-                <p className="mb-3 text-3xl">{t("Experiencias")}</p>
+                <HashLink
+                  hash="#monteverde"
+                  className="mb-3 block text-3xl"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {t("Experiencias")}
+                </HashLink>
                 <div className="flex flex-col gap-3 font-sans text-lg text-muted">
-                  <HashLink hash="#monteverde" onClick={() => setMobileOpen(false)}>
-                    {t("Descubre Monteverde")}
-                  </HashLink>
                   <Link href="/experiencias" onClick={() => setMobileOpen(false)}>
                     {t("Todas las experiencias")}
                   </Link>
