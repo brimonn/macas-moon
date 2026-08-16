@@ -22,6 +22,7 @@ const catalog: Record<string, Translation> = {
   "Reseñas": { en: "Reviews", fr: "Avis", de: "Bewertungen" },
   "Ubicación": { en: "Location", fr: "Localisation", de: "Lage" },
   "Reservar": { en: "Book", fr: "Réserver", de: "Buchen" },
+  "Reserva ahora": { en: "Book now", fr: "Réserver maintenant", de: "Jetzt buchen" },
   "Elegir domo": { en: "Choose a dome", fr: "Choisir un dôme", de: "Kuppel wählen" },
   "Seleccionar idioma": { en: "Select language", fr: "Choisir la langue", de: "Sprache wählen" },
   "Español": { en: "Spanish", fr: "Espagnol", de: "Spanisch" },

@@ -54,7 +54,6 @@ export function Navbar() {
   const isHome = pathname === "/";
   const domeMatch = pathname.match(/^\/domos\/([^/]+)/);
   const isDomePage = Boolean(domeMatch);
-  const currentSlug = domeMatch?.[1];
   const overlay = isHome || isDomePage;
   const solid = !overlay || scrolled || mobileOpen;
 
@@ -113,9 +112,10 @@ export function Navbar() {
     solid ? "text-ink" : "text-warm-white",
   );
 
-  const cta = isDomePage
-    ? { href: `/reservar?domo=${currentSlug}`, label: "Reservar" }
-    : { href: isHome ? "#domos" : "/#domos", label: "Elegir domo" };
+  const cta = {
+    href: site.contact.reservationWhatsappUrl,
+    label: "Reserva ahora",
+  };
 
   return (
     <header
