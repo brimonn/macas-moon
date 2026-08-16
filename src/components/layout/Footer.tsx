@@ -42,8 +42,13 @@ export function Footer() {
           <p className="eyebrow text-sand-400">Explora</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link href="/#experiencia" className="transition-colors duration-200 hover:text-white">
-                Experiencia
+              <Link href="/#experiencias" className="transition-colors duration-200 hover:text-white">
+                Experiencias
+              </Link>
+            </li>
+            <li>
+              <Link href="/#resenas" className="transition-colors duration-200 hover:text-white">
+                Reseñas
               </Link>
             </li>
             <li>

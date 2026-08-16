@@ -23,7 +23,7 @@ export function ReviewsSection() {
   }
 
   return (
-    <section id="experiencia" className="scroll-mt-24 bg-cream">
+    <section id="resenas" className="scroll-mt-24 bg-sand-100">
       <Container className="py-24 sm:py-32">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading

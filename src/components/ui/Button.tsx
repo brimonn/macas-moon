@@ -30,7 +30,7 @@ type ButtonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[-0.005em] transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-plum-500 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[-0.005em] transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive-600 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white";
 
 export function Button({
   variant = "primary",

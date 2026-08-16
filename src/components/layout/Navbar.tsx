@@ -11,6 +11,8 @@ import { domes } from "@/data/domes";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 
+const orderedDomes = [...domes].sort((a, b) => b.capacity - a.capacity);
+
 function HashLink({
   hash,
   className,
@@ -111,7 +113,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300",
         solid
-          ? "bg-warm-white/92 shadow-[0_8px_24px_rgba(36,39,32,0.04)] backdrop-blur-[6px]"
+          ? "bg-sand-50/94 shadow-[0_8px_24px_rgba(36,39,32,0.04)] backdrop-blur-[6px]"
           : "bg-transparent",
       )}
     >
@@ -140,51 +142,59 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
-          {isDomePage ? (
-            <div className="relative" ref={domeWrapRef}>
-              <button
-                type="button"
-                className={cn(linkClass, "inline-flex items-center gap-1")}
-                aria-expanded={domesOpen}
-                aria-controls={domeMenuId}
-                onClick={() => {
-                  setDomesOpen((open) => !open);
-                  setLangOpen(false);
-                }}
-              >
-                Domos
-                <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", domesOpen && "rotate-180")} />
-              </button>
-              {domesOpen ? (
-                <div
-                  id={domeMenuId}
-                  role="menu"
-                  className="absolute left-0 top-full mt-3 min-w-[240px] rounded-2xl border border-border-soft bg-warm-white p-2 shadow-soft"
-                >
-                  {domes.map((dome) => (
-                    <Link
-                      key={dome.slug}
-                      href={`/domos/${dome.slug}`}
-                      role="menuitem"
-                      className="block rounded-xl px-3 py-2.5 text-sm text-ink transition-colors duration-200 hover:bg-olive-50"
-                    >
-                      {dome.category === "ESCAPADA PARA DOS"
-                        ? "Domo 2 · Escapada para dos"
-                        : "Domo 1 · Más espacio para compartir"}
-                    </Link>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <HashLink hash="#domos" className={linkClass}>
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Principal">
+          <div className="relative" ref={domeWrapRef}>
+            <button
+              type="button"
+              className={cn(linkClass, "inline-flex items-center gap-1")}
+              aria-expanded={domesOpen}
+              aria-controls={domeMenuId}
+              onClick={() => {
+                setDomesOpen((open) => !open);
+                setLangOpen(false);
+              }}
+            >
               Domos
-            </HashLink>
-          )}
+              <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", domesOpen && "rotate-180")} />
+            </button>
+            {domesOpen ? (
+              <div
+                id={domeMenuId}
+                role="menu"
+                className="absolute left-0 top-full mt-3 min-w-[280px] rounded-2xl border border-sand-300 bg-sand-50 p-2 shadow-soft"
+              >
+                {orderedDomes.map((dome) => (
+                  <Link
+                    key={dome.slug}
+                    href={`/domos/${dome.slug}`}
+                    role="menuitem"
+                    onClick={() => setDomesOpen(false)}
+                    className="block rounded-xl px-3 py-3 text-sm text-ink transition-colors duration-200 hover:bg-sand-200"
+                  >
+                    <span className="block font-semibold">
+                      {dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico"}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-muted">
+                      Hasta {dome.capacity} huéspedes
+                    </span>
+                  </Link>
+                ))}
+                <HashLink
+                  hash="#domos"
+                  onClick={() => setDomesOpen(false)}
+                  className="mt-1 block border-t border-sand-300 px-3 pt-3 pb-2 text-xs font-bold tracking-wide text-olive-700 uppercase"
+                >
+                  Comparar ambos domos
+                </HashLink>
+              </div>
+            ) : null}
+          </div>
 
-          <HashLink hash="#experiencia" className={linkClass}>
-            Experiencia
+          <HashLink hash="#experiencias" className={linkClass}>
+            Experiencias
+          </HashLink>
+          <HashLink hash="#resenas" className={linkClass}>
+            Reseñas
           </HashLink>
           <HashLink hash="#ubicacion" className={linkClass}>
             Ubicación
@@ -233,7 +243,7 @@ export function Navbar() {
                   }}
                 >
                   English
-                  <span className="text-[0.65rem] tracking-wider text-plum-600 uppercase">Pronto</span>
+                  <span className="text-[0.65rem] tracking-wider text-olive-700 uppercase">Pronto</span>
                 </button>
               </div>
             ) : null}
@@ -265,26 +275,26 @@ export function Navbar() {
         <div className="fixed inset-0 top-[4.5rem] z-40 overflow-y-auto bg-cream lg:hidden">
           <nav className="flex min-h-[calc(100svh-4.5rem)] flex-col px-6 py-10" aria-label="Móvil">
             <div className="flex flex-col gap-6 text-3xl font-semibold text-ink">
-              {isDomePage ? (
-                <div>
-                  <p className="mb-3 text-3xl">Domos</p>
-                  <div className="flex flex-col gap-3 font-sans text-lg text-muted">
-                    {domes.map((dome) => (
-                      <Link key={dome.slug} href={`/domos/${dome.slug}`} className="hover:text-olive-700">
-                        {dome.category === "ESCAPADA PARA DOS"
-                          ? "Domo 2 · Escapada para dos"
-                          : "Domo 1 · Más espacio para compartir"}
-                      </Link>
-                    ))}
-                  </div>
+              <div>
+                <p className="mb-3 text-3xl">Domos</p>
+                <div className="flex flex-col gap-3 font-sans text-lg text-muted">
+                  {orderedDomes.map((dome) => (
+                    <Link
+                      key={dome.slug}
+                      href={`/domos/${dome.slug}`}
+                      className="hover:text-olive-700"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico"}
+                    </Link>
+                  ))}
                 </div>
-              ) : (
-                <HashLink hash="#domos" onClick={() => setMobileOpen(false)}>
-                  Domos
-                </HashLink>
-              )}
-              <HashLink hash="#experiencia" onClick={() => setMobileOpen(false)}>
-                Experiencia
+              </div>
+              <HashLink hash="#experiencias" onClick={() => setMobileOpen(false)}>
+                Experiencias
+              </HashLink>
+              <HashLink hash="#resenas" onClick={() => setMobileOpen(false)}>
+                Reseñas
               </HashLink>
               <HashLink hash="#ubicacion" onClick={() => setMobileOpen(false)}>
                 Ubicación

@@ -12,27 +12,22 @@
   --color-olive-800: #465039;
   --color-olive-900: #343c2b;
 
-  --color-sand-50: #faf7f2;
-  --color-sand-100: #f5efe6;
-  --color-sand-200: #ece3d5;
-  --color-sand-300: #e3d5c1;
+  --color-sand-50: #fbf6ed;
+  --color-sand-100: #f5eadb;
+  --color-sand-200: #eddfcc;
+  --color-sand-300: #e2cfb4;
   --color-sand-400: #d8c7ad;
   --color-sand-500: #ceba9b;
   --color-sand-600: #b79f7e;
   --color-sand-700: #a58d6c;
 
-  --color-plum-100: #eee8ed;
-  --color-plum-500: #786575;
-  --color-plum-600: #695665;
-  --color-plum-700: #594956;
-
-  --color-cream: #f7f3ec;
-  --color-warm-white: #fcfbf7;
+  --color-cream: #f3e9dc;
+  --color-warm-white: #fdf9f2;
   --color-ink: #242720;
   --color-main: #30342d;
   --color-muted: #686d63;
-  --color-border: #ddd8ce;
-  --color-border-soft: #eae6de;
+  --color-border: #ddcfbb;
+  --color-border-soft: #eadfce;
 
   --font-serif: var(--font-lora), Georgia, serif;
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
@@ -63,7 +58,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-plum-500);
+  outline: 2px solid var(--color-olive-600);
   outline-offset: 3px;
 }
 

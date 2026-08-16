@@ -24,7 +24,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Naturaleza",
     description:
       "Caminos entre musgo, nubes bajas y el silencio húmedo que define a Monteverde.",
-    image: unsplash("photo-1511497584788-876760111969"),
+    image: "/assets/otros/bosque-nuboso.webp",
     travelTime: "18 min en carro",
     mapsUrl: "https://maps.google.com/?q=Reserva+Bosque+Nuboso+Monteverde",
   },
@@ -54,7 +54,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Aventura",
     description:
       "Caminar entre las copas de los árboles y ver Monteverde desde otra altura.",
-    image: unsplash("photo-1551632811-561732d1e306"),
+    image: "/assets/otros/hanging-bridges-monteverde.webp",
     travelTime: "20 min en carro",
     mapsUrl: "https://maps.google.com/?q=sky+walk+Monteverde",
   },

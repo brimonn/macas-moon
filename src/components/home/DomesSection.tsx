@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 
 export function DomesSection() {
   return (
-    <section id="domos" className="scroll-mt-24 bg-cream">
+    <section id="domos" className="scroll-mt-24 bg-sand-100">
       <Container className="py-24 sm:py-32">
         <SectionHeading
           title="Encuentra tu espacio"
@@ -40,7 +40,7 @@ export function DomesSection() {
                 />
               </div>
               <div className="flex flex-[0_0_auto] flex-col gap-4 px-6 py-7 sm:px-8 sm:py-8">
-                <Badge tone={index === 0 ? "plum" : "olive"}>{dome.category}</Badge>
+                <Badge tone={index === 0 ? "sand" : "olive"}>{dome.category}</Badge>
                 <h3 className="heading-card text-3xl text-ink">{dome.name}</h3>
                 <p className="text-[0.98rem] leading-relaxed font-normal text-muted">
                   {dome.shortDescription}

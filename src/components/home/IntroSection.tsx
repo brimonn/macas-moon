@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function IntroSection() {
   return (
-    <section id="introduccion" className="bg-warm-white">
+    <section id="introduccion" className="bg-sand-50">
       <Container className="py-24 sm:py-32">
         <SectionHeading
           title="Una forma diferente de vivir Monteverde"
