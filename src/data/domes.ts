@@ -62,7 +62,7 @@ export const domes: Dome[] = [
     beds: 1,
     bathrooms: 1,
     heroImage: "/assets/domo1/IMG_5477.webp",
-    cardImage: "/assets/domo1/IMG_5495.webp",
+    cardImage: "/assets/domo2/IMG_7055.webp",
     shortDescription:
       "Un refugio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
     longDescription:
@@ -158,7 +158,7 @@ export const domes: Dome[] = [
     beds: 2,
     bathrooms: 1,
     heroImage: "/assets/domo2/IMG_7050.webp",
-    cardImage: "/assets/domo2/IMG_7055.webp",
+    cardImage: "/assets/domo1/IMG_5495.webp",
     shortDescription:
       "Un espacio amplio entre naturaleza, pensado para disfrutar Monteverde con mayor comodidad.",
     longDescription:
