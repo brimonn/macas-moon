@@ -6,7 +6,7 @@ export function HomeHero() {
   return (
     <section className="relative isolate min-h-svh overflow-hidden">
       <Image
-        src="/assets/domo1/IMG_7051.webp"
+        src="/assets/domo2/IMG_7051.webp"
         alt="Domos de Macas Moon rodeados de vegetación y las montañas de Monteverde"
         fill
         priority
