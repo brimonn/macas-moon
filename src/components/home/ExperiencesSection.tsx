@@ -7,8 +7,8 @@ import { monteverdePlaces } from "@/data/monteverdePlaces";
 
 export function ExperiencesSection() {
   return (
-    <section id="experiencias" className="scroll-mt-24 bg-warm-white">
-      <Container className="py-24 sm:py-32">
+    <section className="min-h-screen bg-warm-white">
+      <Container className="pt-32 pb-24 sm:pt-40 sm:pb-32">
         <SectionHeading
           eyebrow="Tours y lugares"
           title="Experiencias en Monteverde"

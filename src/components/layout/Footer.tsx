@@ -42,7 +42,7 @@ export function Footer() {
           <p className="eyebrow text-sand-400">Explora</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link href="/#experiencias" className="transition-colors duration-200 hover:text-white">
+              <Link href="/experiencias" className="transition-colors duration-200 hover:text-white">
                 Experiencias
               </Link>
             </li>

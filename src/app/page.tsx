@@ -1,5 +1,4 @@
 import { DomesSection } from "@/components/home/DomesSection";
-import { ExperiencesSection } from "@/components/home/ExperiencesSection";
 import { HomeCTA } from "@/components/home/HomeCTA";
 import { HomeHero } from "@/components/home/HomeHero";
 import { IntroSection } from "@/components/home/IntroSection";
@@ -15,7 +14,6 @@ export default function HomePage() {
       <IntroSection />
       <DomesSection />
       <MonteverdeSection />
-      <ExperiencesSection />
       <ReviewsSection />
       <LocationSection />
       <StayInfoSection />

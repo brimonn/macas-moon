@@ -190,9 +190,9 @@ export function Navbar() {
             ) : null}
           </div>
 
-          <HashLink hash="#experiencias" className={linkClass}>
+          <Link href="/experiencias" className={linkClass}>
             Experiencias
-          </HashLink>
+          </Link>
           <HashLink hash="#resenas" className={linkClass}>
             Reseñas
           </HashLink>
@@ -290,9 +290,9 @@ export function Navbar() {
                   ))}
                 </div>
               </div>
-              <HashLink hash="#experiencias" onClick={() => setMobileOpen(false)}>
+              <Link href="/experiencias" onClick={() => setMobileOpen(false)}>
                 Experiencias
-              </HashLink>
+              </Link>
               <HashLink hash="#resenas" onClick={() => setMobileOpen(false)}>
                 Reseñas
               </HashLink>

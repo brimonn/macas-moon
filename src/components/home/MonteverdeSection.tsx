@@ -18,7 +18,7 @@ export function MonteverdeSection() {
             description="Naturaleza, café y aventura a pocos minutos de los domos."
             className="max-w-2xl"
           />
-          <Button href="#experiencias" variant="outline" className="w-fit shrink-0">
+          <Button href="/experiencias" variant="outline" className="w-fit shrink-0">
             Ver todas las experiencias
             <ArrowRight className="h-4 w-4" />
           </Button>
