@@ -47,7 +47,7 @@ export default async function DomePage({ params }: DomePageProps) {
       <DomeGallery dome={dome} />
       <AmenitiesSection dome={dome} />
       <SpacesSection dome={dome} />
-      <DomeLocation />
+      <DomeLocation dome={dome} />
       <DomeCTA dome={dome} />
     </>
   );

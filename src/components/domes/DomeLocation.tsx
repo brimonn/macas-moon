@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { unsplash } from "@/lib/images";
+import type { Dome } from "@/types/dome";
 
-export function DomeLocation() {
+export function DomeLocation({ dome }: { dome: Dome }) {
   return (
     <section className="bg-olive-50">
       <Container className="grid items-center gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
@@ -21,8 +21,8 @@ export function DomeLocation() {
         </div>
         <div className="relative min-h-[240px] overflow-hidden rounded-[24px] sm:min-h-[300px]">
           <Image
-            src={unsplash("photo-1448375240586-882707db888b")}
-            alt="Bosque de Monteverde cerca de Macas Moon"
+            src={dome.locationImage}
+            alt={`${dome.name} entre la naturaleza de Monteverde`}
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"

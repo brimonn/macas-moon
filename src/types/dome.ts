@@ -77,6 +77,7 @@ export type Dome = {
   bathrooms: number;
   heroImage: string;
   cardImage: string;
+  locationImage: string;
   shortDescription: string;
   longDescription: string;
   conceptTitle: string;

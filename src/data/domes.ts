@@ -15,38 +15,38 @@ const sharedAmenities: Amenity[] = [
   { id: "nature", label: "Entorno de bosque", icon: "trees" },
 ];
 
-const romanticGallery: GalleryImage[] = [
-  { src: "/assets/domo1/IMG_5477.webp", alt: "Domo 2 de Macas Moon", category: "exterior" },
-  { src: "/assets/domo1/IMG_5479.webp", alt: "Habitación del Domo 2", category: "habitacion" },
-  { src: "/assets/domo1/IMG_5481.webp", alt: "Interior del Domo 2", category: "habitacion" },
-  { src: "/assets/domo1/IMG_5482.webp", alt: "Cocina del Domo 2", category: "cocina" },
-  { src: "/assets/domo1/IMG_5483.webp", alt: "Baño del Domo 2", category: "bano" },
-  { src: "/assets/domo1/IMG_5484.webp", alt: "Detalles del Domo 2", category: "habitacion" },
-  { src: "/assets/domo1/IMG_5494.webp", alt: "Jacuzzi del Domo 2", category: "jacuzzi" },
-  { src: "/assets/domo1/IMG_5495.webp", alt: "Exterior del Domo 2", category: "exterior" },
-  { src: "/assets/domo1/IMG_5500.webp", alt: "Entorno natural del Domo 2", category: "vistas" },
-  { src: "/assets/domo1/IMG_5501.webp", alt: "Vista del Domo 2", category: "vistas" },
+const dome1Gallery: GalleryImage[] = [
+  { src: "/assets/domo1/IMG_5501.webp", alt: "Domo 1 rodeado de naturaleza", category: "vistas" },
+  { src: "/assets/domo1/IMG_5477.webp", alt: "Terraza y exterior del Domo 1", category: "exterior" },
+  { src: "/assets/domo1/IMG_5479.webp", alt: "Habitación principal del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_5481.webp", alt: "Interior y comedor del Domo 1", category: "habitacion" },
+  { src: "/assets/domo1/IMG_5482.webp", alt: "Baño completo del Domo 1", category: "bano" },
+  { src: "/assets/domo1/IMG_5483.webp", alt: "Cocina equipada del Domo 1", category: "cocina" },
+  { src: "/assets/domo1/IMG_5484.webp", alt: "Muebles y fregadero de la cocina del Domo 1", category: "cocina" },
+  { src: "/assets/domo1/IMG_5494.webp", alt: "Detalle de la cocina del Domo 1", category: "cocina" },
+  { src: "/assets/domo1/IMG_5495.webp", alt: "Jacuzzi y terraza del Domo 1", category: "jacuzzi" },
+  { src: "/assets/domo1/IMG_5500.webp", alt: "Cama del Domo 1", category: "habitacion" },
 ];
 
-const amplioGallery: GalleryImage[] = [
-  { src: "/assets/domo2/IMG_7050.webp", alt: "Domo 1 de Macas Moon", category: "exterior" },
-  { src: "/assets/domo2/IMG_7051.webp", alt: "Exterior del Domo 1", category: "exterior" },
-  { src: "/assets/domo2/IMG_7052.webp", alt: "Entorno natural del Domo 1", category: "vistas" },
-  { src: "/assets/domo2/IMG_7055.webp", alt: "Habitación del Domo 1", category: "habitacion" },
-  { src: "/assets/domo2/IMG_7056.webp", alt: "Interior del Domo 1", category: "habitacion" },
-  { src: "/assets/domo2/IMG_7061.webp", alt: "Cocina del Domo 1", category: "cocina" },
-  { src: "/assets/domo2/IMG_7066.webp", alt: "Detalles del Domo 1", category: "habitacion" },
-  { src: "/assets/domo2/IMG_7067.webp", alt: "Baño del Domo 1", category: "bano" },
-  { src: "/assets/domo2/IMG_7068.webp", alt: "Interior amplio del Domo 1", category: "habitacion" },
-  { src: "/assets/domo2/IMG_7076.webp", alt: "Jacuzzi del Domo 1", category: "jacuzzi" },
-  { src: "/assets/domo2/IMG_7078.webp", alt: "Terraza del Domo 1", category: "exterior" },
-  { src: "/assets/domo2/IMG_7079.webp", alt: "Vista desde el Domo 1", category: "vistas" },
-  { src: "/assets/domo2/IMG_7080.webp", alt: "Espacio para compartir en el Domo 1", category: "habitacion" },
-  { src: "/assets/domo2/IMG_7081.webp", alt: "Cocina equipada del Domo 1", category: "cocina" },
-  { src: "/assets/domo2/IMG_7085.webp", alt: "Baño privado del Domo 1", category: "bano" },
-  { src: "/assets/domo2/IMG_7087.webp", alt: "Jacuzzi y naturaleza en el Domo 1", category: "jacuzzi" },
-  { src: "/assets/domo2/IMG_7092.webp", alt: "Exterior entre el bosque del Domo 1", category: "exterior" },
-  { src: "/assets/domo2/IMG_7098.webp", alt: "Vista del bosque desde el Domo 1", category: "vistas" },
+const dome2Gallery: GalleryImage[] = [
+  { src: "/assets/domo2/IMG_7051.webp", alt: "Domo 2 entre las montañas de Monteverde", category: "vistas" },
+  { src: "/assets/domo2/IMG_7050.webp", alt: "Vista aérea de los domos entre el bosque", category: "vistas" },
+  { src: "/assets/domo2/IMG_7052.webp", alt: "Domo 2 rodeado de vegetación", category: "vistas" },
+  { src: "/assets/domo2/IMG_7055.webp", alt: "Terraza y jacuzzi del Domo 2", category: "exterior" },
+  { src: "/assets/domo2/IMG_7056.webp", alt: "Exterior privado del Domo 2", category: "exterior" },
+  { src: "/assets/domo2/IMG_7061.webp", alt: "Jacuzzi del Domo 2 con vista a la naturaleza", category: "jacuzzi" },
+  { src: "/assets/domo2/IMG_7066.webp", alt: "Cocina equipada del Domo 2", category: "cocina" },
+  { src: "/assets/domo2/IMG_7067.webp", alt: "Cocina y ventana panorámica del Domo 2", category: "cocina" },
+  { src: "/assets/domo2/IMG_7068.webp", alt: "Habitación del Domo 2", category: "habitacion" },
+  { src: "/assets/domo2/IMG_7076.webp", alt: "Ducha del baño del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7078.webp", alt: "Baño completo del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7079.webp", alt: "Lavamanos del baño del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7080.webp", alt: "Espejo y lavamanos del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7081.webp", alt: "Amenidades de baño del Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7085.webp", alt: "Estación de café del Domo 2", category: "cocina" },
+  { src: "/assets/domo2/IMG_7087.webp", alt: "Comedor del Domo 2", category: "cocina" },
+  { src: "/assets/domo2/IMG_7092.webp", alt: "Toallas preparadas en el Domo 2", category: "bano" },
+  { src: "/assets/domo2/IMG_7098.webp", alt: "Jacuzzi privado del Domo 2", category: "jacuzzi" },
 ];
 
 export const domes: Dome[] = [
@@ -61,8 +61,9 @@ export const domes: Dome[] = [
     capacity: 2,
     beds: 1,
     bathrooms: 1,
-    heroImage: "/assets/domo1/IMG_5477.webp",
+    heroImage: "/assets/domo2/IMG_7052.webp",
     cardImage: "/assets/domo2/IMG_7055.webp",
+    locationImage: "/assets/domo2/IMG_7051.webp",
     shortDescription:
       "Un refugio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
     longDescription:
@@ -95,14 +96,14 @@ export const domes: Dome[] = [
       { id: "terrace", label: "Terraza", icon: "sun" },
       ...sharedAmenities,
     ],
-    gallery: romanticGallery,
+    gallery: dome2Gallery,
     spaces: [
       {
         id: "habitacion",
         name: "Habitación",
         description:
           "Un cuarto sereno, con cama cómoda y la vegetación como único vecino. Pensado para despertar despacio.",
-        image: "/assets/domo1/IMG_5479.webp",
+        image: "/assets/domo2/IMG_7068.webp",
         layout: "full",
       },
       {
@@ -110,7 +111,7 @@ export const domes: Dome[] = [
         name: "Jacuzzi",
         description:
           "Un rincón privado para quedarse en silencio, hablar o mirar el bosque mientras el día se apaga.",
-        image: "/assets/domo1/IMG_5494.webp",
+        image: "/assets/domo2/IMG_7061.webp",
         layout: "half",
       },
       {
@@ -118,7 +119,7 @@ export const domes: Dome[] = [
         name: "Cocina",
         description:
           "Lo esencial para un desayuno largo o una cena sencilla, sin salir del refugio.",
-        image: "/assets/domo1/IMG_5482.webp",
+        image: "/assets/domo2/IMG_7066.webp",
         layout: "half",
       },
       {
@@ -126,7 +127,7 @@ export const domes: Dome[] = [
         name: "Exterior",
         description:
           "Terraza, aire fresco y la sensación de estar dentro del bosque de Monteverde.",
-        image: "/assets/domo1/IMG_5495.webp",
+        image: "/assets/domo2/IMG_7055.webp",
         layout: "wide",
       },
       {
@@ -134,7 +135,7 @@ export const domes: Dome[] = [
         name: "Baño",
         description:
           "Un baño privado, cálido y funcional, con agua caliente después del clima de montaña.",
-        image: "/assets/domo1/IMG_5483.webp",
+        image: "/assets/domo2/IMG_7078.webp",
         layout: "half",
       },
     ],
@@ -157,8 +158,9 @@ export const domes: Dome[] = [
     capacity: 4,
     beds: 2,
     bathrooms: 1,
-    heroImage: "/assets/domo2/IMG_7050.webp",
+    heroImage: "/assets/domo1/IMG_5501.webp",
     cardImage: "/assets/domo1/IMG_5495.webp",
+    locationImage: "/assets/domo1/IMG_5501.webp",
     shortDescription:
       "Un espacio amplio entre naturaleza, pensado para disfrutar Monteverde con mayor comodidad.",
     longDescription:
@@ -191,14 +193,14 @@ export const domes: Dome[] = [
       { id: "terrace", label: "Terraza amplia", icon: "sun" },
       ...sharedAmenities,
     ],
-    gallery: amplioGallery,
+    gallery: dome1Gallery,
     spaces: [
       {
         id: "habitacion",
         name: "Habitación",
         description:
           "Un ambiente más amplio para descansar, con dos camas y la sensación de espacio que pide un viaje compartido.",
-        image: "/assets/domo2/IMG_7055.webp",
+        image: "/assets/domo1/IMG_5479.webp",
         layout: "full",
       },
       {
@@ -206,7 +208,7 @@ export const domes: Dome[] = [
         name: "Jacuzzi",
         description:
           "Para soltar el día después de caminar, observar aves o simplemente no hacer nada.",
-        image: "/assets/domo2/IMG_7076.webp",
+        image: "/assets/domo1/IMG_5495.webp",
         layout: "half",
       },
       {
@@ -214,7 +216,7 @@ export const domes: Dome[] = [
         name: "Cocina",
         description:
           "Un espacio más cómodo para preparar café, desayunos y comidas sin prisa.",
-        image: "/assets/domo2/IMG_7061.webp",
+        image: "/assets/domo1/IMG_5484.webp",
         layout: "half",
       },
       {
@@ -222,7 +224,7 @@ export const domes: Dome[] = [
         name: "Exterior",
         description:
           "Una terraza amplia para estar afuera, escuchar el bosque y ver pasar las nubes de Monteverde.",
-        image: "/assets/domo2/IMG_7078.webp",
+        image: "/assets/domo1/IMG_5477.webp",
         layout: "wide",
       },
       {
@@ -230,7 +232,7 @@ export const domes: Dome[] = [
         name: "Baño",
         description:
           "Baño privado, luminoso y práctico, listo después de un día en la montaña.",
-        image: "/assets/domo2/IMG_7067.webp",
+        image: "/assets/domo1/IMG_5482.webp",
         layout: "half",
       },
     ],
