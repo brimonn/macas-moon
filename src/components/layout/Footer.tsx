@@ -24,7 +24,7 @@ export function Footer() {
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-sand-300">
-            {t("Un refugio entre las montañas de Monteverde.")}
+            {t("Una estadía entre las montañas de Monteverde.")}
           </p>
         </div>
 

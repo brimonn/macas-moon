@@ -19,7 +19,7 @@ export function IntroSection() {
           />
           <FeatureIcon
             name="home"
-            label="Refugio"
+            label="Desconexión"
             text="Un espacio creado para desconectar del ritmo cotidiano."
           />
           <FeatureIcon

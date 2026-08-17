@@ -26,7 +26,7 @@ export function HomeHero() {
             Monteverde, Costa Rica
           </p>
           <h1 className="heading-hero text-left">
-            {t("Tu refugio entre las montañas de Monteverde")}
+            {t("Descansa entre las montañas de Monteverde")}
           </h1>
           <p className="hero-subtitle mt-4 max-w-xl text-sand-100 sm:mt-6">
             {t("Una experiencia entre naturaleza, tranquilidad y comodidad.")}

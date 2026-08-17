@@ -23,7 +23,7 @@ export const houseRules: HouseRule[] = [
   {
     id: "parties",
     title: "No fiestas",
-    text: "Macas Moon es un refugio de descanso. No se permiten fiestas, eventos ni música a alto volumen.",
+    text: "Macas Moon es un espacio de descanso. No se permiten fiestas, eventos ni música a alto volumen.",
   },
   {
     id: "quiet",

@@ -65,9 +65,9 @@ export const domes: Dome[] = [
     cardImage: "/assets/domo2/IMG_7055.webp",
     locationImage: "/assets/domo2/IMG_7051.webp",
     shortDescription:
-      "Un refugio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
+      "Un espacio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
     longDescription:
-      "Un espacio recogido, silencioso y cercano al bosque. El Domo 2 está pensado para quienes buscan privacidad, noches despacio y la sensación de estar lejos de todo, sin renunciar al confort de un buen refugio.",
+      "Un espacio recogido, silencioso y cercano al bosque. El Domo 2 está pensado para quienes buscan privacidad, noches despacio y la sensación de estar lejos de todo, sin renunciar a la comodidad.",
     conceptTitle: "Hecho para desconectar juntos",
     highlights: [
       {
@@ -118,7 +118,7 @@ export const domes: Dome[] = [
         id: "cocina",
         name: "Cocina",
         description:
-          "Lo esencial para un desayuno largo o una cena sencilla, sin salir del refugio.",
+          "Lo esencial para un desayuno largo o una cena sencilla, sin salir del domo.",
         image: "/assets/domo2/IMG_7066.webp",
         layout: "half",
       },
