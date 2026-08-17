@@ -236,6 +236,10 @@ export function Navbar() {
             {t("Nosotros")}
           </Link>
 
+          <Link href="/galeria" className={linkClass}>
+            {t("Galería")}
+          </Link>
+
           <div className="relative" ref={experiencesWrapRef}>
             <div className="inline-flex items-center gap-1">
               <HashLink
@@ -410,6 +414,9 @@ export function Navbar() {
               </div>
               <Link href="/nosotros" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
                 {t("Nosotros")}
+              </Link>
+              <Link href="/galeria" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
+                {t("Galería")}
               </Link>
               <div>
                 <button
