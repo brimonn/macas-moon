@@ -179,6 +179,10 @@ export function Navbar() {
         </HashLink>
 
         <nav className="hidden items-center gap-5 xl:flex 2xl:gap-7" aria-label="Principal">
+          <HashLink hash="#inicio" className={linkClass}>
+            {t("Inicio")}
+          </HashLink>
+
           <div className="relative" ref={domeWrapRef}>
             <button
               type="button"
@@ -227,10 +231,6 @@ export function Navbar() {
               </div>
             ) : null}
           </div>
-
-          <HashLink hash="#inicio" className={linkClass}>
-            {t("Inicio")}
-          </HashLink>
 
           <Link href="/nosotros" className={linkClass}>
             {t("Nosotros")}
@@ -390,6 +390,9 @@ export function Navbar() {
         <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream xl:hidden">
           <nav className="flex min-h-[calc(100svh-var(--header-h))] flex-col px-5 py-8 sm:px-6 sm:py-10" aria-label="Móvil">
             <div className="flex flex-col gap-5 text-[1.65rem] leading-tight font-semibold text-ink sm:gap-6 sm:text-3xl">
+              <HashLink hash="#inicio" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
+                {t("Inicio")}
+              </HashLink>
               <div>
                 <p className="mb-3">{t("Domos")}</p>
                 <div className="flex flex-col gap-3 font-sans text-base text-muted sm:text-lg">
@@ -405,9 +408,6 @@ export function Navbar() {
                   ))}
                 </div>
               </div>
-              <HashLink hash="#inicio" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
-                {t("Inicio")}
-              </HashLink>
               <Link href="/nosotros" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
                 {t("Nosotros")}
               </Link>

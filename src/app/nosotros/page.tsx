@@ -19,7 +19,7 @@ export default function AboutPage() {
             <TranslatedText>Nosotros</TranslatedText>
           </p>
           <h1 className="heading-display max-w-3xl text-ink">
-            <TranslatedText>Un refugio creado para compartir Monteverde</TranslatedText>
+            <TranslatedText>Un rincón creado para compartir Monteverde</TranslatedText>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             <TranslatedText>
