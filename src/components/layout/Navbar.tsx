@@ -13,6 +13,16 @@ import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 
 const orderedDomes = [...domes].sort((a, b) => b.capacity - a.capacity);
+const faqItems = [
+  {
+    question: "¿Qué tan lejos estamos de Monteverde?",
+    answer: "Nos encontramos a 10 minutos en auto del centro.",
+  },
+  {
+    question: "¿Ofrecen servicios de comida?",
+    answer: "No, pero Monteverde ofrece múltiples restaurantes de calidad para su comodidad.",
+  },
+] as const;
 
 function HashLink({
   hash,
@@ -44,13 +54,16 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [domesOpen, setDomesOpen] = useState(false);
   const [experiencesOpen, setExperiencesOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [activePath, setActivePath] = useState(pathname);
   const domeMenuId = useId();
   const experiencesMenuId = useId();
+  const faqMenuId = useId();
   const langMenuId = useId();
   const domeWrapRef = useRef<HTMLDivElement>(null);
   const experiencesWrapRef = useRef<HTMLDivElement>(null);
+  const faqWrapRef = useRef<HTMLDivElement>(null);
   const langWrapRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
@@ -71,6 +84,7 @@ export function Navbar() {
     setMobileOpen(false);
     setDomesOpen(false);
     setExperiencesOpen(false);
+    setFaqOpen(false);
     setLangOpen(false);
   }
 
@@ -89,6 +103,9 @@ export function Navbar() {
       if (experiencesWrapRef.current && !experiencesWrapRef.current.contains(event.target as Node)) {
         setExperiencesOpen(false);
       }
+      if (faqWrapRef.current && !faqWrapRef.current.contains(event.target as Node)) {
+        setFaqOpen(false);
+      }
       if (langWrapRef.current && !langWrapRef.current.contains(event.target as Node)) {
         setLangOpen(false);
       }
@@ -97,6 +114,7 @@ export function Navbar() {
       if (event.key === "Escape") {
         setDomesOpen(false);
         setExperiencesOpen(false);
+        setFaqOpen(false);
         setLangOpen(false);
         setMobileOpen(false);
       }
@@ -160,7 +178,7 @@ export function Navbar() {
           />
         </HashLink>
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Principal">
+        <nav className="hidden items-center gap-5 xl:flex 2xl:gap-7" aria-label="Principal">
           <div className="relative" ref={domeWrapRef}>
             <button
               type="button"
@@ -170,6 +188,7 @@ export function Navbar() {
               onClick={() => {
                 setDomesOpen((open) => !open);
                 setExperiencesOpen(false);
+                setFaqOpen(false);
                 setLangOpen(false);
               }}
             >
@@ -209,6 +228,14 @@ export function Navbar() {
             ) : null}
           </div>
 
+          <HashLink hash="#inicio" className={linkClass}>
+            {t("Inicio")}
+          </HashLink>
+
+          <Link href="/nosotros" className={linkClass}>
+            {t("Nosotros")}
+          </Link>
+
           <div className="relative" ref={experiencesWrapRef}>
             <div className="inline-flex items-center gap-1">
               <HashLink
@@ -230,6 +257,7 @@ export function Navbar() {
                 onClick={() => {
                   setExperiencesOpen((open) => !open);
                   setDomesOpen(false);
+                  setFaqOpen(false);
                   setLangOpen(false);
                 }}
               >
@@ -259,6 +287,40 @@ export function Navbar() {
             {t("Ubicación")}
           </HashLink>
 
+          <div className="relative" ref={faqWrapRef}>
+            <button
+              type="button"
+              className={cn(linkClass, "inline-flex items-center gap-1")}
+              aria-expanded={faqOpen}
+              aria-controls={faqMenuId}
+              onClick={() => {
+                setFaqOpen((open) => !open);
+                setDomesOpen(false);
+                setExperiencesOpen(false);
+                setLangOpen(false);
+              }}
+            >
+              {t("FAQ")}
+              <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", faqOpen && "rotate-180")} />
+            </button>
+            {faqOpen ? (
+              <div
+                id={faqMenuId}
+                className="absolute right-0 top-full mt-3 w-[min(24rem,calc(100vw-2rem))] rounded-2xl border border-sand-300 bg-sand-50 p-5 text-ink shadow-soft"
+              >
+                <p className="eyebrow text-olive-700">{t("Preguntas frecuentes")}</p>
+                <dl className="mt-4 space-y-4">
+                  {faqItems.map((item, index) => (
+                    <div key={item.question} className={cn(index > 0 && "border-t border-sand-300 pt-4")}>
+                      <dt className="text-sm font-bold">{t(item.question)}</dt>
+                      <dd className="mt-1 text-sm leading-relaxed text-muted">{t(item.answer)}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ) : null}
+          </div>
+
           <div className="relative" ref={langWrapRef}>
             <button
               type="button"
@@ -270,6 +332,7 @@ export function Navbar() {
                 setLangOpen((open) => !open);
                 setDomesOpen(false);
                 setExperiencesOpen(false);
+                setFaqOpen(false);
               }}
             >
               {language.toUpperCase()}
@@ -302,7 +365,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <Button href={cta.href} size="md">
               {cta.label}
             </Button>
@@ -310,7 +373,7 @@ export function Navbar() {
           <button
             type="button"
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
+              "flex h-11 w-11 items-center justify-center rounded-full xl:hidden",
               solid ? "text-ink hover:bg-sand-100" : "bg-warm-white/88 text-ink",
             )}
             aria-label={t(mobileOpen ? "Cerrar menú" : "Abrir menú")}
@@ -324,7 +387,7 @@ export function Navbar() {
     </header>
 
       {mobileOpen ? (
-        <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream lg:hidden">
+        <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream xl:hidden">
           <nav className="flex min-h-[calc(100svh-var(--header-h))] flex-col px-5 py-8 sm:px-6 sm:py-10" aria-label="Móvil">
             <div className="flex flex-col gap-5 text-[1.65rem] leading-tight font-semibold text-ink sm:gap-6 sm:text-3xl">
               <div>
@@ -341,6 +404,37 @@ export function Navbar() {
                     </Link>
                   ))}
                 </div>
+              </div>
+              <HashLink hash="#inicio" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
+                {t("Inicio")}
+              </HashLink>
+              <Link href="/nosotros" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
+                {t("Nosotros")}
+              </Link>
+              <div>
+                <button
+                  type="button"
+                  className="flex min-h-11 w-full items-center justify-between py-1 text-left"
+                  aria-expanded={faqOpen}
+                  aria-controls={`${faqMenuId}-mobile`}
+                  onClick={() => setFaqOpen((open) => !open)}
+                >
+                  {t("FAQ")}
+                  <ChevronDown className={cn("h-5 w-5 transition-transform duration-200", faqOpen && "rotate-180")} />
+                </button>
+                {faqOpen ? (
+                  <dl
+                    id={`${faqMenuId}-mobile`}
+                    className="mt-3 space-y-4 rounded-2xl border border-sand-300 bg-sand-50 p-5 font-sans text-base font-normal"
+                  >
+                    {faqItems.map((item, index) => (
+                      <div key={item.question} className={cn(index > 0 && "border-t border-sand-300 pt-4")}>
+                        <dt className="font-bold text-ink">{t(item.question)}</dt>
+                        <dd className="mt-1 leading-relaxed text-muted">{t(item.answer)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : null}
               </div>
               <div>
                 <HashLink
