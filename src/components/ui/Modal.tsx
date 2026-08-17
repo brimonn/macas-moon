@@ -94,7 +94,7 @@ export function Modal({
         </div>
         <div
           className={cn(
-            "overflow-y-auto px-5 py-6 sm:px-8 sm:py-8",
+            "overflow-y-auto px-5 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-8",
             bodyClassName,
           )}
         >

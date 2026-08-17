@@ -16,7 +16,7 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-cream">
-      <Container className="py-24 sm:py-28">
+      <Container className="py-16 sm:py-24 lg:py-28">
         <SectionHeading title="Todo lo que necesitas para tu estadía" />
         <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           {preview.map((amenity) => {

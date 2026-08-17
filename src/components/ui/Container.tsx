@@ -16,7 +16,7 @@ export function Container({
   return (
     <Tag
       id={id}
-      className={cn("mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-10", className)}
+      className={cn("site-wrap", className)}
     >
       {children}
     </Tag>

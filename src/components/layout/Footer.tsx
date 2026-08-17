@@ -12,9 +12,9 @@ export function Footer() {
 
   return (
     <footer className="bg-olive-900 text-sand-100">
-      <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4 lg:py-20">
+      <Container className="grid gap-10 py-12 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4 lg:py-20">
         <div className="sm:col-span-2 lg:col-span-1">
-          <Link href="/" className="inline-flex rounded-2xl bg-warm-white/95 px-3 py-2">
+          <Link href="/#inicio" className="inline-flex rounded-2xl bg-warm-white/95 px-3 py-2">
             <Image
               src={site.logo}
               alt={site.name}

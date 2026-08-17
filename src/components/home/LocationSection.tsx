@@ -7,11 +7,11 @@ import { site } from "@/lib/site";
 
 export function LocationSection() {
   return (
-    <section id="ubicacion" className="scroll-mt-24 bg-warm-white">
-      <Container className="py-24 sm:py-32">
-        <SectionHeading title="Estamos en Monteverde" />
-        <div className="mt-12 overflow-hidden rounded-[28px] border border-border-soft bg-sand-50">
-          <div className="relative min-h-[280px] overflow-hidden sm:min-h-[380px] lg:min-h-[460px]">
+    <section id="ubicacion" className="home-screen bg-warm-white">
+      <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
+        <SectionHeading title="Estamos en Monteverde" className="shrink-0" />
+        <div className="mt-8 flex min-h-0 flex-col overflow-hidden rounded-[28px] border border-border-soft bg-sand-50 lg:mt-6 lg:flex-1">
+          <div className="relative min-h-[220px] overflow-hidden sm:min-h-[380px] lg:min-h-0 lg:flex-1">
             <Image
               src="/assets/otros/bosque-nuboso.webp"
               alt="Bosque nuboso de Monteverde"
@@ -29,13 +29,13 @@ export function LocationSection() {
               </span>
             </div>
           </div>
-          <div className="grid gap-6 px-6 py-7 sm:px-8 md:grid-cols-2 md:items-center">
+          <div className="grid shrink-0 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="heading-card text-2xl text-ink">Monteverde</p>
               <p className="mt-1 text-muted">Puntarenas, Costa Rica</p>
             </div>
             <div className="md:justify-self-end">
-              <Button href={site.location.mapsUrl} variant="outline">
+              <Button href={site.location.mapsUrl} variant="outline" className="w-full md:w-auto">
                 Cómo llegar
                 <ArrowUpRight className="h-4 w-4" />
               </Button>

@@ -55,7 +55,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-warm-white font-sans text-main antialiased">
         <LanguageProvider>
           <Navbar />
-          <main id="contenido" className="flex-1 pb-16 md:pb-0">
+          <main id="contenido" className="flex-1 pb-[5.5rem] md:pb-0">
             {children}
           </main>
           <Footer />

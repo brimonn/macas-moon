@@ -47,17 +47,17 @@ export function SpacesSection({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-warm-white">
-      <Container className="py-24 sm:py-28">
+      <Container className="py-16 sm:py-24 lg:py-28">
         <SectionHeading title="Conoce cada espacio" />
         <div className="mt-14 space-y-16">
           {first ? (
-            <SpaceBlock space={first} imageClassName="aspect-[16/9] min-h-[280px] sm:min-h-[420px]" />
+            <SpaceBlock space={first} imageClassName="aspect-[16/10] sm:aspect-[16/9] sm:min-h-[420px]" />
           ) : null}
 
           {completePairs.map((pair) => (
             <div key={pair.map((item) => item.id).join("-")} className="grid gap-10 lg:grid-cols-2">
               {pair.map((space) => (
-                <SpaceBlock key={space.id} space={space} imageClassName="aspect-[4/3] min-h-[240px]" />
+                <SpaceBlock key={space.id} space={space} imageClassName="aspect-[4/3]" />
               ))}
             </div>
           ))}
@@ -67,7 +67,7 @@ export function SpacesSection({ dome }: { dome: Dome }) {
               key={space.id}
               space={space}
               className="lg:max-w-[85%]"
-              imageClassName="aspect-[21/9] min-h-[240px] sm:min-h-[320px]"
+              imageClassName="aspect-[16/9] sm:aspect-[21/9] sm:min-h-[320px]"
             />
           ))}
 
@@ -78,7 +78,7 @@ export function SpacesSection({ dome }: { dome: Dome }) {
                   key={space.id}
                   space={space}
                   className="lg:col-start-2"
-                  imageClassName="aspect-[4/3] min-h-[220px]"
+                  imageClassName="aspect-[4/3]"
                 />
               ))}
             </div>

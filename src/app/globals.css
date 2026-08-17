@@ -40,12 +40,114 @@
   --radius-3xl: 1.75rem;
 }
 
+:root {
+  --header-h: 4rem;
+  --site-max: 82.5rem;
+  --page-px: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 4.5rem;
+    --page-px: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 5rem;
+    --page-px: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --site-max: 92.5rem;
+    --page-px: 3rem;
+  }
+}
+
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 0;
+}
+
+.site-wrap {
+  width: 100%;
+  max-width: var(--site-max);
+  margin-inline: auto;
+  padding-inline: var(--page-px);
+}
+
+@media (min-width: 1024px) {
+  .home-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    overflow: hidden;
+  }
+
+  .home-screen-inner {
+    display: flex;
+    height: 100%;
+    min-height: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--header-h) + 3rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .home-screen-inner.home-screen-fill {
+    justify-content: flex-start;
+  }
+
+  .home-screen-inner.home-screen-fill > :last-child {
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  .home-screen-inner.home-screen-fill > .reviews-scroller {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+}
+
+.dome-first-screen {
+  min-height: 0;
+}
+
+@media (min-width: 1024px) {
+  .dome-first-screen {
+    display: flex;
+    height: 100svh;
+    min-height: 100svh;
+    flex-direction: column;
+  }
+
+  .dome-hero {
+    position: relative;
+    display: flex;
+    min-height: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dome-stats {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
 }
 
 body {
+  overflow-x: clip;
   background: var(--color-warm-white);
   color: var(--color-main);
   font-family: var(--font-sans);
@@ -69,15 +171,16 @@ body {
 .heading-hero {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2.5rem, 11vw, 3.5rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 8.4vw, 2.7rem);
+  line-height: 1.08;
   letter-spacing: -0.02em;
-  text-wrap: balance;
+  text-align: left;
+  text-wrap: pretty;
 }
 
 @media (min-width: 640px) {
   .heading-hero {
-    font-size: clamp(3rem, 5.4vw, 4.5rem);
+    font-size: clamp(2.6rem, 6vw, 3.75rem);
     line-height: 1.06;
   }
 }
@@ -91,19 +194,35 @@ body {
 .heading-display {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2.5rem, 8vw, 4.25rem);
-  line-height: 1.08;
+  font-size: clamp(1.85rem, 7.2vw, 2.6rem);
+  line-height: 1.1;
   letter-spacing: -0.015em;
-  text-wrap: balance;
+  text-wrap: pretty;
+}
+
+@media (min-width: 1024px) {
+  .heading-display {
+    font-size: clamp(2.5rem, 4.2vw, 4.25rem);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
 }
 
 .heading-section {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
-  line-height: 1.1;
+  font-size: clamp(1.6rem, 6.4vw, 2.05rem);
+  line-height: 1.15;
   letter-spacing: -0.015em;
-  text-wrap: balance;
+  text-wrap: pretty;
+}
+
+@media (min-width: 1024px) {
+  .heading-section {
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
 }
 
 .heading-card {
@@ -117,8 +236,15 @@ body {
 .hero-subtitle {
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
-  line-height: 1.6;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  line-height: 1.55;
+}
+
+@media (min-width: 1024px) {
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    line-height: 1.6;
+  }
 }
 
 .eyebrow {
@@ -136,6 +262,10 @@ body {
     rgba(20, 27, 19, 0.42) 42%,
     rgba(20, 27, 19, 0.16) 100%
   );
+}
+
+.hero-logo-light {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.22));
 }
 
 @media (min-width: 1024px) {
@@ -194,6 +324,75 @@ body {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.reviews-scroller {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  max-height: none;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1024px) {
+  .reviews-scroller {
+    gap: 24px;
+    scroll-snap-type: x proximity;
+  }
+}
+
+.reviews-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.review-card {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 min(18.75rem, 86%);
+  min-width: 0;
+  align-self: stretch;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.review-card,
+.review-card * {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.review-card blockquote {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .review-card {
+    flex-basis: min(22rem, 85%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .review-card {
+    flex: 0 0 calc((100% - 48px) / 3);
+    min-width: 0;
+  }
+
+  .review-card blockquote {
+    font-size: 1.1875rem;
+    line-height: 1.5;
+  }
 }
 
 @keyframes fade-up {

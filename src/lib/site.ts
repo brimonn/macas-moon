@@ -25,4 +25,5 @@ export const site = {
   checkOut: "Hasta las 11:00 a. m.",
   arrival: "Check-in autónomo",
   logo: "/assets/Macamoon_logo_transparent_trimmed.webp",
+  logoLight: "/assets/Macamoon_logo_light.webp",
 } as const;

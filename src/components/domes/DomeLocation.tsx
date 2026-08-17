@@ -11,7 +11,7 @@ export function DomeLocation({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-olive-50">
-      <Container className="grid items-center gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+      <Container className="grid items-center gap-8 py-16 sm:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
         <div>
           <h2 className="heading-section text-ink">{t("Entre las montañas de Monteverde")}</h2>
           <p className="mt-4 max-w-md text-[0.98rem] leading-relaxed font-normal text-muted">
@@ -23,7 +23,7 @@ export function DomeLocation({ dome }: { dome: Dome }) {
             </Button>
           </div>
         </div>
-        <div className="relative min-h-[240px] overflow-hidden rounded-[24px] sm:min-h-[300px]">
+        <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-[24px] sm:aspect-auto sm:min-h-[300px]">
           <Image
             src={dome.locationImage}
             alt={`${dome.name} entre la naturaleza de Monteverde`}

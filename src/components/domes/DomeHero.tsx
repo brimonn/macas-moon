@@ -13,28 +13,28 @@ export function DomeHero({ dome }: DomeHeroProps) {
   const { t } = useLanguage();
 
   return (
-    <section className="relative isolate min-h-[88svh] overflow-hidden">
+    <section className="dome-hero relative isolate min-h-[88svh] overflow-hidden lg:min-h-0">
       <Image
         src={dome.heroImage}
         alt={dome.name}
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-[center_58%] sm:object-[center_50%] lg:object-center"
       />
       <div className="hero-overlay absolute inset-0" />
-      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1320px] flex-col justify-end px-5 pb-16 sm:px-8 lg:justify-center lg:px-10 lg:pb-0">
-        <div className="max-w-2xl pt-28 text-warm-white">
-          <p className="eyebrow mb-4 text-sand-300">
+      <div className="site-wrap relative z-10 flex min-h-[88svh] flex-col items-start justify-end pb-10 pt-[calc(var(--header-h)+0.75rem)] text-left sm:pb-12 lg:h-full lg:min-h-0 lg:pb-8">
+        <div className="w-full max-w-2xl text-left text-warm-white">
+          <p className="eyebrow mb-3 text-sand-300">
             {t(dome.category)}
           </p>
-          <h1 className="heading-display">
+          <h1 className="heading-display text-left [text-wrap:pretty]">
             {t(dome.heroTitle)}
           </h1>
-          <p className="hero-subtitle mt-5 max-w-lg text-sand-100">
+          <p className="hero-subtitle mt-4 max-w-lg text-left text-sand-100">
             {t(dome.heroSubtitle)}
           </p>
-          <div className="mt-9">
+          <div className="mt-7">
             <Button href={`/reservar?domo=${dome.slug}`} size="lg">
               Reservar este domo
             </Button>

@@ -67,7 +67,7 @@ function FilterChip({
       type="button"
       onClick={onClick}
       className={cn(
-        "rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors duration-200",
+        "min-h-11 rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors duration-200",
         active ? "bg-olive-500 text-white" : "bg-olive-50 text-olive-800 hover:bg-olive-100",
       )}
     >

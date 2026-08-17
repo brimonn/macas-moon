@@ -10,9 +10,9 @@ export function DomeHighlights({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-cream">
-      <Container className="py-24 sm:py-28">
+      <Container className="py-16 sm:py-24 lg:py-28">
         <SectionHeading title={dome.conceptTitle} description={dome.longDescription} />
-        <div className="mt-14 grid gap-10 sm:grid-cols-3">
+        <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-3 sm:gap-10">
           {dome.highlights.map((item) => (
             <div key={item.title} className="max-w-sm">
               <h3 className="heading-card text-2xl text-ink">{t(item.title)}</h3>

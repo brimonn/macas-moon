@@ -14,9 +14,9 @@ export function MonteverdeSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="monteverde" className="scroll-mt-24 bg-sand-200">
-      <Container className="py-16 sm:py-20 lg:py-24">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+    <section id="monteverde" className="home-screen bg-sand-200">
+      <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
+        <div className="flex shrink-0 flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Cerca de Macas Moon"
             title="Descubre Monteverde"
@@ -29,11 +29,11 @@ export function MonteverdeSection() {
           </Button>
         </div>
 
-        <div className="mt-9 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-6 lg:min-h-0 lg:flex-1 lg:grid-rows-1">
           {featuredPlaces.map((place) => (
             <article
               key={place.id}
-              className="group relative min-h-64 overflow-hidden rounded-[24px] bg-olive-900 shadow-soft"
+              className="group relative min-h-56 overflow-hidden rounded-[24px] bg-olive-900 shadow-soft sm:min-h-64 lg:min-h-0 lg:h-full"
             >
               <Image
                 src={place.image}

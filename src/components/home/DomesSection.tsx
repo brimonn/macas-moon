@@ -14,20 +14,21 @@ export function DomesSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="domos" className="scroll-mt-24 bg-sand-100">
-      <Container className="py-24 sm:py-32">
+    <section id="domos" className="home-screen bg-sand-100">
+      <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
         <SectionHeading
           title="Encuentra tu espacio"
           description="Dos formas de vivir Monteverde."
+          className="shrink-0"
         />
-        <div className="mt-14 grid gap-8 lg:grid-cols-2">
+        <div className="mt-8 grid gap-8 lg:mt-6 lg:min-h-0 lg:flex-1 lg:grid-cols-2">
           {domes.map((dome, index) => (
             <Link
               key={dome.slug}
               href={`/domos/${dome.slug}`}
-              className="group flex flex-col overflow-hidden rounded-[28px] bg-warm-white shadow-soft transition-[box-shadow,transform] duration-300 hover:shadow-lift"
+              className="group flex min-h-0 flex-col overflow-hidden rounded-[28px] bg-warm-white shadow-soft transition-[box-shadow,transform] duration-300 hover:shadow-lift lg:h-full"
             >
-              <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/4]">
+              <div className="relative aspect-[5/4] overflow-hidden sm:aspect-[5/4] lg:aspect-auto lg:min-h-0 lg:flex-1">
                 <Image
                   src={dome.cardImage}
                   alt={dome.name}
@@ -44,9 +45,9 @@ export function DomesSection() {
                   )}
                 />
               </div>
-              <div className="flex flex-[0_0_auto] flex-col gap-4 px-6 py-7 sm:px-8 sm:py-8">
+              <div className="flex shrink-0 flex-col gap-3 px-6 py-6 sm:px-8 lg:py-5">
                 <Badge tone={index === 0 ? "sand" : "olive"}>{dome.category}</Badge>
-                <h3 className="heading-card text-3xl text-ink">{t(dome.name)}</h3>
+                <h3 className="heading-card text-2xl text-ink sm:text-3xl">{t(dome.name)}</h3>
                 <p className="text-[0.98rem] leading-relaxed font-normal text-muted">
                   {t(dome.shortDescription)}
                 </p>
@@ -68,7 +69,7 @@ export function DomesSection() {
                     {t(dome.preview.extra)}
                   </li>
                 </ul>
-                <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-olive-700">
+                <span className="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-olive-700">
                   {t("Descubrir este domo")}
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>

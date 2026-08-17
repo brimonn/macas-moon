@@ -19,17 +19,19 @@ function HashLink({
   className,
   children,
   onClick,
+  ariaLabel,
 }: {
   hash: `#${string}`;
   className?: string;
   children: React.ReactNode;
   onClick?: () => void;
+  ariaLabel?: string;
 }) {
   const pathname = usePathname();
   const href = pathname === "/" ? hash : `/${hash}`;
 
   return (
-    <Link href={href} className={className} onClick={onClick}>
+    <Link href={href} className={className} onClick={onClick} aria-label={ariaLabel}>
       {children}
     </Link>
   );
@@ -108,7 +110,7 @@ export function Navbar() {
   }, []);
 
   const linkClass = cn(
-    "nav-underline pb-0.5 text-[0.9rem] font-semibold tracking-wide transition-colors duration-300",
+    "nav-underline pb-0.5 text-[0.9rem] font-medium tracking-[0.04em] transition-colors duration-300",
     solid ? "text-ink" : "text-warm-white",
   );
 
@@ -118,9 +120,10 @@ export function Navbar() {
   };
 
   return (
+    <>
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300",
         solid
           ? "bg-sand-50/94 shadow-[0_8px_24px_rgba(36,39,32,0.04)] backdrop-blur-[6px]"
           : "bg-transparent",
@@ -132,24 +135,30 @@ export function Navbar() {
       >
         {t("Saltar al contenido")}
       </a>
-      <Container className="flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
-        <Link
-          href="/"
-          className={cn(
-            "relative flex items-center rounded-full transition-colors duration-300",
-            !solid && "bg-warm-white/88 px-2.5 py-1.5 backdrop-blur-sm",
-          )}
-          aria-label={`${site.name}, ir al inicio`}
+      <Container className="flex h-[var(--header-h)] items-center justify-between gap-4">
+        <HashLink
+          hash="#inicio"
+          className="relative flex items-center"
+          ariaLabel={`${site.name}, ir al inicio`}
+          onClick={() => {
+            setMobileOpen(false);
+            if (pathname === "/") {
+              document.getElementById("inicio")?.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
         >
           <Image
-            src={site.logo}
+            src={solid ? site.logo : site.logoLight}
             alt={site.name}
             width={148}
             height={48}
-            className="h-10 w-auto object-contain lg:h-11"
+            className={cn(
+              "h-9 w-auto object-contain sm:h-10 lg:h-11",
+              !solid && "hero-logo-light",
+            )}
             priority
           />
-        </Link>
+        </HashLink>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Principal">
           <div className="relative" ref={domeWrapRef}>
@@ -312,19 +321,20 @@ export function Navbar() {
           </button>
         </div>
       </Container>
+    </header>
 
       {mobileOpen ? (
-        <div className="fixed inset-0 top-[4.5rem] z-40 overflow-y-auto bg-cream lg:hidden">
-          <nav className="flex min-h-[calc(100svh-4.5rem)] flex-col px-6 py-10" aria-label="Móvil">
-            <div className="flex flex-col gap-6 text-3xl font-semibold text-ink">
+        <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream lg:hidden">
+          <nav className="flex min-h-[calc(100svh-var(--header-h))] flex-col px-5 py-8 sm:px-6 sm:py-10" aria-label="Móvil">
+            <div className="flex flex-col gap-5 text-[1.65rem] leading-tight font-semibold text-ink sm:gap-6 sm:text-3xl">
               <div>
-                <p className="mb-3 text-3xl">{t("Domos")}</p>
-                <div className="flex flex-col gap-3 font-sans text-lg text-muted">
+                <p className="mb-3">{t("Domos")}</p>
+                <div className="flex flex-col gap-3 font-sans text-base text-muted sm:text-lg">
                   {orderedDomes.map((dome) => (
                     <Link
                       key={dome.slug}
                       href={`/domos/${dome.slug}`}
-                      className="hover:text-olive-700"
+                      className="min-h-11 py-1 hover:text-olive-700"
                       onClick={() => setMobileOpen(false)}
                     >
                       {t(dome.capacity === 4 ? "Domo 1 · Amplio" : "Domo 2 · Romántico")}
@@ -335,31 +345,31 @@ export function Navbar() {
               <div>
                 <HashLink
                   hash="#monteverde"
-                  className="mb-3 block text-3xl"
+                  className="mb-3 block"
                   onClick={() => setMobileOpen(false)}
                 >
                   {t("Experiencias")}
                 </HashLink>
-                <div className="flex flex-col gap-3 font-sans text-lg text-muted">
-                  <Link href="/experiencias" onClick={() => setMobileOpen(false)}>
+                <div className="flex flex-col gap-3 font-sans text-base text-muted sm:text-lg">
+                  <Link href="/experiencias" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
                     {t("Todas las experiencias")}
                   </Link>
                 </div>
               </div>
-              <HashLink hash="#resenas" onClick={() => setMobileOpen(false)}>
+              <HashLink hash="#resenas" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
                 {t("Reseñas")}
               </HashLink>
-              <HashLink hash="#ubicacion" onClick={() => setMobileOpen(false)}>
+              <HashLink hash="#ubicacion" className="min-h-11 py-1" onClick={() => setMobileOpen(false)}>
                 {t("Ubicación")}
               </HashLink>
             </div>
-            <div className="mt-10 flex flex-wrap gap-2 text-sm">
+            <div className="mt-8 flex flex-wrap gap-2 text-sm">
               {languageOptions.map((option) => (
                 <button
                   key={option.code}
                   type="button"
                   className={cn(
-                    "rounded-full px-4 py-2 text-sm font-semibold",
+                    "min-h-11 rounded-full px-4 py-2 text-sm font-semibold",
                     language === option.code ? "bg-olive-500 text-white" : "bg-white text-ink",
                   )}
                   onClick={() => setLanguage(option.code)}
@@ -368,7 +378,7 @@ export function Navbar() {
                 </button>
               ))}
             </div>
-            <div className="mt-auto pt-12 pb-8">
+            <div className="mt-auto pt-10 pb-[max(2rem,env(safe-area-inset-bottom))]">
               <Button href={cta.href} size="lg" className="w-full" onClick={() => setMobileOpen(false)}>
                 {cta.label}
               </Button>
@@ -376,6 +386,6 @@ export function Navbar() {
           </nav>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }

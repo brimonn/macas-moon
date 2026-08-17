@@ -37,14 +37,14 @@ export function DomeGallery({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-warm-white">
-      <Container className="py-20 sm:py-24">
+      <Container className="py-16 sm:py-20 lg:py-24">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-4 sm:grid-rows-2 sm:gap-3">
           {tiles.map((tile, index) => (
             <button
               key={`${tile.image.src}-${index}`}
               type="button"
               onClick={() => setOpen(true)}
-              className={`group relative min-h-[220px] overflow-hidden rounded-[22px] sm:min-h-[200px] ${index === 0 ? "sm:min-h-[420px]" : ""} ${tile.className}`}
+              className={`group relative aspect-[4/3] overflow-hidden rounded-[20px] sm:aspect-auto sm:min-h-[200px] sm:rounded-[22px] ${index === 0 ? "sm:min-h-[420px]" : ""} ${tile.className}`}
             >
               <Image
                 src={tile.image.src}

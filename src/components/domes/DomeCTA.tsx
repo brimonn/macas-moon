@@ -10,7 +10,7 @@ export function DomeCTA({ dome }: { dome: Dome }) {
 
   return (
     <section className="bg-sand-50">
-      <Container className="py-24 text-center sm:py-28">
+      <Container className="py-16 text-center sm:py-24 lg:py-28">
         <h2 className="heading-display text-ink">{t(dome.ctaTitle)}</h2>
         <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed font-normal text-muted">{t(dome.ctaText)}</p>
         <div className="mt-8">

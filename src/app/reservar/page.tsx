@@ -19,7 +19,7 @@ export default async function ReservarPage({ searchParams }: ReservarPageProps) 
   const selected = domo ? getDome(domo) : undefined;
 
   return (
-    <section className="bg-sand-50 pt-28 pb-24 sm:pt-32">
+    <section className="bg-sand-50 pt-24 pb-20 sm:pt-32 sm:pb-24">
       <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="eyebrow text-olive-700">
@@ -36,7 +36,7 @@ export default async function ReservarPage({ searchParams }: ReservarPageProps) 
             </p>
           ) : null}
         </div>
-        <div className="rounded-[28px] border border-border-soft bg-warm-white p-6 shadow-soft sm:p-8">
+        <div className="rounded-[24px] border border-border-soft bg-warm-white p-5 shadow-soft sm:rounded-[28px] sm:p-8">
           <ReservationForm initialDome={domo} />
         </div>
       </Container>

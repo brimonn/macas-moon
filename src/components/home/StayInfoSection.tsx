@@ -20,10 +20,10 @@ export function StayInfoSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="bg-olive-50">
-      <Container className="py-24 sm:py-32">
-        <SectionHeading title="Antes de tu estadía" />
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+    <section className="home-screen bg-olive-50">
+      <Container className="home-screen-inner py-16 sm:py-20 lg:py-0">
+        <SectionHeading title="Antes de tu estadía" className="shrink-0" />
+        <div className="mt-10 grid gap-6 sm:grid-cols-3 lg:mt-8">
           {facts.map((fact) => (
             <div key={fact.label} className="rounded-[24px] bg-warm-white px-6 py-8">
               <fact.icon className="h-6 w-6 text-olive-500" strokeWidth={1.5} />
@@ -37,7 +37,7 @@ export function StayInfoSection() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-olive-700 transition-colors duration-200 hover:text-olive-900"
+          className="mt-8 inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-olive-700 transition-colors duration-200 hover:text-olive-900 lg:mt-6"
         >
           {t("Ver reglas del alojamiento")}
           <ArrowRight className="h-4 w-4" />

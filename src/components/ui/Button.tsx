@@ -17,8 +17,8 @@ const variants = {
 
 const sizes = {
   sm: "px-4 py-2 text-sm",
-  md: "px-6 py-2.5 text-sm",
-  lg: "px-8 py-3.5 text-base",
+  md: "min-h-11 px-6 py-2.5 text-sm",
+  lg: "min-h-12 px-7 py-3.5 text-base sm:px-8",
 } as const;
 
 type ButtonProps = {
@@ -34,7 +34,7 @@ type ButtonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[-0.005em] transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive-600 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white";
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-[0.02em] transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive-600 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white";
 
 export function Button({
   variant = "primary",

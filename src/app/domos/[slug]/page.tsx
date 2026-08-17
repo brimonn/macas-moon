@@ -41,8 +41,10 @@ export default async function DomePage({ params }: DomePageProps) {
 
   return (
     <>
-      <DomeHero dome={dome} />
-      <DomeStats dome={dome} />
+      <div className="dome-first-screen">
+        <DomeHero dome={dome} />
+        <DomeStats dome={dome} />
+      </div>
       <DomeHighlights dome={dome} />
       <DomeGallery dome={dome} />
       <AmenitiesSection dome={dome} />

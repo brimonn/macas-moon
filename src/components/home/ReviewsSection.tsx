@@ -17,7 +17,8 @@ export function ReviewsSection() {
     const root = scrollerRef.current;
     if (!root) return;
     const card = root.querySelector("article");
-    const amount = card ? card.getBoundingClientRect().width + 24 : 340;
+    const gap = Number.parseFloat(getComputedStyle(root).columnGap || getComputedStyle(root).gap) || 16;
+    const amount = card ? card.getBoundingClientRect().width + gap : 300;
     root.scrollBy({
       left: amount * direction,
       behavior: reduced ? "auto" : "smooth",
@@ -25,9 +26,9 @@ export function ReviewsSection() {
   }
 
   return (
-    <section id="resenas" className="scroll-mt-24 bg-sand-100">
-      <Container className="py-24 sm:py-32">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+    <section id="resenas" className="home-screen bg-sand-100">
+      <Container className="home-screen-inner py-16 sm:py-20 lg:py-0">
+        <div className="flex shrink-0 flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
           <SectionHeading
             title={reviewSummary.label}
             description="Palabras de quienes ya se quedaron, publicadas en Google Maps."
@@ -67,23 +68,25 @@ export function ReviewsSection() {
 
         <div
           ref={scrollerRef}
-          className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2"
+          className="reviews-scroller mt-10 lg:mt-6"
         >
           {reviews.map((review) => (
             <article
               key={review.id}
-              className="min-w-[min(100%,20rem)] snap-start rounded-[24px] border border-border-soft bg-warm-white p-7 sm:min-w-[min(100%,22rem)] lg:min-w-[calc((100%-3rem)/3)]"
+              className="review-card flex snap-start flex-col rounded-[24px] border border-border-soft bg-warm-white p-7"
             >
               <p className="flex gap-1 text-olive-500" aria-hidden="true">
                 {Array.from({ length: review.rating }).map((_, index) => (
                   <Star key={index} className="h-4 w-4 fill-current" />
                 ))}
               </p>
-              <blockquote className="mt-5 font-serif text-xl leading-relaxed font-medium text-ink">
+              <blockquote className="mt-5 font-serif font-medium text-ink">
                 “{review.quote}”
               </blockquote>
-              <p className="mt-6 text-sm font-semibold text-olive-800">{review.name}</p>
-              <p className="text-sm text-muted">{review.source}</p>
+              <div className="mt-4">
+                <p className="text-sm font-semibold text-olive-800">{review.name}</p>
+                <p className="text-sm text-muted">{review.source}</p>
+              </div>
             </article>
           ))}
         </div>
