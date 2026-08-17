@@ -17,7 +17,7 @@ export const site = {
   contact: {
     whatsappUrl,
     reservationWhatsappUrl: `${whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hola@macasmoon.com",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "macasmoonglamping@gmail.com",
     instagram: "https://instagram.com/macasmoon",
     facebook: "https://facebook.com/macasmoon",
   },

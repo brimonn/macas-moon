@@ -67,20 +67,20 @@ export const domes: Dome[] = [
     shortDescription:
       "Un espacio íntimo entre las montañas de Monteverde, pensado para desconectar y disfrutar en pareja.",
     longDescription:
-      "Un espacio recogido, silencioso y cercano al bosque. El Domo 2 está pensado para quienes buscan privacidad, noches despacio y la sensación de estar lejos de todo, sin renunciar a la comodidad.",
+      "Un refugio íntimo en medio del bosque nuboso de Monteverde. Un lugar para bajar el ritmo, disfrutar de la compañía y vivir una experiencia diferente, rodeados de naturaleza y confort.",
     conceptTitle: "Hecho para desconectar juntos",
     highlights: [
       {
-        title: "Privacidad para dos",
-        text: "Un entorno íntimo, lejos del ruido, para recuperar el ritmo de la pareja.",
+        title: "Un espacio solo para ustedes",
+        text: "Un espacio diseñado para disfrutar en pareja, con la tranquilidad y privacidad que necesitas para conectar, conversar y crear momentos especiales lejos del ruido y las distracciones.",
       },
       {
         title: "Jacuzzi privado",
-        text: "Agua tibia, bosque alrededor y la calma de Monteverde al caer la tarde.",
+        text: "Relájate en tu jacuzzi privado mientras contemplas el entorno natural. El plan perfecto para disfrutar de una tarde tranquila, una noche bajo las estrellas o simplemente dejar pasar el tiempo.",
       },
       {
         title: "Noches rodeadas de naturaleza",
-        text: "Estrellas, viento en los árboles y la quietud de la montaña.",
+        text: "Cuando cae la noche, el bosque se transforma. El sonido de la naturaleza, el aire fresco de la montaña y el cielo sobre el domo crean el escenario perfecto para una noche diferente.",
       },
     ],
     stats: [
