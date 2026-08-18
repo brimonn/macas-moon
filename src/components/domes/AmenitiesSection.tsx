@@ -18,13 +18,18 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
     <section className="bg-cream">
       <Container className="py-16 sm:py-24 lg:py-28">
         <SectionHeading title="Todo lo que necesitas para tu estadía" />
-        <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mt-12 grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-y-11">
           {preview.map((amenity) => {
             const Icon = icons[amenity.icon];
             return (
-              <li key={amenity.id} className="flex items-start gap-3">
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-olive-500" strokeWidth={1.5} />
-                <span className="text-sm font-medium text-ink">{t(amenity.label)}</span>
+              <li key={amenity.id} className="flex min-w-0 items-start gap-3">
+                <Icon
+                  className="mt-0.5 h-[22px] w-[22px] shrink-0 text-olive-500 sm:h-6 sm:w-6 lg:h-[26px] lg:w-[26px]"
+                  strokeWidth={1.5}
+                />
+                <span className="min-w-0 text-[15px] leading-snug font-medium break-words text-ink sm:text-base">
+                  {t(amenity.label)}
+                </span>
               </li>
             );
           })}
