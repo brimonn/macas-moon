@@ -4,8 +4,8 @@ import { HomeHero } from "@/components/home/HomeHero";
 import { IntroSection } from "@/components/home/IntroSection";
 import { LocationSection } from "@/components/home/LocationSection";
 import { MonteverdeSection } from "@/components/home/MonteverdeSection";
+import { FaqSection } from "@/components/home/FaqSection";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
-import { StayInfoSection } from "@/components/home/StayInfoSection";
 
 export default function HomePage() {
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
       <MonteverdeSection />
       <ReviewsSection />
       <LocationSection />
-      <StayInfoSection />
+      <FaqSection />
       <HomeCTA />
     </>
   );

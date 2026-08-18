@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 export function LocationSection() {
   return (
-    <section id="ubicacion" className="home-screen bg-warm-white">
+    <section id="ubicacion" className="home-screen bg-sand-100">
       <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
         <SectionHeading title="Estamos en Monteverde" className="shrink-0" />
         <div className="mt-8 flex min-h-0 flex-col overflow-hidden rounded-[28px] border border-border-soft bg-sand-50 lg:mt-6 lg:flex-1">

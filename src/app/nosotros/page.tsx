@@ -30,8 +30,8 @@ export default function AboutPage() {
 
         <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] shadow-lift lg:aspect-[5/6]">
           <Image
-            src="/assets/otros/macasmoon-nocturno.jpg"
-            alt="Macas Moon Glamping iluminado durante la noche en Monteverde"
+            src="/assets/Generales/IMG_9052.webp"
+            alt="Macas Moon Glamping en Monteverde"
             fill
             priority
             sizes="(min-width: 1024px) 42vw, 100vw"

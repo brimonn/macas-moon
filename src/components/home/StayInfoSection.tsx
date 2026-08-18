@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Clock3, KeyRound, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Modal } from "@/components/ui/Modal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -20,8 +21,8 @@ export function StayInfoSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="home-screen bg-olive-50">
-      <Container className="home-screen-inner py-16 sm:py-20 lg:py-0">
+    <section className="bg-sand-100">
+      <Container className="py-16 sm:py-24 lg:py-28">
         <SectionHeading title="Antes de tu estadía" className="shrink-0" />
         <div className="mt-10 grid gap-6 sm:grid-cols-3 lg:mt-8">
           {facts.map((fact) => (
@@ -34,14 +35,15 @@ export function StayInfoSection() {
             </div>
           ))}
         </div>
-        <button
+        <Button
           type="button"
+          variant="outline"
+          className="mt-8 w-fit lg:mt-6"
           onClick={() => setOpen(true)}
-          className="mt-8 inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-olive-700 transition-colors duration-200 hover:text-olive-900 lg:mt-6"
         >
-          {t("Ver reglas del alojamiento")}
+          Ver reglas del alojamiento
           <ArrowRight className="h-4 w-4" />
-        </button>
+        </Button>
       </Container>
       <Modal
         open={open}

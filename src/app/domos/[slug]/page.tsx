@@ -8,6 +8,7 @@ import { DomeHighlights } from "@/components/domes/DomeHighlights";
 import { DomeLocation } from "@/components/domes/DomeLocation";
 import { DomeStats } from "@/components/domes/DomeStats";
 import { SpacesSection } from "@/components/domes/SpacesSection";
+import { StayInfoSection } from "@/components/home/StayInfoSection";
 import { domes, getDome } from "@/data/domes";
 
 type DomePageProps = {
@@ -49,6 +50,7 @@ export default async function DomePage({ params }: DomePageProps) {
       <DomeGallery dome={dome} />
       <AmenitiesSection dome={dome} />
       <SpacesSection dome={dome} />
+      <StayInfoSection />
       <DomeLocation dome={dome} />
       <DomeCTA dome={dome} />
     </>

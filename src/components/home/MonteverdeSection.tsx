@@ -14,7 +14,7 @@ export function MonteverdeSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="monteverde" className="home-screen bg-sand-200">
+    <section id="experiencias" className="home-screen bg-sand-100">
       <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
         <div className="flex shrink-0 flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
