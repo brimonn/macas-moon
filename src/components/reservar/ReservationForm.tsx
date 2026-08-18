@@ -44,7 +44,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       email,
       phone,
       message,
-    });
+    }, t);
     setSubmittedUrl(result.whatsappUrl);
     window.open(result.whatsappUrl, "_blank", "noopener,noreferrer");
   }

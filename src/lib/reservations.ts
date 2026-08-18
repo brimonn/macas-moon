@@ -17,22 +17,25 @@ export type ReservationResult = {
   whatsappUrl: string;
 };
 
+type Translate = (text: string) => string;
+
 export function submitReservationRequest(
   payload: ReservationRequest,
+  t: Translate = (text) => text,
 ): ReservationResult {
   const selectedDome = domes.find((dome) => dome.slug === payload.domeSlug);
   const lines = [
-    "Hola, quisiera consultar la disponibilidad en Macas Moon.",
+    t("Hola, quisiera consultar la disponibilidad en Macas Moon."),
     "",
-    `Domo: ${selectedDome?.name ?? payload.domeSlug}`,
-    `Llegada: ${payload.checkIn}`,
-    `Salida: ${payload.checkOut}`,
-    `Huéspedes: ${payload.guests}`,
+    `${t("Domo")}: ${selectedDome ? t(selectedDome.name) : payload.domeSlug}`,
+    `${t("Llegada")}: ${payload.checkIn}`,
+    `${t("Salida")}: ${payload.checkOut}`,
+    `${t("Huéspedes")}: ${payload.guests}`,
     "",
-    `Nombre: ${payload.name}`,
-    `Correo: ${payload.email}`,
-    `Teléfono: ${payload.phone}`,
-    payload.message ? `Mensaje: ${payload.message}` : "",
+    `${t("Nombre")}: ${payload.name}`,
+    `${t("Correo")}: ${payload.email}`,
+    `${t("Teléfono")}: ${payload.phone}`,
+    payload.message ? `${t("Mensaje")}: ${payload.message}` : "",
   ].filter(Boolean);
 
   const separator = site.contact.whatsappUrl.includes("?") ? "&" : "?";

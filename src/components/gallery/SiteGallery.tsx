@@ -109,11 +109,11 @@ export function SiteGallery() {
               "group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[20px] bg-sand-100 text-left shadow-soft",
               image.orientation === "portrait" ? "aspect-[3/4]" : "aspect-[4/3]",
             )}
-            aria-label={`${t("Abrir foto")}: ${image.alt}`}
+            aria-label={`${t("Abrir foto")}: ${t(image.alt)}`}
           >
             <Image
               src={image.src}
-              alt={image.alt}
+              alt={t(image.alt)}
               fill
               sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
@@ -138,7 +138,7 @@ export function SiteGallery() {
           <div className="relative flex h-[calc(100svh-4.6rem)] items-center justify-center bg-ink sm:h-[calc(92svh-4.6rem)]">
             <Image
               src={selectedImage.src}
-              alt={selectedImage.alt}
+              alt={t(selectedImage.alt)}
               fill
               priority
               sizes="100vw"
@@ -161,7 +161,7 @@ export function SiteGallery() {
               <ChevronRight className="h-6 w-6" />
             </button>
             <div className="absolute inset-x-4 bottom-4 z-10 text-center text-sm text-sand-100 sm:bottom-5">
-              <p>{selectedImage.alt}</p>
+              <p>{t(selectedImage.alt)}</p>
               <p className="mt-1 text-xs text-sand-400">
                 {t("Foto {current} de {total}", {
                   current: selectedIndex + 1,

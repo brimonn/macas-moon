@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Modal } from "@/components/ui/Modal";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import { galleryCategories, type GalleryCategory, type GalleryImage } from "@/types/dome";
 import { cn } from "@/lib/cn";
 
@@ -15,6 +16,7 @@ type GalleryModalProps = {
 };
 
 export function GalleryModal({ open, onClose, images, labels, title }: GalleryModalProps) {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState<"todas" | GalleryCategory>("todas");
 
   const filters = useMemo(() => {
@@ -27,10 +29,10 @@ export function GalleryModal({ open, onClose, images, labels, title }: GalleryMo
   const visible = filter === "todas" ? images : images.filter((image) => image.category === filter);
 
   return (
-    <Modal open={open} onClose={onClose} title={`Fotos · ${title}`} size="full">
+    <Modal open={open} onClose={onClose} title={t("Fotos · {title}", { title })} size="full">
       <div className="no-scrollbar -mx-1 mb-6 flex gap-2 overflow-x-auto pb-1">
         <FilterChip active={filter === "todas"} onClick={() => setFilter("todas")}>
-          Todas
+          {t("Todas")}
         </FilterChip>
         {filters.map((category) => (
           <FilterChip
@@ -45,7 +47,7 @@ export function GalleryModal({ open, onClose, images, labels, title }: GalleryMo
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((image) => (
           <figure key={image.src} className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
-            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
+            <Image src={image.src} alt={t(image.alt)} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
           </figure>
         ))}
       </div>

@@ -36,7 +36,7 @@ export function ReviewsSection() {
           <div className="flex items-center gap-4">
             <div>
               <p className="font-serif text-5xl leading-none font-semibold text-ink">{reviewSummary.rating}</p>
-              <p className="mt-2 flex items-center gap-1 text-olive-500" aria-label="5 de 5 estrellas">
+              <p className="mt-2 flex items-center gap-1 text-olive-500" aria-label={t("5 de 5 estrellas")}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Star key={index} className="h-4 w-4 fill-current" />
                 ))}
@@ -81,7 +81,7 @@ export function ReviewsSection() {
                 ))}
               </p>
               <blockquote className="mt-5 font-serif font-medium text-ink">
-                “{review.quote}”
+                “{t(review.quote)}”
               </blockquote>
               <div className="mt-4">
                 <p className="text-sm font-semibold text-olive-800">{review.name}</p>

@@ -48,7 +48,7 @@ export function DomeGallery({ dome }: { dome: Dome }) {
             >
               <Image
                 src={tile.image.src}
-                alt={tile.image.alt}
+                alt={t(tile.image.alt)}
                 fill
                 sizes={index === 0 ? "(min-width: 640px) 50vw, 100vw" : "(min-width: 640px) 25vw, 100vw"}
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"

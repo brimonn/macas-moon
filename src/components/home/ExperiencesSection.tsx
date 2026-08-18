@@ -38,7 +38,7 @@ export function ExperiencesSection() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <Badge>{place.category}</Badge>
-                <h3 className="heading-card mt-4 text-2xl text-ink">{t(place.name)}</h3>
+                <h3 className="heading-card mt-4 text-2xl text-ink">{place.name}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{t(place.description)}</p>
                 <p className="mt-5 flex items-center gap-2 text-sm font-medium text-olive-800">
                   <Compass className="h-4 w-4" strokeWidth={1.6} />

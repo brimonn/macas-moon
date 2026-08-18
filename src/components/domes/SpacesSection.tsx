@@ -15,7 +15,7 @@ function SpaceBlock({ space, className, imageClassName }: { space: Space; classN
       <div className={cn("relative overflow-hidden rounded-[24px]", imageClassName)}>
         <Image
           src={space.image}
-          alt={space.name}
+          alt={t(space.name)}
           fill
           sizes="(min-width: 1024px) 70vw, 100vw"
           className="object-cover"

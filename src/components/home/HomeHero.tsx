@@ -12,7 +12,7 @@ export function HomeHero() {
     <section id="inicio" className="home-screen relative isolate min-h-svh overflow-hidden lg:h-svh">
       <Image
         src="/assets/domo2/IMG_7051.webp"
-        alt="Domos de Macas Moon rodeados de vegetación y las montañas de Monteverde"
+        alt={t("Domos de Macas Moon rodeados de vegetación y las montañas de Monteverde")}
         fill
         priority
         sizes="100vw"

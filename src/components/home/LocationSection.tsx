@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import { site } from "@/lib/site";
 
 export function LocationSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="ubicacion" className="home-screen bg-sand-100">
       <Container className="home-screen-inner home-screen-fill py-16 sm:py-20 lg:py-0">
@@ -14,7 +19,7 @@ export function LocationSection() {
           <div className="relative min-h-[220px] overflow-hidden sm:min-h-[380px] lg:min-h-0 lg:flex-1">
             <Image
               src="/assets/otros/bosque-nuboso.webp"
-              alt="Bosque nuboso de Monteverde"
+              alt={t("Bosque nuboso de Monteverde")}
               fill
               sizes="100vw"
               className="location-image object-cover"

@@ -26,7 +26,7 @@ export function DomeLocation({ dome }: { dome: Dome }) {
         <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-[24px] sm:aspect-auto sm:min-h-[300px]">
           <Image
             src={dome.locationImage}
-            alt={`${dome.name} entre la naturaleza de Monteverde`}
+            alt={t("{name} entre la naturaleza de Monteverde", { name: t(dome.name) })}
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"

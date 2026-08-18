@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Heart, Leaf } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { TranslatedText } from "@/i18n/LanguageProvider";
+import { TranslatedImage } from "@/i18n/TranslatedImage";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -29,7 +29,7 @@ export default function AboutPage() {
         </div>
 
         <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] shadow-lift lg:aspect-[5/6]">
-          <Image
+          <TranslatedImage
             src="/assets/Generales/IMG_9052.webp"
             alt="Macas Moon Glamping en Monteverde"
             fill

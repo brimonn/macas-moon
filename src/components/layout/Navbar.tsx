@@ -7,17 +7,10 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown, Globe, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { type Language, languageOptions, useLanguage } from "@/i18n/LanguageProvider";
+import { languageOptions, useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 import { domes } from "@/data/domes";
-
-const languageNames: Record<Language, string> = {
-  es: "Español",
-  en: "English",
-  fr: "Français",
-  de: "Deutsch",
-};
 
 function scrollToHash(hash: `#${string}`) {
   const target = document.getElementById(hash.slice(1));
@@ -161,8 +154,10 @@ export function Navbar() {
       : "border-white/35 bg-white/10 text-warm-white hover:bg-white/18",
   );
 
+  const reservationMessage = t("Hola, quisiera consultar la disponibilidad en Macas Moon.");
+  const whatsappSeparator = site.contact.whatsappUrl.includes("?") ? "&" : "?";
   const cta = {
-    href: site.contact.reservationWhatsappUrl,
+    href: `${site.contact.whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
     label: "Reserva ahora",
   };
 
@@ -231,7 +226,7 @@ export function Navbar() {
           <HashLink
             hash="#inicio"
             className="relative flex shrink-0 items-center"
-            ariaLabel={`${site.name}, ir al inicio`}
+            ariaLabel={`${site.name}, ${t("ir al inicio")}`}
             onClick={closeMenus}
           >
             <Image
@@ -249,7 +244,7 @@ export function Navbar() {
 
           <nav
             className="hidden min-w-0 flex-1 items-center justify-center gap-6 lg:flex xl:gap-8"
-            aria-label="Principal"
+            aria-label={t("Principal")}
           >
             <div className="relative" ref={domesWrapRef}>
               <button
@@ -351,7 +346,7 @@ export function Navbar() {
                         )}
                         strokeWidth={2.2}
                       />
-                      {languageNames[option.code]}
+                      {t(option.label)}
                     </button>
                   ))}
                 </div>
@@ -389,7 +384,7 @@ export function Navbar() {
         <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream lg:hidden">
           <nav
             className="flex min-h-[calc(100svh-var(--header-h))] flex-col px-5 py-8 sm:px-6 sm:py-10"
-            aria-label="Móvil"
+            aria-label={t("Móvil")}
           >
             <div className="flex flex-col gap-1 text-[1.45rem] leading-tight font-semibold text-ink sm:text-2xl">
               <div>

@@ -16,7 +16,7 @@ export function DomeHero({ dome }: DomeHeroProps) {
     <section className="dome-hero relative isolate min-h-[88svh] overflow-hidden lg:min-h-0">
       <Image
         src={dome.heroImage}
-        alt={dome.name}
+        alt={t(dome.name)}
         fill
         priority
         sizes="100vw"

@@ -45,7 +45,7 @@ export function MonteverdeSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-olive-900/90 via-olive-900/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5 text-warm-white sm:p-6">
                 <p className="eyebrow text-sand-300">{t(place.category)}</p>
-                <h3 className="heading-card mt-2 text-2xl">{t(place.name)}</h3>
+                <h3 className="heading-card mt-2 text-2xl">{place.name}</h3>
                 <p className="mt-3 flex items-center gap-2 text-sm text-sand-100">
                   <Compass className="h-4 w-4" strokeWidth={1.6} />
                   {t(place.highlight)}
