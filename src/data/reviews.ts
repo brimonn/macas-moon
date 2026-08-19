@@ -8,7 +8,7 @@ export type Review = {
 
 export const reviewSummary = {
   rating: "5.0",
-  label: "Experiencias de nuestros huéspedes",
+  label: "Reseñas de nuestros huéspedes",
   source: "Google Maps",
 };
 

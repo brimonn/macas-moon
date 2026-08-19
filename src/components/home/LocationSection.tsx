@@ -25,14 +25,20 @@ export function LocationSection() {
               className="location-image object-cover"
             />
             <div className="absolute inset-0 bg-olive-900/25" />
-            <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+            <a
+              href={site.location.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("Cómo llegar")}
+              className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
+            >
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-warm-white text-olive-700 shadow-soft">
                 <MapPin className="h-5 w-5" />
               </span>
               <span className="mt-3 rounded-full bg-warm-white/95 px-4 py-1.5 text-sm font-semibold text-ink">
                 Macas Moon
               </span>
-            </div>
+            </a>
           </div>
           <div className="grid shrink-0 gap-6 px-6 py-7 sm:px-8 md:grid-cols-2 md:items-center">
             <div>

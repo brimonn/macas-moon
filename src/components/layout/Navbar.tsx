@@ -73,7 +73,8 @@ export function Navbar() {
   const langWrapRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
-  const isDomePage = Boolean(pathname.match(/^\/domos\/([^/]+)/));
+  const domeMatch = pathname.match(/^\/domos\/([^/]+)/);
+  const isDomePage = Boolean(domeMatch);
   const overlay = isHome || isDomePage;
   const solid = !overlay || scrolled || mobileOpen;
 
@@ -154,10 +155,8 @@ export function Navbar() {
       : "border-white/35 bg-white/10 text-warm-white hover:bg-white/18",
   );
 
-  const reservationMessage = t("Hola, quisiera consultar la disponibilidad en Macas Moon.");
-  const whatsappSeparator = site.contact.whatsappUrl.includes("?") ? "&" : "?";
   const cta = {
-    href: `${site.contact.whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
+    href: domeMatch ? `/reservar?domo=${domeMatch[1]}` : "/reservar",
     label: "Reserva ahora",
   };
 

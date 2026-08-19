@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { domes } from "@/data/domes";
 import { site } from "@/lib/site";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
@@ -31,15 +30,21 @@ export function Footer() {
         <div>
           <p className="eyebrow text-sand-400">{t("Domos")}</p>
           <ul className="mt-4 space-y-3 text-sm">
-            {domes.map((dome) => (
-              <li key={dome.slug}>
-                <Link href={`/domos/${dome.slug}`} className="transition-colors duration-200 hover:text-white">
-                  {t(dome.category === "ESCAPADA PARA DOS"
-                    ? "Domo 2 · Escapada para dos"
-                    : "Domo 1 · Más espacio para compartir")}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link href="/#domos" className="transition-colors duration-200 hover:text-white">
+                {t("Elegir domo")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/domos/domo-amplio" className="transition-colors duration-200 hover:text-white">
+                {t("Domo 1 · Más espacio para compartir")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/domos/domo-romantico" className="transition-colors duration-200 hover:text-white">
+                {t("Domo 2 · Escapada para dos")}
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -47,7 +52,7 @@ export function Footer() {
           <p className="eyebrow text-sand-400">{t("Explora")}</p>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link href="/experiencias" className="transition-colors duration-200 hover:text-white">
+              <Link href="/#experiencias" className="transition-colors duration-200 hover:text-white">
                 {t("Experiencias")}
               </Link>
             </li>
@@ -62,8 +67,8 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/#domos" className="transition-colors duration-200 hover:text-white">
-                {t("Elegir domo")}
+              <Link href="/#faq" className="transition-colors duration-200 hover:text-white">
+                {t("FAQ")}
               </Link>
             </li>
           </ul>
