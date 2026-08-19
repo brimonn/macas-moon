@@ -29,22 +29,30 @@ export function GalleryModal({ open, onClose, images, labels, title }: GalleryMo
   const visible = filter === "todas" ? images : images.filter((image) => image.category === filter);
 
   return (
-    <Modal open={open} onClose={onClose} title={t("Fotos · {title}", { title })} size="full">
-      <div className="no-scrollbar -mx-1 mb-6 flex gap-2 overflow-x-auto pb-1">
-        <FilterChip active={filter === "todas"} onClick={() => setFilter("todas")}>
-          {t("Todas")}
-        </FilterChip>
-        {filters.map((category) => (
-          <FilterChip
-            key={category}
-            active={filter === category}
-            onClick={() => setFilter(category)}
-          >
-            {labels[category]}
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={t("Fotos · {title}", { title })}
+      size="full"
+      bodyClassName="px-0 py-0 sm:px-0 sm:py-0"
+    >
+      <div className="sticky top-0 z-10 bg-warm-white px-5 pt-6 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
+        <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto pb-1">
+          <FilterChip active={filter === "todas"} onClick={() => setFilter("todas")}>
+            {t("Todas")}
           </FilterChip>
-        ))}
+          {filters.map((category) => (
+            <FilterChip
+              key={category}
+              active={filter === category}
+              onClick={() => setFilter(category)}
+            >
+              {labels[category]}
+            </FilterChip>
+          ))}
+        </div>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:grid-cols-2 sm:px-8 sm:pb-8 lg:grid-cols-3">
         {visible.map((image) => (
           <figure key={image.src} className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
             <Image src={image.src} alt={t(image.alt)} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />

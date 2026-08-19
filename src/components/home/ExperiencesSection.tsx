@@ -22,7 +22,7 @@ export function ExperiencesSection() {
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {monteverdePlaces.map((place) => (
+          {monteverdePlaces.map((place, index) => (
             <article
               key={place.id}
               className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-sand-300 bg-sand-50 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift"
@@ -32,6 +32,7 @@ export function ExperiencesSection() {
                   src={place.image}
                   alt={place.name}
                   fill
+                  priority={index < 3}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />

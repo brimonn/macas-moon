@@ -75,6 +75,7 @@ export function Navbar() {
   const isHome = pathname === "/";
   const domeMatch = pathname.match(/^\/domos\/([^/]+)/);
   const isDomePage = Boolean(domeMatch);
+  const isReservarPage = pathname === "/reservar";
   const overlay = isHome || isDomePage;
   const solid = !overlay || scrolled || mobileOpen;
 
@@ -157,7 +158,7 @@ export function Navbar() {
 
   const cta = {
     href: domeMatch ? `/reservar?domo=${domeMatch[1]}` : "/reservar",
-    label: "Reserva ahora",
+    label: isDomePage ? "Reservar este domo" : "Reserva ahora",
   };
 
   function closeMenus() {
@@ -229,13 +230,24 @@ export function Navbar() {
             onClick={closeMenus}
           >
             <Image
-              src={solid ? site.logo : site.logoLight}
-              alt={site.name}
+              src={site.logo}
+              alt={solid ? site.name : ""}
               width={148}
               height={48}
               className={cn(
                 "h-9 w-auto object-contain sm:h-10 lg:h-11",
-                !solid && "hero-logo-light",
+                !solid && "hidden",
+              )}
+              priority
+            />
+            <Image
+              src={site.logoLight}
+              alt={!solid ? site.name : ""}
+              width={148}
+              height={48}
+              className={cn(
+                "h-9 w-auto object-contain sm:h-10 lg:h-11 hero-logo-light",
+                solid && "hidden",
               )}
               priority
             />
@@ -352,11 +364,13 @@ export function Navbar() {
               ) : null}
             </div>
 
-            <div className="hidden lg:block">
-              <Button href={cta.href} size="md">
-                {cta.label}
-              </Button>
-            </div>
+            {!isReservarPage ? (
+              <div className="hidden lg:block">
+                <Button href={cta.href} size="md">
+                  {cta.label}
+                </Button>
+              </div>
+            ) : null}
 
             <button
               type="button"
@@ -439,11 +453,13 @@ export function Navbar() {
                 ) : null}
               </div>
             </div>
-            <div className="mt-auto pt-10 pb-[max(2rem,env(safe-area-inset-bottom))]">
-              <Button href={cta.href} size="lg" className="w-full" onClick={closeMenus}>
-                {cta.label}
-              </Button>
-            </div>
+            {!isReservarPage ? (
+              <div className="mt-auto pt-10 pb-[max(2rem,env(safe-area-inset-bottom))]">
+                <Button href={cta.href} size="lg" className="w-full" onClick={closeMenus}>
+                  {cta.label}
+                </Button>
+              </div>
+            ) : null}
           </nav>
         </div>
       ) : null}

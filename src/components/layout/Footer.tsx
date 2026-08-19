@@ -20,6 +20,7 @@ export function Footer() {
               width={170}
               height={54}
               className="h-[3.125rem] w-auto object-contain"
+              loading="eager"
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-sand-300">
@@ -104,12 +105,12 @@ export function Footer() {
             </li>
             <li>
               <a
-                href={site.contact.facebook}
+                href={site.contact.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors duration-200 hover:text-white"
               >
-                Facebook
+                TikTok
               </a>
             </li>
           </ul>

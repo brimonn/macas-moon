@@ -1,20 +1,136 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { domes } from "@/data/domes";
 import { submitReservationRequest } from "@/lib/reservations";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { cn } from "@/lib/cn";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
+import dePhoneLabels from "react-phone-number-input/locale/de";
+import enPhoneLabels from "react-phone-number-input/locale/en";
+import esPhoneLabels from "react-phone-number-input/locale/es";
+import frPhoneLabels from "react-phone-number-input/locale/fr";
+import "react-phone-number-input/style.css";
 
 type ReservationFormProps = {
   initialDome?: string;
 };
 
+function formatDateInput(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function addDays(isoDate: string, days: number) {
+  const date = new Date(`${isoDate}T12:00:00`);
+  date.setDate(date.getDate() + days);
+  return formatDateInput(date);
+}
+
+function isoToDisplay(iso: string) {
+  if (!iso) return "";
+  const [year, month, day] = iso.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function displayToIso(value: string) {
+  const match = value.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if (!match) return "";
+  const day = Number(match[1]);
+  const month = Number(match[2]);
+  const year = Number(match[3]);
+  const date = new Date(year, month - 1, day);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    return "";
+  }
+  return formatDateInput(date);
+}
+
+function maskDate(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  const day = digits.slice(0, 2);
+  const month = digits.slice(2, 4);
+  const year = digits.slice(4, 8);
+  if (digits.length <= 2) return day;
+  if (digits.length <= 4) return `${day}/${month}`;
+  return `${day}/${month}/${year}`;
+}
+
+function DateField({
+  label,
+  value,
+  min,
+  fieldClass,
+  required,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  min: string;
+  fieldClass: string;
+  required?: boolean;
+  onChange: (iso: string) => void;
+}) {
+  const [text, setText] = useState(isoToDisplay(value));
+
+  useEffect(() => {
+    setText(isoToDisplay(value));
+  }, [value]);
+
+  function commit(nextText: string) {
+    const iso = displayToIso(nextText);
+    if (!iso || iso < min) {
+      setText(isoToDisplay(value));
+      return;
+    }
+    onChange(iso);
+  }
+
+  return (
+    <label className="block">
+      <span className="text-sm font-medium text-ink">{label}</span>
+      <span className={cn("relative block", fieldClass, "pr-12 focus-within:border-olive-500")}>
+        <input
+          required={required}
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          placeholder="dd/mm/yyyy"
+          value={text}
+          onChange={(event) => setText(maskDate(event.target.value))}
+          onBlur={() => commit(text)}
+          className="date-field-input w-full appearance-none border-0 bg-transparent p-0 shadow-none outline-none ring-0"
+        />
+        <Calendar
+          className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-ink"
+          strokeWidth={1.7}
+          aria-hidden="true"
+        />
+        <input
+          type="date"
+          min={min}
+          value={value}
+          tabIndex={-1}
+          aria-hidden="true"
+          onChange={(event) => onChange(event.target.value)}
+          className="absolute top-1/2 right-3 h-7 w-7 -translate-y-1/2 cursor-pointer opacity-0"
+        />
+      </span>
+    </label>
+  );
+}
+
 export function ReservationForm({ initialDome }: ReservationFormProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const selectedDefault = domes.some((dome) => dome.slug === initialDome)
     ? initialDome
     : "";
+  const domeLocked = Boolean(selectedDefault);
 
   const [domeSlug, setDomeSlug] = useState(selectedDefault ?? "");
   const [checkIn, setCheckIn] = useState("");
@@ -22,7 +138,8 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   const [guests, setGuests] = useState("2");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<string | undefined>();
+  const [phoneError, setPhoneError] = useState("");
   const [message, setMessage] = useState("");
   const [submittedUrl, setSubmittedUrl] = useState("");
 
@@ -32,9 +149,17 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   );
 
   const maxGuests = selectedDome?.capacity ?? 4;
+  const today = formatDateInput(new Date());
+  const minCheckIn = addDays(today, 1);
+  const minCheckOut = checkIn ? addDays(checkIn, 1) : addDays(minCheckIn, 1);
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (checkIn < minCheckIn || checkOut <= checkIn) return;
+    if (!phone || !isValidPhoneNumber(phone)) {
+      setPhoneError(t("Ingresa un número de teléfono válido."));
+      return;
+    }
     const result = submitReservationRequest({
       domeSlug,
       checkIn,
@@ -44,7 +169,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       email,
       phone,
       message,
-    }, t);
+    }, t, language);
     setSubmittedUrl(result.whatsappUrl);
     window.open(result.whatsappUrl, "_blank", "noopener,noreferrer");
   }
@@ -70,44 +195,54 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
     <form onSubmit={onSubmit} className="space-y-6">
       <label className="block">
         <span className="text-sm font-medium text-ink">{t("Domo seleccionado")}</span>
-        <select
-          required
-          value={domeSlug}
-          onChange={(event) => setDomeSlug(event.target.value)}
-          className={fieldClass}
-        >
-          <option value="" disabled>
-            {t("Elige un domo")}
-          </option>
-          {domes.map((dome) => (
-            <option key={dome.slug} value={dome.slug}>
-              {t(dome.name)}
+        {domeLocked && selectedDome ? (
+          <input
+            readOnly
+            value={t(selectedDome.name)}
+            className={`${fieldClass} cursor-default bg-sand-50`}
+            aria-readonly="true"
+          />
+        ) : (
+          <select
+            required
+            value={domeSlug}
+            onChange={(event) => setDomeSlug(event.target.value)}
+            className={fieldClass}
+          >
+            <option value="" disabled>
+              {t("Elige un domo")}
             </option>
-          ))}
-        </select>
+            {domes.map((dome) => (
+              <option key={dome.slug} value={dome.slug}>
+                {t(dome.name)}
+              </option>
+            ))}
+          </select>
+        )}
       </label>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <label className="block">
-          <span className="text-sm font-medium text-ink">{t("Fecha de llegada")}</span>
-          <input
-            required
-            type="date"
-            value={checkIn}
-            onChange={(event) => setCheckIn(event.target.value)}
-            className={fieldClass}
-          />
-        </label>
-        <label className="block">
-          <span className="text-sm font-medium text-ink">{t("Fecha de salida")}</span>
-          <input
-            required
-            type="date"
-            value={checkOut}
-            onChange={(event) => setCheckOut(event.target.value)}
-            className={fieldClass}
-          />
-        </label>
+        <DateField
+          label={t("Fecha de llegada")}
+          value={checkIn}
+          min={minCheckIn}
+          required
+          fieldClass={fieldClass}
+          onChange={(nextCheckIn) => {
+            setCheckIn(nextCheckIn);
+            if (checkOut && nextCheckIn && checkOut <= nextCheckIn) {
+              setCheckOut(addDays(nextCheckIn, 1));
+            }
+          }}
+        />
+        <DateField
+          label={t("Fecha de salida")}
+          value={checkOut}
+          min={minCheckOut}
+          required
+          fieldClass={fieldClass}
+          onChange={setCheckOut}
+        />
       </div>
 
       <label className="block">
@@ -148,16 +283,42 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
             className={fieldClass}
           />
         </label>
-        <label className="block">
+        <div>
           <span className="text-sm font-medium text-ink">{t("Teléfono")}</span>
-          <input
-            required
-            type="tel"
+          <PhoneInput
+            international
+            defaultCountry="CR"
+            countryCallingCodeEditable={false}
+            flags={flags}
+            labels={
+              language === "en"
+                ? enPhoneLabels
+                : language === "de"
+                  ? dePhoneLabels
+                  : language === "fr"
+                    ? frPhoneLabels
+                    : esPhoneLabels
+            }
             value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-            className={fieldClass}
+            onChange={(value) => {
+              setPhone(value);
+              if (phoneError) setPhoneError("");
+            }}
+            className={cn("phone-input", phoneError && "phone-input-error")}
+            numberInputProps={{
+              name: "phone",
+              autoComplete: "tel",
+              inputMode: "tel",
+              "aria-invalid": Boolean(phoneError),
+              "aria-describedby": phoneError ? "reservation-phone-error" : undefined,
+            }}
           />
-        </label>
+          {phoneError ? (
+            <span id="reservation-phone-error" className="mt-1.5 block text-xs text-olive-800">
+              {phoneError}
+            </span>
+          ) : null}
+        </div>
       </div>
 
       <label className="block">

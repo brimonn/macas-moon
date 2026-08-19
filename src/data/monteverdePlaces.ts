@@ -1,5 +1,3 @@
-import { unsplash } from "@/lib/images";
-
 export type PlaceCategory =
   | "Naturaleza"
   | "Gastronomía"
@@ -33,7 +31,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Aventura",
     description:
       "Puentes colgantes, teleférico y tirolesas para recorrer el dosel del bosque.",
-    image: "/assets/otros/hanging-bridges-monteverde.webp",
+    image: "/assets/otros/treetopia-park.webp",
     highlight: "Puentes, teleférico y canopy",
     websiteUrl: "https://treetopiapark.com/",
   },
@@ -43,7 +41,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Aventura",
     description:
       "Canopy, salto bungee, columpio Tarzán y experiencias de adrenalina entre el bosque.",
-    image: unsplash("photo-1500530855697-b586d89ba3ee"),
+    image: "/assets/otros/extremo-park.webp",
     highlight: "Canopy y aventura extrema",
     websiteUrl: "https://monteverdeextremo.com/",
   },
@@ -53,7 +51,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Aventura",
     description:
       "Aventura y naturaleza en el bosque nuboso con canopy, puentes y recorridos para explorar.",
-    image: "/assets/otros/hanging-bridges-monteverde.webp",
+    image: "/assets/otros/selvatura-park.webp",
     highlight: "Aventura en el bosque nuboso",
     websiteUrl: "https://www.selvatura.com/",
   },
@@ -63,7 +61,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Café",
     description:
       "Conoce el proceso del café de Monteverde, desde la finca hasta la taza.",
-    image: unsplash("photo-1495474472287-4d71bcdd2085"),
+    image: "/assets/otros/cafe-tour.webp",
     highlight: "Cultura y degustación de café",
     websiteUrl: "https://cafedemonteverde.com/tour/",
   },
@@ -73,7 +71,7 @@ export const monteverdePlaces: MonteverdePlace[] = [
     category: "Gastronomía",
     description:
       "Una opción para disfrutar una cena especial y sabores de alta calidad en Monteverde.",
-    image: unsplash("photo-1414235077428-338989a2e8c0"),
+    image: "/assets/otros/kapikapi.webp",
     highlight: "Cena de alta calidad",
     websiteUrl: "https://www.kapikapirestaurante.com/",
   },

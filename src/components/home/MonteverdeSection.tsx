@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Compass } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Compass } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -50,6 +50,15 @@ export function MonteverdeSection() {
                   <Compass className="h-4 w-4" strokeWidth={1.6} />
                   {t(place.highlight)}
                 </p>
+                <a
+                  href={place.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-sand-100 transition-colors hover:text-white"
+                >
+                  {t("Visitar sitio oficial")}
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
               </div>
             </article>
           ))}

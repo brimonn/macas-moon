@@ -1,3 +1,4 @@
+import type { Language } from "@/i18n/LanguageProvider";
 import { domes } from "@/data/domes";
 import { site } from "@/lib/site";
 
@@ -19,23 +20,36 @@ export type ReservationResult = {
 
 type Translate = (text: string) => string;
 
+function fieldLabel(spanish: string, t: Translate, language: Language) {
+  if (language === "es") return spanish;
+  const translated = t(spanish);
+  return translated === spanish ? spanish : `${translated} / ${spanish}`;
+}
+
 export function submitReservationRequest(
   payload: ReservationRequest,
   t: Translate = (text) => text,
+  language: Language = "es",
 ): ReservationResult {
   const selectedDome = domes.find((dome) => dome.slug === payload.domeSlug);
+  const label = (spanish: string) => fieldLabel(spanish, t, language);
+  const guestMessage = payload.message
+    ? language === "es"
+      ? `${t("Mensaje")}: ${payload.message}`
+      : `${label("Mensaje del cliente")}:\n${payload.message}`
+    : "";
   const lines = [
     t("Hola, quisiera consultar la disponibilidad en Macas Moon."),
     "",
-    `${t("Domo")}: ${selectedDome ? t(selectedDome.name) : payload.domeSlug}`,
-    `${t("Llegada")}: ${payload.checkIn}`,
-    `${t("Salida")}: ${payload.checkOut}`,
-    `${t("Huéspedes")}: ${payload.guests}`,
+    `${label("Domo")}: ${selectedDome ? t(selectedDome.name) : payload.domeSlug}`,
+    `${label("Llegada")}: ${payload.checkIn}`,
+    `${label("Salida")}: ${payload.checkOut}`,
+    `${label("Huéspedes")}: ${payload.guests}`,
     "",
-    `${t("Nombre")}: ${payload.name}`,
-    `${t("Correo")}: ${payload.email}`,
-    `${t("Teléfono")}: ${payload.phone}`,
-    payload.message ? `${t("Mensaje")}: ${payload.message}` : "",
+    `${label("Nombre")}: ${payload.name}`,
+    `${label("Correo")}: ${payload.email}`,
+    `${label("Teléfono")}: ${payload.phone}`,
+    guestMessage,
   ].filter(Boolean);
 
   const separator = site.contact.whatsappUrl.includes("?") ? "&" : "?";

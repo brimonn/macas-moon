@@ -1,5 +1,5 @@
 const whatsappUrl =
-  process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/50684915764";
+  process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/50661694392";
 const whatsappSeparator = whatsappUrl.includes("?") ? "&" : "?";
 const reservationMessage =
   "Hola, quisiera consultar la disponibilidad en Macas Moon.";
@@ -18,8 +18,8 @@ export const site = {
     whatsappUrl,
     reservationWhatsappUrl: `${whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "macasmoonglamping@gmail.com",
-    instagram: "https://instagram.com/macasmoon",
-    facebook: "https://facebook.com/macasmoon",
+    instagram: "https://www.instagram.com/macasmoonglampingscr",
+    tiktok: "https://www.tiktok.com/@macasmoonglampingscr",
   },
   checkIn: "Desde las 3:00 p. m.",
   checkOut: "Hasta las 11:00 a. m.",

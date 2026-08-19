@@ -81,22 +81,24 @@ export function SiteGallery() {
 
   return (
     <>
-      <div className="no-scrollbar mt-10 flex gap-2 overflow-x-auto pb-2 sm:mt-12">
-        {filters.map((item) => (
-          <button
-            key={item.value}
-            type="button"
-            onClick={() => selectFilter(item.value)}
-            className={cn(
-              "min-h-11 shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-200",
-              filter === item.value
-                ? "bg-olive-600 text-white"
-                : "border border-sand-300 bg-sand-50 text-olive-800 hover:bg-olive-50",
-            )}
-          >
-            {t(item.label)}
-          </button>
-        ))}
+      <div className="sticky top-[var(--header-h)] z-20 mt-10 bg-warm-white pt-2 pb-1 sm:mt-12">
+        <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto pb-2">
+          {filters.map((item) => (
+            <button
+              key={item.value}
+              type="button"
+              onClick={() => selectFilter(item.value)}
+              className={cn(
+                "min-h-11 shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-200",
+                filter === item.value
+                  ? "bg-olive-600 text-white"
+                  : "border border-sand-300 bg-sand-50 text-olive-800 hover:bg-olive-50",
+              )}
+            >
+              {t(item.label)}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">

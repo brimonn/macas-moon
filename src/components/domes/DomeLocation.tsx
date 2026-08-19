@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { Dome } from "@/types/dome";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { site } from "@/lib/site";
 
 export function DomeLocation({ dome }: { dome: Dome }) {
   const { t } = useLanguage();
@@ -18,7 +19,7 @@ export function DomeLocation({ dome }: { dome: Dome }) {
             {t("Los domos están en un entorno de bosque y montaña, a pocos minutos de Santa Elena y de los senderos que hacen único a este destino.")}
           </p>
           <div className="mt-7">
-            <Button href="/#ubicacion" variant="outline">
+            <Button href={site.location.mapsUrl} variant="outline">
               Ver ubicación
             </Button>
           </div>
