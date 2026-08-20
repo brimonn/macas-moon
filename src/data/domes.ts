@@ -161,6 +161,10 @@ export const domes: Dome[] = [
     heroImage: "/assets/domo1/IMG_5501.webp",
     cardImage: "/assets/domo1/IMG_5495.webp",
     locationImage: "/assets/domo1/IMG_5501.webp",
+    video: {
+      youtubeId: "KIKsIjOI_jE",
+      title: "Video del Domo 1 de Macas Moon",
+    },
     shortDescription:
       "Un espacio amplio entre naturaleza, pensado para disfrutar Monteverde con mayor comodidad.",
     longDescription:

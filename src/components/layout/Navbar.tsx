@@ -257,6 +257,9 @@ export function Navbar() {
             className="hidden min-w-0 flex-1 items-center justify-center gap-6 lg:flex xl:gap-8"
             aria-label={t("Principal")}
           >
+            <HashLink hash="#inicio" className={linkClass} onClick={closeMenus}>
+              {t("Inicio")}
+            </HashLink>
             <div className="relative" ref={domesWrapRef}>
               <button
                 type="button"
@@ -400,6 +403,13 @@ export function Navbar() {
             aria-label={t("Móvil")}
           >
             <div className="flex flex-col gap-1 text-[1.45rem] leading-tight font-semibold text-ink sm:text-2xl">
+              <HashLink
+                hash="#inicio"
+                className="flex min-h-11 items-center py-1"
+                onClick={closeMenus}
+              >
+                {t("Inicio")}
+              </HashLink>
               <div>
                 <button
                   type="button"

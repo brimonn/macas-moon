@@ -65,6 +65,11 @@ export type DomeHighlight = {
   text: string;
 };
 
+export type DomeVideo = {
+  youtubeId: string;
+  title: string;
+};
+
 export type Dome = {
   slug: string;
   name: string;
@@ -78,6 +83,7 @@ export type Dome = {
   heroImage: string;
   cardImage: string;
   locationImage: string;
+  video?: DomeVideo;
   shortDescription: string;
   longDescription: string;
   conceptTitle: string;

@@ -7,6 +7,7 @@ import { DomeHero } from "@/components/domes/DomeHero";
 import { DomeHighlights } from "@/components/domes/DomeHighlights";
 import { DomeLocation } from "@/components/domes/DomeLocation";
 import { DomeStats } from "@/components/domes/DomeStats";
+import { DomeVideoSection } from "@/components/domes/DomeVideoSection";
 import { SpacesSection } from "@/components/domes/SpacesSection";
 import { StayInfoSection } from "@/components/home/StayInfoSection";
 import { domes, getDome } from "@/data/domes";
@@ -48,6 +49,7 @@ export default async function DomePage({ params }: DomePageProps) {
       </div>
       <DomeHighlights dome={dome} />
       <DomeGallery dome={dome} />
+      <DomeVideoSection dome={dome} />
       <AmenitiesSection dome={dome} />
       <SpacesSection dome={dome} />
       <StayInfoSection />
