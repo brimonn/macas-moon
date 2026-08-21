@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Calendar } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { domes } from "@/data/domes";
 import { submitReservationRequest } from "@/lib/reservations";
@@ -14,6 +14,13 @@ import enPhoneLabels from "react-phone-number-input/locale/en";
 import esPhoneLabels from "react-phone-number-input/locale/es";
 import frPhoneLabels from "react-phone-number-input/locale/fr";
 import "react-phone-number-input/style.css";
+
+const FIELD_LIMITS = {
+  name: 100,
+  email: 254,
+  phone: 25,
+  message: 600,
+} as const;
 
 type ReservationFormProps = {
   initialDome?: string;
@@ -38,33 +45,28 @@ function isoToDisplay(iso: string) {
   return `${day}/${month}/${year}`;
 }
 
-function displayToIso(value: string) {
-  const match = value.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-  if (!match) return "";
-  const day = Number(match[1]);
-  const month = Number(match[2]);
-  const year = Number(match[3]);
-  const date = new Date(year, month - 1, day);
-  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
-    return "";
-  }
-  return formatDateInput(date);
+function monthFromIso(iso: string) {
+  const [year, month] = iso.split("-").map(Number);
+  return { year, month: month - 1 };
 }
 
-function maskDate(value: string) {
-  const digits = value.replace(/\D/g, "").slice(0, 8);
-  const day = digits.slice(0, 2);
-  const month = digits.slice(2, 4);
-  const year = digits.slice(4, 8);
-  if (digits.length <= 2) return day;
-  if (digits.length <= 4) return `${day}/${month}`;
-  return `${day}/${month}/${year}`;
+function shiftMonth(year: number, month: number, delta: number) {
+  const date = new Date(year, month + delta, 1);
+  return { year: date.getFullYear(), month: date.getMonth() };
+}
+
+function weekdayLabels(locale: string) {
+  return Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(Date.UTC(2024, 0, 1 + index));
+    return date.toLocaleDateString(locale, { weekday: "short", timeZone: "UTC" }).replace(".", "");
+  });
 }
 
 function DateField({
   label,
   value,
   min,
+  name,
   fieldClass,
   required,
   onChange,
@@ -72,57 +74,197 @@ function DateField({
   label: string;
   value: string;
   min: string;
+  name: string;
   fieldClass: string;
   required?: boolean;
   onChange: (iso: string) => void;
 }) {
-  const [text, setText] = useState(isoToDisplay(value));
+  const { t, language } = useLanguage();
+  const locale = language === "es" ? "es-CR" : language;
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [usesNativePicker, setUsesNativePicker] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [view, setView] = useState(() => monthFromIso(value || min));
 
   useEffect(() => {
-    setText(isoToDisplay(value));
-  }, [value]);
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const iOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    setUsesNativePicker(coarse || iOS);
+  }, []);
 
-  function commit(nextText: string) {
-    const iso = displayToIso(nextText);
-    if (!iso || iso < min) {
-      setText(isoToDisplay(value));
-      return;
+  useEffect(() => {
+    if (!open) return;
+    setView(monthFromIso(value || min));
+  }, [open, value, min]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onPointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     }
-    onChange(iso);
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  function applyIso(iso: string) {
+    if (!iso) return;
+    onChange(iso < min ? min : iso);
+  }
+
+  if (usesNativePicker) {
+    return (
+      <label className="block">
+        <span className="text-sm font-medium text-ink">{label}</span>
+        <span className={cn("relative block", fieldClass)}>
+          <input
+            required={required}
+            type="date"
+            name={name}
+            autoComplete="off"
+            lang={locale}
+            min={min}
+            value={value}
+            onChange={(event) => applyIso(event.target.value)}
+            className="date-native-input w-full appearance-none border-0 bg-transparent p-0 text-ink shadow-none outline-none"
+          />
+        </span>
+      </label>
+    );
+  }
+
+  const minMonth = monthFromIso(min);
+  const canGoPrev =
+    view.year > minMonth.year || (view.year === minMonth.year && view.month > minMonth.month);
+  const daysInView = new Date(view.year, view.month + 1, 0).getDate();
+  const leadingEmpty = (() => {
+    const weekday = new Date(view.year, view.month, 1).getDay();
+    return weekday === 0 ? 6 : weekday - 1;
+  })();
+  const monthLabel = new Date(view.year, view.month, 1).toLocaleDateString(locale, {
+    month: "long",
+    year: "numeric",
+  });
+
+  function selectDay(day: number) {
+    const iso = formatDateInput(new Date(view.year, view.month, day));
+    if (iso < min) return;
+    applyIso(iso);
+    setOpen(false);
   }
 
   return (
-    <label className="block">
+    <div ref={rootRef} className="relative">
       <span className="text-sm font-medium text-ink">{label}</span>
-      <span className={cn("relative block", fieldClass, "pr-12 focus-within:border-olive-500")}>
-        <input
-          required={required}
-          type="text"
-          inputMode="numeric"
-          autoComplete="off"
-          placeholder="dd/mm/yyyy"
-          value={text}
-          onChange={(event) => setText(maskDate(event.target.value))}
-          onBlur={() => commit(text)}
-          className="date-field-input w-full appearance-none border-0 bg-transparent p-0 shadow-none outline-none ring-0"
-        />
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        className={cn(
+          "relative block w-full cursor-pointer text-left",
+          fieldClass,
+          "pr-12",
+          open && "border-olive-500",
+        )}
+      >
+        <span className={cn("block", value ? "text-ink" : "text-muted")}>
+          {isoToDisplay(value) || "dd/mm/yyyy"}
+        </span>
         <Calendar
           className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-ink"
           strokeWidth={1.7}
           aria-hidden="true"
         />
-        <input
-          type="date"
-          min={min}
-          value={value}
-          tabIndex={-1}
-          aria-hidden="true"
-          onChange={(event) => onChange(event.target.value)}
-          className="absolute top-1/2 right-3 h-7 w-7 -translate-y-1/2 cursor-pointer opacity-0"
-        />
-      </span>
-    </label>
+      </button>
+      <input
+        required={required}
+        readOnly
+        name={name}
+        autoComplete="off"
+        value={isoToDisplay(value)}
+        className="sr-only"
+      />
+      {open ? (
+        <div className="absolute z-30 mt-2 w-full min-w-[17rem] rounded-2xl border border-border bg-warm-white p-3 shadow-soft">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <button
+              type="button"
+              disabled={!canGoPrev}
+              aria-label={t("Mes anterior")}
+              onClick={() => setView((current) => shiftMonth(current.year, current.month, -1))}
+              className="flex h-11 w-11 items-center justify-center rounded-full text-olive-800 disabled:opacity-30"
+            >
+              <ChevronLeft className="h-5 w-5" strokeWidth={1.8} />
+            </button>
+            <p className="text-sm font-medium capitalize text-ink">{monthLabel}</p>
+            <button
+              type="button"
+              aria-label={t("Mes siguiente")}
+              onClick={() => setView((current) => shiftMonth(current.year, current.month, 1))}
+              className="flex h-11 w-11 items-center justify-center rounded-full text-olive-800"
+            >
+              <ChevronRight className="h-5 w-5" strokeWidth={1.8} />
+            </button>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-center">
+            {weekdayLabels(locale).map((weekday, index) => (
+              <span key={`${weekday}-${index}`} className="pb-1 text-[0.68rem] font-medium tracking-wide text-muted uppercase">
+                {weekday}
+              </span>
+            ))}
+            {Array.from({ length: leadingEmpty }, (_, index) => (
+              <span key={`empty-${index}`} />
+            ))}
+            {Array.from({ length: daysInView }, (_, index) => {
+              const day = index + 1;
+              const iso = formatDateInput(new Date(view.year, view.month, day));
+              const disabled = iso < min;
+              const selected = iso === value;
+              return (
+                <button
+                  key={iso}
+                  type="button"
+                  disabled={disabled}
+                  onClick={() => selectDay(day)}
+                  className={cn(
+                    "flex h-10 items-center justify-center rounded-full text-sm",
+                    disabled && "cursor-not-allowed text-sand-400",
+                    !disabled && !selected && "text-ink hover:bg-olive-50",
+                    selected && "bg-olive-500 text-white",
+                  )}
+                >
+                  {day}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+    </div>
   );
+}
+
+function openWhatsApp(url: string) {
+  const popup = window.open(url, "_blank");
+  if (popup) {
+    popup.opener = null;
+    return "popup" as const;
+  }
+
+  try {
+    window.location.assign(url);
+    return "redirect" as const;
+  } catch {
+    return "failed" as const;
+  }
 }
 
 export function ReservationForm({ initialDome }: ReservationFormProps) {
@@ -131,6 +273,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
     ? initialDome
     : "";
   const domeLocked = Boolean(selectedDefault);
+  const highestCapacity = Math.max(...domes.map((dome) => dome.capacity));
 
   const [domeSlug, setDomeSlug] = useState(selectedDefault ?? "");
   const [checkIn, setCheckIn] = useState("");
@@ -141,37 +284,64 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   const [phone, setPhone] = useState<string | undefined>();
   const [phoneError, setPhoneError] = useState("");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [submittedUrl, setSubmittedUrl] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
   const selectedDome = useMemo(
     () => domes.find((dome) => dome.slug === domeSlug),
     [domeSlug],
   );
 
-  const maxGuests = selectedDome?.capacity ?? 4;
+  const maxGuests = selectedDome?.capacity ?? highestCapacity;
   const today = formatDateInput(new Date());
   const minCheckIn = addDays(today, 1);
   const minCheckOut = checkIn ? addDays(checkIn, 1) : addDays(minCheckIn, 1);
 
+  useEffect(() => {
+    setGuests((current) => {
+      const count = Number(current);
+      if (!Number.isFinite(count) || count < 1) return current;
+      if (count > maxGuests) return String(maxGuests);
+      return current;
+    });
+  }, [maxGuests]);
+
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submittingRef.current) return;
+    if (honeypot.trim()) return;
     if (checkIn < minCheckIn || checkOut <= checkIn) return;
-    if (!phone || !isValidPhoneNumber(phone)) {
+    if (!phone || !isValidPhoneNumber(phone) || phone.length > FIELD_LIMITS.phone) {
       setPhoneError(t("Ingresa un número de teléfono válido."));
       return;
     }
+
+    const guestCount = Math.min(Math.max(Number(guests) || 1, 1), maxGuests);
+    submittingRef.current = true;
+    setSubmitting(true);
+
     const result = submitReservationRequest({
       domeSlug,
       checkIn,
       checkOut,
-      guests: Number(guests),
-      name,
-      email,
+      guests: guestCount,
+      name: name.slice(0, FIELD_LIMITS.name),
+      email: email.slice(0, FIELD_LIMITS.email),
       phone,
-      message,
+      message: message.slice(0, FIELD_LIMITS.message),
     }, t, language);
-    setSubmittedUrl(result.whatsappUrl);
-    window.open(result.whatsappUrl, "_blank", "noopener,noreferrer");
+
+    const opened = openWhatsApp(result.whatsappUrl);
+    if (opened === "popup") {
+      setSubmittedUrl(result.whatsappUrl);
+      return;
+    }
+    if (opened === "failed") {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   }
 
   if (submittedUrl) {
@@ -192,12 +362,26 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
     "mt-2 w-full rounded-2xl border border-border bg-warm-white px-4 py-3 text-ink outline-none transition-colors duration-200 focus:border-olive-500";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
+    <form onSubmit={onSubmit} className="relative space-y-6">
+      <div className="absolute -left-[10000px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label>
+          Company website
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(event) => setHoneypot(event.target.value)}
+          />
+        </label>
+      </div>
       <label className="block">
         <span className="text-sm font-medium text-ink">{t("Domo seleccionado")}</span>
         {domeLocked && selectedDome ? (
           <input
             readOnly
+            name="dome"
             value={t(selectedDome.name)}
             className={`${fieldClass} cursor-default bg-sand-50`}
             aria-readonly="true"
@@ -205,6 +389,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         ) : (
           <select
             required
+            name="dome"
             value={domeSlug}
             onChange={(event) => setDomeSlug(event.target.value)}
             className={fieldClass}
@@ -224,6 +409,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       <div className="grid gap-6 sm:grid-cols-2">
         <DateField
           label={t("Fecha de llegada")}
+          name="check-in"
           value={checkIn}
           min={minCheckIn}
           required
@@ -237,6 +423,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         />
         <DateField
           label={t("Fecha de salida")}
+          name="check-out"
           value={checkOut}
           min={minCheckOut}
           required
@@ -250,10 +437,19 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         <input
           required
           type="number"
+          name="guests"
+          inputMode="numeric"
           min={1}
           max={maxGuests}
           value={guests}
-          onChange={(event) => setGuests(event.target.value)}
+          onChange={(event) => {
+            const next = Number(event.target.value);
+            if (!Number.isFinite(next)) {
+              setGuests(event.target.value);
+              return;
+            }
+            setGuests(String(Math.min(Math.max(next, 1), maxGuests)));
+          }}
           className={fieldClass}
         />
         {selectedDome ? (
@@ -266,8 +462,11 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         <input
           required
           type="text"
+          name="name"
+          autoComplete="name"
+          maxLength={FIELD_LIMITS.name}
           value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => setName(event.target.value.slice(0, FIELD_LIMITS.name))}
           className={fieldClass}
         />
       </label>
@@ -278,8 +477,11 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           <input
             required
             type="email"
+            name="email"
+            autoComplete="email"
+            maxLength={FIELD_LIMITS.email}
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value.slice(0, FIELD_LIMITS.email))}
             className={fieldClass}
           />
         </label>
@@ -309,6 +511,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
               name: "phone",
               autoComplete: "tel",
               inputMode: "tel",
+              maxLength: FIELD_LIMITS.phone,
               "aria-invalid": Boolean(phoneError),
               "aria-describedby": phoneError ? "reservation-phone-error" : undefined,
             }}
@@ -325,8 +528,11 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         <span className="text-sm font-medium text-ink">{t("Mensaje adicional")}</span>
         <textarea
           rows={4}
+          name="message"
+          autoComplete="off"
+          maxLength={FIELD_LIMITS.message}
           value={message}
-          onChange={(event) => setMessage(event.target.value)}
+          onChange={(event) => setMessage(event.target.value.slice(0, FIELD_LIMITS.message))}
           className={`${fieldClass} resize-y`}
         />
       </label>
@@ -335,7 +541,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
         {t("Esta solicitud no confirma automáticamente tu reserva. Nos pondremos en contacto contigo para verificar disponibilidad y continuar con el proceso.")}
       </p>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
+      <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitting}>
         Enviar solicitud por WhatsApp
       </Button>
     </form>

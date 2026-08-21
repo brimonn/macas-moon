@@ -3,12 +3,14 @@ import { Heart, Leaf } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { TranslatedText } from "@/i18n/LanguageProvider";
 import { TranslatedImage } from "@/i18n/TranslatedImage";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/nosotros",
   title: "Nosotros",
   description:
-    "Conoce la motivación y la misión de los anfitriones de Macas Moon Glamping en Monteverde.",
-};
+    "Somos los anfitriones de Macas Moon Glamping en Monteverde. Creamos un rincón para compartir la calma del bosque y recibir a cada huésped con calidez.",
+});
 
 export default function AboutPage() {
   return (

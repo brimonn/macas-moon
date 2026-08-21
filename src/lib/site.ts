@@ -1,5 +1,14 @@
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.macasmoon.com";
+
+export const sitePhone = {
+  display: "+506 7111 0261",
+  e164: "+50671110261",
+  whatsapp: "50671110261",
+} as const;
+
 const whatsappUrl =
-  process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/50661694392";
+  process.env.NEXT_PUBLIC_WHATSAPP_URL ?? `https://wa.me/${sitePhone.whatsapp}`;
 const whatsappSeparator = whatsappUrl.includes("?") ? "&" : "?";
 const reservationMessage =
   "Hola, quisiera consultar la disponibilidad en Macas Moon.";
@@ -18,6 +27,9 @@ export const site = {
     whatsappUrl,
     reservationWhatsappUrl: `${whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "macasmoonglamping@gmail.com",
+    phone: sitePhone.display,
+    telephone: sitePhone.e164,
+    telUrl: `tel:${sitePhone.e164}`,
     instagram: "https://www.instagram.com/macasmoonglampingscr",
     tiktok: "https://www.tiktok.com/@macasmoonglampingscr",
   },

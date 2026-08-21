@@ -27,7 +27,7 @@ export function StayInfoSection() {
         <div className="mt-10 grid gap-6 sm:grid-cols-3 lg:mt-8">
           {facts.map((fact) => (
             <div key={fact.label} className="rounded-[24px] bg-warm-white px-6 py-8">
-              <fact.icon className="h-6 w-6 text-olive-500" strokeWidth={1.5} />
+              <fact.icon className="h-6 w-6 text-olive-500" strokeWidth={1.5} aria-hidden="true" />
               <p className="eyebrow mt-5 text-olive-700">
                 {t(fact.label)}
               </p>

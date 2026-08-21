@@ -21,7 +21,7 @@ export function LocationSection() {
               src="/assets/otros/bosque-nuboso.webp"
               alt={t("Bosque nuboso de Monteverde")}
               fill
-              sizes="100vw"
+              sizes="(min-width: 1024px) 80vw, calc(100vw - 2.5rem)"
               className="location-image object-cover"
             />
             <div className="absolute inset-0 bg-olive-900/25" />
@@ -33,7 +33,7 @@ export function LocationSection() {
               className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-warm-white text-olive-700 shadow-soft">
-                <MapPin className="h-5 w-5" />
+                <MapPin className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="mt-3 rounded-full bg-warm-white/95 px-4 py-1.5 text-sm font-semibold text-ink">
                 Macas Moon

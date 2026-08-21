@@ -15,6 +15,7 @@ export function ExperiencesSection() {
     <section className="min-h-screen bg-warm-white">
       <Container className="pt-24 pb-20 sm:pt-40 sm:pb-32">
         <SectionHeading
+          as="h1"
           eyebrow="Tours y lugares"
           title="Experiencias en Monteverde"
           description="Ideas para explorar el bosque nuboso, descubrir sabores locales y disfrutar la montaña durante tu estadía."
@@ -32,7 +33,7 @@ export function ExperiencesSection() {
                   src={place.image}
                   alt={place.name}
                   fill
-                  priority={index < 3}
+                  priority={index === 0}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />

@@ -4,8 +4,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { websiteJsonLd } from "@/lib/jsonLd";
 import { site } from "@/lib/site";
 import "./globals.css";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.macasmoon.com";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -21,27 +25,31 @@ const nunito = Nunito_Sans({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Macas Moon Glamping | Domos en Monteverde",
+    default: "Macas Moon | Glamping en Monteverde, Costa Rica",
     template: "%s | Macas Moon Glamping",
   },
   description:
-    "Descubre una forma diferente de vivir Monteverde en los domos de Macas Moon Glamping, rodeados de naturaleza, tranquilidad y comodidad.",
+    "Glamping en Monteverde, Costa Rica: los domos de Macas Moon ofrecen naturaleza, tranquilidad y comodidad entre las montañas del bosque nuboso.",
   openGraph: {
-    title: "Macas Moon Glamping | Domos en Monteverde",
+    title: "Macas Moon | Glamping en Monteverde, Costa Rica",
     description:
-      "Descubre una forma diferente de vivir Monteverde en los domos de Macas Moon Glamping, rodeados de naturaleza, tranquilidad y comodidad.",
+      "Glamping en Monteverde, Costa Rica: los domos de Macas Moon ofrecen naturaleza, tranquilidad y comodidad entre las montañas del bosque nuboso.",
     type: "website",
     locale: "es_CR",
     siteName: site.name,
+    url: siteUrl,
+    images: [
+      {
+        url: "/assets/domo2/IMG_7051.webp",
+        alt: "Domos de Macas Moon rodeados de vegetación y las montañas de Monteverde",
+      },
+    ],
   },
-  icons: {
-    icon: site.logo,
-    apple: site.logo,
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -53,6 +61,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${lora.variable} ${nunito.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-warm-white font-sans text-main antialiased">
+        <JsonLd data={websiteJsonLd()} />
         <LanguageProvider>
           <Navbar />
           <main id="contenido" className="flex-1 pb-[5.5rem] md:pb-0">

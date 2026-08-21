@@ -11,6 +11,9 @@ import { DomeVideoSection } from "@/components/domes/DomeVideoSection";
 import { SpacesSection } from "@/components/domes/SpacesSection";
 import { StayInfoSection } from "@/components/home/StayInfoSection";
 import { domes, getDome } from "@/data/domes";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { accommodationJsonLd } from "@/lib/jsonLd";
+import { createPageMetadata } from "@/lib/seo";
 
 type DomePageProps = {
   params: Promise<{ slug: string }>;
@@ -23,17 +26,37 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: DomePageProps): Promise<Metadata> {
   const { slug } = await params;
   const dome = getDome(slug);
-  if (!dome) return { title: "Domo no encontrado" };
+  if (!dome) {
+    return {
+      title: "Domo no encontrado",
+      robots: { index: false, follow: false },
+    };
+  }
 
-  return {
-    title: dome.name,
-    description: dome.shortDescription,
-    openGraph: {
-      title: `${dome.name} | Macas Moon Glamping`,
-      description: dome.shortDescription,
-      images: [{ url: dome.heroImage, alt: dome.name }],
+  const domeSeo: Record<string, { title: string; description: string }> = {
+    "domo-romantico": {
+      title: "Domo 2 · Romántico",
+      description:
+        "El Domo 2 de Macas Moon en Monteverde es un espacio íntimo para 2 huéspedes, con jacuzzi privado, terraza y cocina entre el bosque.",
+    },
+    "domo-amplio": {
+      title: "Domo 1 · Amplio",
+      description:
+        "El Domo 1 de Macas Moon en Monteverde ofrece más espacio para hasta 4 huéspedes, con 2 camas, jacuzzi, terraza amplia y cocina.",
     },
   };
+
+  const page = domeSeo[slug] ?? {
+    title: dome.name,
+    description: dome.shortDescription,
+  };
+
+  return createPageMetadata({
+    path: `/domos/${slug}`,
+    title: page.title,
+    description: page.description,
+    images: [{ url: dome.heroImage, alt: dome.name }],
+  });
 }
 
 export default async function DomePage({ params }: DomePageProps) {
@@ -43,6 +66,7 @@ export default async function DomePage({ params }: DomePageProps) {
 
   return (
     <>
+      <JsonLd data={accommodationJsonLd(dome)} />
       <div className="dome-first-screen">
         <DomeHero dome={dome} />
         <DomeStats dome={dome} />

@@ -7,7 +7,17 @@ import { cn } from "@/lib/cn";
 import type { Dome, Space } from "@/types/dome";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
-function SpaceBlock({ space, className, imageClassName }: { space: Space; className?: string; imageClassName?: string }) {
+function SpaceBlock({
+  space,
+  className,
+  imageClassName,
+  sizes = "(min-width: 1024px) 80vw, calc(100vw - 2.5rem)",
+}: {
+  space: Space;
+  className?: string;
+  imageClassName?: string;
+  sizes?: string;
+}) {
   const { t } = useLanguage();
 
   return (
@@ -17,7 +27,7 @@ function SpaceBlock({ space, className, imageClassName }: { space: Space; classN
           src={space.image}
           alt={t(space.name)}
           fill
-          sizes="(min-width: 1024px) 70vw, 100vw"
+          sizes={sizes}
           className="object-cover"
         />
       </div>
@@ -57,7 +67,12 @@ export function SpacesSection({ dome }: { dome: Dome }) {
           {completePairs.map((pair) => (
             <div key={pair.map((item) => item.id).join("-")} className="grid gap-10 lg:grid-cols-2">
               {pair.map((space) => (
-                <SpaceBlock key={space.id} space={space} imageClassName="aspect-[4/3]" />
+                <SpaceBlock
+                  key={space.id}
+                  space={space}
+                  imageClassName="aspect-[4/3]"
+                  sizes="(min-width: 1024px) 40vw, calc(100vw - 2.5rem)"
+                />
               ))}
             </div>
           ))}
@@ -68,6 +83,7 @@ export function SpacesSection({ dome }: { dome: Dome }) {
               space={space}
               className="lg:max-w-[85%]"
               imageClassName="aspect-[16/9] sm:aspect-[21/9] sm:min-h-[320px]"
+              sizes="(min-width: 1024px) 70vw, calc(100vw - 2.5rem)"
             />
           ))}
 
@@ -79,6 +95,7 @@ export function SpacesSection({ dome }: { dome: Dome }) {
                   space={space}
                   className="lg:col-start-2"
                   imageClassName="aspect-[4/3]"
+                  sizes="(min-width: 1024px) 40vw, calc(100vw - 2.5rem)"
                 />
               ))}
             </div>

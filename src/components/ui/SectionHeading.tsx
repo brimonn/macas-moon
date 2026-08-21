@@ -10,6 +10,7 @@ type SectionHeadingProps = {
   align?: "left" | "center";
   className?: string;
   id?: string;
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -19,6 +20,7 @@ export function SectionHeading({
   align = "left",
   className,
   id,
+  as: HeadingTag = "h2",
 }: SectionHeadingProps) {
   const { t } = useLanguage();
 
@@ -35,12 +37,12 @@ export function SectionHeading({
           {t(eyebrow)}
         </p>
       ) : null}
-      <h2
+      <HeadingTag
         id={id}
         className="heading-section text-ink"
       >
         {t(title)}
-      </h2>
+      </HeadingTag>
       {description ? (
         <p className="mt-4 text-base leading-relaxed font-normal text-muted sm:text-lg">
           {t(description)}

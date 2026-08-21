@@ -6,10 +6,22 @@ import { LocationSection } from "@/components/home/LocationSection";
 import { MonteverdeSection } from "@/components/home/MonteverdeSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { lodgingBusinessJsonLd } from "@/lib/jsonLd";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  path: "/",
+  title: "Macas Moon | Glamping en Monteverde, Costa Rica",
+  description:
+    "Glamping en Monteverde, Costa Rica: los domos de Macas Moon ofrecen naturaleza, tranquilidad y comodidad entre las montañas del bosque nuboso.",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={lodgingBusinessJsonLd()} />
       <HomeHero />
       <IntroSection />
       <DomesSection />

@@ -230,26 +230,14 @@ export function Navbar() {
             onClick={closeMenus}
           >
             <Image
-              src={site.logo}
-              alt={solid ? site.name : ""}
+              src={solid ? site.logo : site.logoLight}
+              alt={site.name}
               width={148}
               height={48}
               className={cn(
                 "h-9 w-auto object-contain sm:h-10 lg:h-11",
-                !solid && "hidden",
+                !solid && "hero-logo-light",
               )}
-              priority
-            />
-            <Image
-              src={site.logoLight}
-              alt={!solid ? site.name : ""}
-              width={148}
-              height={48}
-              className={cn(
-                "h-9 w-auto object-contain sm:h-10 lg:h-11 hero-logo-light",
-                solid && "hidden",
-              )}
-              priority
             />
           </HashLink>
 

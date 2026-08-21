@@ -26,6 +26,7 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
                 <Icon
                   className="mt-0.5 h-[22px] w-[22px] shrink-0 text-olive-500 sm:h-6 sm:w-6 lg:h-[26px] lg:w-[26px]"
                   strokeWidth={1.5}
+                  aria-hidden="true"
                 />
                 <span className="min-w-0 text-[15px] leading-snug font-medium break-words text-ink sm:text-base">
                   {t(amenity.label)}
@@ -46,7 +47,7 @@ export function AmenitiesSection({ dome }: { dome: Dome }) {
             const Icon = icons[amenity.icon];
             return (
               <li key={amenity.id} className="flex items-center gap-3">
-                <Icon className="h-5 w-5 text-olive-500" strokeWidth={1.5} />
+                <Icon className="h-5 w-5 text-olive-500" strokeWidth={1.5} aria-hidden="true" />
                 <span className="text-sm font-medium text-ink">{t(amenity.label)}</span>
               </li>
             );

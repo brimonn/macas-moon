@@ -20,7 +20,6 @@ export function Footer() {
               width={170}
               height={54}
               className="h-[3.125rem] w-auto object-contain"
-              loading="eager"
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-sand-300">
@@ -78,6 +77,14 @@ export function Footer() {
         <div>
           <p className="eyebrow text-sand-400">{t("Contacto")}</p>
           <ul className="mt-4 space-y-3 text-sm">
+            <li>
+              <a
+                href={site.contact.telUrl}
+                className="transition-colors duration-200 hover:text-white"
+              >
+                {site.contact.phone}
+              </a>
+            </li>
             <li>
               <a
                 href={site.contact.whatsappUrl}

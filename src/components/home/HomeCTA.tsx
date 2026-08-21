@@ -11,7 +11,7 @@ export function HomeCTA() {
   return (
     <section className="relative isolate min-h-svh overflow-hidden lg:h-svh lg:max-h-svh">
       <Image
-        src="/assets/otros/macasmoon-nocturno.jpg"
+        src="/assets/otros/macasmoon-nocturno.webp"
         alt={t("Domo de Macas Moon iluminado al anochecer entre el bosque de Monteverde")}
         fill
         sizes="100vw"

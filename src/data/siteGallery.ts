@@ -95,7 +95,7 @@ const generalImages: SiteGalleryImage[] = [
     orientation: "portrait",
   },
   {
-    src: "/assets/otros/macasmoon-nocturno.jpg",
+    src: "/assets/otros/macasmoon-nocturno.webp",
     alt: "Macas Moon Glamping iluminado durante la noche",
     category: "general",
     orientation: "landscape",

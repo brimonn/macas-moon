@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { SiteGallery } from "@/components/gallery/SiteGallery";
 import { Container } from "@/components/ui/Container";
 import { TranslatedText } from "@/i18n/LanguageProvider";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/galeria",
   title: "Galería",
   description:
-    "Explora todas las fotografías de los domos, la naturaleza y el entorno de Macas Moon Glamping en Monteverde.",
-};
+    "Fotografías de los domos, jacuzzis, terrazas y el bosque de Macas Moon Glamping en Monteverde, Costa Rica.",
+});
 
 export default function GalleryPage() {
   return (

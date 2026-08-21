@@ -44,6 +44,7 @@ export function DomeGallery({ dome }: { dome: Dome }) {
               key={`${tile.image.src}-${index}`}
               type="button"
               onClick={() => setOpen(true)}
+              aria-label={`${t("Abrir foto")}: ${t(tile.image.alt)}`}
               className={`group relative aspect-[4/3] overflow-hidden rounded-[20px] sm:aspect-auto sm:min-h-[200px] sm:rounded-[22px] ${index === 0 ? "sm:min-h-[420px]" : ""} ${tile.className}`}
             >
               <Image

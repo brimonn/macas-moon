@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { TranslatedText } from "@/i18n/LanguageProvider";
+
+export const metadata: Metadata = {
+  title: "Página no encontrada",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

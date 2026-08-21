@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
@@ -26,19 +27,25 @@ const categoryLabels: Record<SiteGalleryCategory, string> = {
   monteverde: "Monteverde",
 };
 
+const INITIAL_VISIBLE = 12;
+const LOAD_MORE = 12;
+
 export function SiteGallery() {
   const { t } = useLanguage();
   const [filter, setFilter] = useState<"all" | SiteGalleryCategory>("all");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const visibleImages = useMemo(
+  const filteredImages = useMemo(
     () => filter === "all"
       ? siteGalleryImages
       : siteGalleryImages.filter((image) => image.category === filter),
     [filter],
   );
 
-  const selectedImage = selectedIndex === null ? null : visibleImages[selectedIndex];
+  const mountedImages = filteredImages.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredImages.length;
+  const selectedImage = selectedIndex === null ? null : filteredImages[selectedIndex];
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -46,22 +53,23 @@ export function SiteGallery() {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "ArrowLeft") {
         setSelectedIndex((current) =>
-          current === null ? null : (current - 1 + visibleImages.length) % visibleImages.length,
+          current === null ? null : (current - 1 + filteredImages.length) % filteredImages.length,
         );
       }
       if (event.key === "ArrowRight") {
         setSelectedIndex((current) =>
-          current === null ? null : (current + 1) % visibleImages.length,
+          current === null ? null : (current + 1) % filteredImages.length,
         );
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selectedIndex, visibleImages.length]);
+  }, [selectedIndex, filteredImages.length]);
 
   function selectFilter(nextFilter: "all" | SiteGalleryCategory) {
     setFilter(nextFilter);
+    setVisibleCount(INITIAL_VISIBLE);
     setSelectedIndex(null);
   }
 
@@ -69,13 +77,13 @@ export function SiteGallery() {
 
   function showPrevious() {
     setSelectedIndex((current) =>
-      current === null ? null : (current - 1 + visibleImages.length) % visibleImages.length,
+      current === null ? null : (current - 1 + filteredImages.length) % filteredImages.length,
     );
   }
 
   function showNext() {
     setSelectedIndex((current) =>
-      current === null ? null : (current + 1) % visibleImages.length,
+      current === null ? null : (current + 1) % filteredImages.length,
     );
   }
 
@@ -102,7 +110,7 @@ export function SiteGallery() {
       </div>
 
       <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
-        {visibleImages.map((image, index) => (
+        {mountedImages.map((image, index) => (
           <button
             key={image.src}
             type="button"
@@ -117,7 +125,7 @@ export function SiteGallery() {
               src={image.src}
               alt={t(image.alt)}
               fill
-              sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 28vw, (min-width: 640px) 44vw, calc(100vw - 2.5rem)"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
             />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/65 to-transparent px-4 pt-12 pb-4 text-xs font-bold tracking-[0.12em] text-white uppercase opacity-90 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
@@ -126,6 +134,18 @@ export function SiteGallery() {
           </button>
         ))}
       </div>
+
+      {hasMore ? (
+        <div className="mt-6 flex justify-center sm:mt-8">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setVisibleCount((current) => current + LOAD_MORE)}
+          >
+            Ver más
+          </Button>
+        </div>
+      ) : null}
 
       <Modal
         open={selectedImage !== null}
@@ -167,7 +187,7 @@ export function SiteGallery() {
               <p className="mt-1 text-xs text-sand-400">
                 {t("Foto {current} de {total}", {
                   current: selectedIndex + 1,
-                  total: visibleImages.length,
+                  total: filteredImages.length,
                 })}
               </p>
             </div>

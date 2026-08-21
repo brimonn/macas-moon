@@ -20,12 +20,34 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
+const LANGUAGE_KEY = "macas-moon-language";
+
+function readStoredLanguage(): Language | null {
+  try {
+    const saved = window.localStorage.getItem(LANGUAGE_KEY);
+    if (saved === "es" || saved === "en" || saved === "fr" || saved === "de") {
+      return saved;
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function writeStoredLanguage(language: Language) {
+  try {
+    window.localStorage.setItem(LANGUAGE_KEY, language);
+  } catch {
+    // Storage may be blocked; keep the in-memory language anyway.
+  }
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("es");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("macas-moon-language");
-    if (saved === "es" || saved === "en" || saved === "fr" || saved === "de") {
+    const saved = readStoredLanguage();
+    if (saved) {
       // Restoring browser-only persisted state after hydration is intentional.
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguageState(saved);
@@ -38,7 +60,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage);
-    window.localStorage.setItem("macas-moon-language", nextLanguage);
+    writeStoredLanguage(nextLanguage);
   }, []);
 
   const t = useCallback(

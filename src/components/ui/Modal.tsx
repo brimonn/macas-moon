@@ -5,6 +5,15 @@ import { X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "textarea:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
 type ModalProps = {
   open: boolean;
   onClose: () => void;
@@ -29,6 +38,7 @@ export function Modal({
   const { t } = useLanguage();
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -39,8 +49,42 @@ export function Modal({
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    function getFocusable() {
+      if (!dialogRef.current) return [];
+      return Array.from(dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (element) => element.getAttribute("aria-hidden") !== "true",
+      );
+    }
+
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialogRef.current?.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || !dialogRef.current?.contains(active))) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && (active === last || !dialogRef.current?.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     window.addEventListener("keydown", onKey);
@@ -57,14 +101,17 @@ export function Modal({
     <div className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-6">
       <button
         type="button"
+        tabIndex={-1}
         aria-label={t("Cerrar")}
         className="absolute inset-0 bg-ink/45 transition-opacity duration-300"
         onClick={onClose}
       />
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        tabIndex={-1}
         className={cn(
           "relative z-10 flex max-h-[92svh] w-full flex-col overflow-hidden bg-warm-white shadow-soft duration-300",
           size === "full" && "h-[100svh] max-h-[100svh] rounded-none sm:h-auto sm:max-h-[92svh] sm:rounded-[24px]",

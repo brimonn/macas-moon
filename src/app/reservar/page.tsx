@@ -3,12 +3,14 @@ import { ReservationForm } from "@/components/reservar/ReservationForm";
 import { Container } from "@/components/ui/Container";
 import { getDome } from "@/data/domes";
 import { TranslatedText } from "@/i18n/LanguageProvider";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/reservar",
   title: "Solicita tu reserva",
   description:
-    "Solicita tu estadía en Macas Moon Glamping. Te contactaremos para confirmar disponibilidad en Monteverde.",
-};
+    "Consulta disponibilidad en Macas Moon Glamping, Monteverde. Elige fechas y domo; te contactamos por WhatsApp para continuar la reserva.",
+});
 
 type ReservarPageProps = {
   searchParams: Promise<{ domo?: string }>;
