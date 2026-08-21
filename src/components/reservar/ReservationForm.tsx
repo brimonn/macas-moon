@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { domes } from "@/data/domes";
@@ -82,6 +82,8 @@ function DateField({
   const { t, language } = useLanguage();
   const locale = language === "es" ? "es-CR" : language;
   const rootRef = useRef<HTMLDivElement>(null);
+  const fieldId = useId();
+  const labelId = `${fieldId}-label`;
   const [usesNativePicker, setUsesNativePicker] = useState(true);
   const [open, setOpen] = useState(false);
   const [view, setView] = useState(() => monthFromIso(value || min));
@@ -89,13 +91,10 @@ function DateField({
   useEffect(() => {
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const iOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    // Detect input mode after hydration so SSR markup stays stable.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUsesNativePicker(coarse || iOS);
   }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    setView(monthFromIso(value || min));
-  }, [open, value, min]);
 
   useEffect(() => {
     if (!open) return;
@@ -164,10 +163,19 @@ function DateField({
 
   return (
     <div ref={rootRef} className="relative">
-      <span className="text-sm font-medium text-ink">{label}</span>
+      <span id={labelId} className="text-sm font-medium text-ink">
+        {label}
+      </span>
       <button
         type="button"
-        onClick={() => setOpen((current) => !current)}
+        id={fieldId}
+        aria-labelledby={labelId}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={() => {
+          setView(monthFromIso(value || min));
+          setOpen((current) => !current);
+        }}
         className={cn(
           "relative block w-full cursor-pointer text-left",
           fieldClass,
@@ -287,6 +295,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   const [honeypot, setHoneypot] = useState("");
   const [submittedUrl, setSubmittedUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
   const submittingRef = useRef(false);
 
   const selectedDome = useMemo(
@@ -299,24 +308,26 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
   const minCheckIn = addDays(today, 1);
   const minCheckOut = checkIn ? addDays(checkIn, 1) : addDays(minCheckIn, 1);
 
-  useEffect(() => {
-    setGuests((current) => {
-      const count = Number(current);
-      if (!Number.isFinite(count) || count < 1) return current;
-      if (count > maxGuests) return String(maxGuests);
-      return current;
-    });
-  }, [maxGuests]);
+  function clampGuests(current: string, capacity: number) {
+    const count = Number(current);
+    if (!Number.isFinite(count) || count < 1) return current;
+    if (count > capacity) return String(capacity);
+    return current;
+  }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submittingRef.current) return;
     if (honeypot.trim()) return;
-    if (checkIn < minCheckIn || checkOut <= checkIn) return;
+    if (checkIn < minCheckIn || checkOut <= checkIn) {
+      setFormError(t("Revisa las fechas: la salida debe ser posterior a la llegada."));
+      return;
+    }
     if (!phone || !isValidPhoneNumber(phone) || phone.length > FIELD_LIMITS.phone) {
       setPhoneError(t("Ingresa un número de teléfono válido."));
       return;
     }
+    setFormError("");
 
     const guestCount = Math.min(Math.max(Number(guests) || 1, 1), maxGuests);
     submittingRef.current = true;
@@ -341,6 +352,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
     if (opened === "failed") {
       submittingRef.current = false;
       setSubmitting(false);
+      setFormError(t("No se pudo abrir WhatsApp. Inténtalo de nuevo."));
     }
   }
 
@@ -391,7 +403,12 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
             required
             name="dome"
             value={domeSlug}
-            onChange={(event) => setDomeSlug(event.target.value)}
+            onChange={(event) => {
+              const nextSlug = event.target.value;
+              setDomeSlug(nextSlug);
+              const capacity = domes.find((dome) => dome.slug === nextSlug)?.capacity ?? highestCapacity;
+              setGuests((current) => clampGuests(current, capacity));
+            }}
             className={fieldClass}
           >
             <option value="" disabled>
@@ -486,7 +503,9 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
           />
         </label>
         <div>
-          <span className="text-sm font-medium text-ink">{t("Teléfono")}</span>
+          <label htmlFor="reservation-phone" className="block text-sm font-medium text-ink">
+            {t("Teléfono")}
+          </label>
           <PhoneInput
             international
             defaultCountry="CR"
@@ -508,6 +527,7 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
             }}
             className={cn("phone-input", phoneError && "phone-input-error")}
             numberInputProps={{
+              id: "reservation-phone",
               name: "phone",
               autoComplete: "tel",
               inputMode: "tel",
@@ -540,6 +560,12 @@ export function ReservationForm({ initialDome }: ReservationFormProps) {
       <p className="rounded-2xl bg-sand-50 px-4 py-3 text-sm leading-relaxed text-muted">
         {t("Esta solicitud no confirma automáticamente tu reserva. Nos pondremos en contacto contigo para verificar disponibilidad y continuar con el proceso.")}
       </p>
+
+      {formError ? (
+        <p id="reservation-form-error" role="alert" className="text-sm text-olive-800">
+          {formError}
+        </p>
+      ) : null}
 
       <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitting}>
         Enviar solicitud por WhatsApp

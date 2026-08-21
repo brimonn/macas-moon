@@ -1,6 +1,6 @@
 import type { Language } from "@/i18n/LanguageProvider";
 import { domes } from "@/data/domes";
-import { site } from "@/lib/site";
+import { whatsappMessageUrl } from "@/lib/site";
 
 export type ReservationRequest = {
   domeSlug: string;
@@ -52,10 +52,5 @@ export function submitReservationRequest(
     guestMessage,
   ].filter(Boolean);
 
-  const separator = site.contact.whatsappUrl.includes("?") ? "&" : "?";
-  const whatsappUrl = `${site.contact.whatsappUrl}${separator}text=${encodeURIComponent(
-    lines.join("\n"),
-  )}`;
-
-  return { ok: true, whatsappUrl };
+  return { ok: true, whatsappUrl: whatsappMessageUrl(lines.join("\n")) };
 }

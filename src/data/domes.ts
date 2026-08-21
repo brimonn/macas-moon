@@ -49,7 +49,7 @@ const dome2Gallery: GalleryImage[] = [
   { src: "/assets/domo2/IMG_7098.webp", alt: "Jacuzzi privado del Domo 2", category: "jacuzzi" },
 ];
 
-export const domes: Dome[] = [
+const domeCatalog: Dome[] = [
   {
     slug: "domo-romantico",
     name: "Macas Moon Domo 2 · Romántico",
@@ -102,7 +102,7 @@ export const domes: Dome[] = [
         id: "habitacion",
         name: "Habitación",
         description:
-          "Un cuarto sereno, con cama cómoda y la vegetación como único vecino. Pensado para despertar despacio.",
+          "Un espacio sereno y acogedor, rodeado de naturaleza para despertar sin prisa.",
         image: "/assets/domo2/IMG_7068.webp",
         layout: "full",
       },
@@ -110,7 +110,7 @@ export const domes: Dome[] = [
         id: "jacuzzi",
         name: "Jacuzzi",
         description:
-          "Un rincón privado para quedarse en silencio, hablar o mirar el bosque mientras el día se apaga.",
+          "Un rincón privado para relajarse, conversar y contemplar el bosque.",
         image: "/assets/domo2/IMG_7061.webp",
         layout: "half",
       },
@@ -118,7 +118,7 @@ export const domes: Dome[] = [
         id: "cocina",
         name: "Cocina",
         description:
-          "Lo esencial para un desayuno largo o una cena sencilla, sin salir del domo.",
+          "Todo lo necesario para disfrutar un café, un desayuno o una cena sin salir del domo.",
         image: "/assets/domo2/IMG_7066.webp",
         layout: "half",
       },
@@ -126,7 +126,7 @@ export const domes: Dome[] = [
         id: "exterior",
         name: "Exterior",
         description:
-          "Terraza, aire fresco y la sensación de estar dentro del bosque de Monteverde.",
+          "Una terraza rodeada de aire fresco, vegetación y el paisaje de Monteverde.",
         image: "/assets/domo2/IMG_7055.webp",
         layout: "wide",
       },
@@ -134,7 +134,7 @@ export const domes: Dome[] = [
         id: "bano",
         name: "Baño",
         description:
-          "Un baño privado, cálido y funcional, con agua caliente después del clima de montaña.",
+          "Un espacio privado y confortable, con agua caliente para disfrutar el clima de montaña.",
         image: "/assets/domo2/IMG_7078.webp",
         layout: "half",
       },
@@ -168,20 +168,20 @@ export const domes: Dome[] = [
     shortDescription:
       "Un espacio amplio entre naturaleza, pensado para disfrutar Monteverde con mayor comodidad.",
     longDescription:
-      "Más aire, más luz y más lugar para estar juntos. El Domo 1 está pensado para quienes viajan en pareja, con amigos o en un pequeño grupo y quieren la calma de Monteverde sin sentirse justos.",
-    conceptTitle: "Espacio para disfrutar juntos",
+      "Un domo diseñado para quienes quieren disfrutar de Monteverde con comodidad, amplitud y el encanto de estar rodeados de naturaleza.",
+    conceptTitle: "Más espacio para vivir la experiencia",
     highlights: [
       {
-        title: "Mayor amplitud",
-        text: "Un interior más abierto, pensado para quedarse, conversar y descansar con holgura.",
+        title: "Comodidad que se siente",
+        text: "Un ambiente amplio, más comodidad y rincones pensados para que descansar también sea parte de la aventura.",
       },
       {
-        title: "Hasta 4 huéspedes",
-        text: "Dos camas y espacio suficiente para compartir la estadía con quienes elijas.",
+        title: "Un refugio para compartir",
+        text: "Con capacidad para hasta cuatro huéspedes, es ideal para una escapada en pareja, una pequeña familia o un viaje entre amigos.",
       },
       {
-        title: "Espacios para compartir",
-        text: "Cocina, terraza amplia y rincones para estar juntos después de explorar Monteverde.",
+        title: "Después de la aventura",
+        text: "Prepara algo rico, relájate en la terraza o simplemente disfruta de una tarde tranquila. Aquí también empieza la parte más bonita del viaje.",
       },
     ],
     stats: [
@@ -203,7 +203,7 @@ export const domes: Dome[] = [
         id: "habitacion",
         name: "Habitación",
         description:
-          "Un ambiente más amplio para descansar, con dos camas y la sensación de espacio que pide un viaje compartido.",
+          "Un espacio amplio y acogedor, con dos camas y todo lo necesario para descansar cómodamente.",
         image: "/assets/domo1/IMG_5479.webp",
         layout: "full",
       },
@@ -211,7 +211,7 @@ export const domes: Dome[] = [
         id: "jacuzzi",
         name: "Jacuzzi",
         description:
-          "Para soltar el día después de caminar, observar aves o simplemente no hacer nada.",
+          "Agua caliente y naturaleza alrededor para relajarse después de un día en Monteverde.",
         image: "/assets/domo1/IMG_5495.webp",
         layout: "half",
       },
@@ -219,7 +219,7 @@ export const domes: Dome[] = [
         id: "cocina",
         name: "Cocina",
         description:
-          "Un espacio más cómodo para preparar café, desayunos y comidas sin prisa.",
+          "Todo lo esencial para preparar café, desayunos o una comida sin prisa.",
         image: "/assets/domo1/IMG_5484.webp",
         layout: "half",
       },
@@ -227,7 +227,7 @@ export const domes: Dome[] = [
         id: "exterior",
         name: "Exterior",
         description:
-          "Una terraza amplia para estar afuera, escuchar el bosque y ver pasar las nubes de Monteverde.",
+          "Una terraza amplia para disfrutar del aire fresco y contemplar el bosque.",
         image: "/assets/domo1/IMG_5477.webp",
         layout: "wide",
       },
@@ -235,7 +235,7 @@ export const domes: Dome[] = [
         id: "bano",
         name: "Baño",
         description:
-          "Baño privado, luminoso y práctico, listo después de un día en la montaña.",
+          "Un baño privado, luminoso y cómodo para terminar el día con tranquilidad.",
         image: "/assets/domo1/IMG_5482.webp",
         layout: "half",
       },
@@ -250,6 +250,15 @@ export const domes: Dome[] = [
     },
   },
 ];
+
+const DOME_DISPLAY_ORDER: Record<string, number> = {
+  "domo-amplio": 0,
+  "domo-romantico": 1,
+};
+
+export const domes: Dome[] = [...domeCatalog].sort(
+  (a, b) => (DOME_DISPLAY_ORDER[a.slug] ?? 99) - (DOME_DISPLAY_ORDER[b.slug] ?? 99),
+);
 
 export function getDome(slug: string) {
   return domes.find((dome) => dome.slug === slug);

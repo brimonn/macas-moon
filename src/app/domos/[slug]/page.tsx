@@ -34,15 +34,15 @@ export async function generateMetadata({ params }: DomePageProps): Promise<Metad
   }
 
   const domeSeo: Record<string, { title: string; description: string }> = {
-    "domo-romantico": {
-      title: "Domo 2 · Romántico",
-      description:
-        "El Domo 2 de Macas Moon en Monteverde es un espacio íntimo para 2 huéspedes, con jacuzzi privado, terraza y cocina entre el bosque.",
-    },
     "domo-amplio": {
       title: "Domo 1 · Amplio",
       description:
         "El Domo 1 de Macas Moon en Monteverde ofrece más espacio para hasta 4 huéspedes, con 2 camas, jacuzzi, terraza amplia y cocina.",
+    },
+    "domo-romantico": {
+      title: "Domo 2 · Romántico",
+      description:
+        "El Domo 2 de Macas Moon en Monteverde es un espacio íntimo para 2 huéspedes, con jacuzzi privado, terraza y cocina entre el bosque.",
     },
   };
 

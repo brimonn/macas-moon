@@ -84,6 +84,70 @@ export function lodgingBusinessJsonLd() {
   };
 }
 
+export function servicesJsonLd() {
+  const pageUrl = absoluteUrl("/servicios");
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Servicios adicionales en Macas Moon",
+    url: pageUrl,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        item: {
+          "@type": "Service",
+          name: "Decoraciones especiales",
+          description:
+            "Decoración para cumpleaños, aniversarios, propuestas y otras ocasiones especiales, disponible con reserva previa.",
+          url: `${pageUrl}#decoraciones`,
+          provider: {
+            "@type": "LodgingBusiness",
+            "@id": lodgingId(),
+            name: site.name,
+          },
+          areaServed: site.location.area,
+        },
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        item: {
+          "@type": "Service",
+          name: "Organización de tours en Monteverde",
+          description:
+            "Ayuda para organizar y reservar tours durante la estancia. El pago de cada tour se realiza directamente con el proveedor de la actividad.",
+          url: `${pageUrl}#tours`,
+          provider: {
+            "@type": "LodgingBusiness",
+            "@id": lodgingId(),
+            name: site.name,
+          },
+          areaServed: site.location.area,
+        },
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        item: {
+          "@type": "Service",
+          name: "Masajes",
+          description:
+            "Servicio de masajes coordinado durante la estancia, con reserva previa y sujeto a disponibilidad.",
+          url: `${pageUrl}#masajes`,
+          provider: {
+            "@type": "LodgingBusiness",
+            "@id": lodgingId(),
+            name: site.name,
+          },
+          areaServed: site.location.area,
+        },
+      },
+    ],
+  };
+}
+
 export function accommodationJsonLd(dome: Dome) {
   return {
     "@context": "https://schema.org",

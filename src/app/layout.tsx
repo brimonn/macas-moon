@@ -64,7 +64,7 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd()} />
         <LanguageProvider>
           <Navbar />
-          <main id="contenido" className="flex-1 pb-[5.5rem] md:pb-0">
+          <main id="contenido" className="flex-1">
             {children}
           </main>
           <Footer />

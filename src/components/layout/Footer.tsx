@@ -57,6 +57,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/#servicios" className="transition-colors duration-200 hover:text-white">
+                {t("Servicios")}
+              </Link>
+            </li>
+            <li>
               <Link href="/#resenas" className="transition-colors duration-200 hover:text-white">
                 {t("Reseñas")}
               </Link>
@@ -124,7 +129,7 @@ export function Footer() {
         </div>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-2 py-6 text-sm text-sand-400 sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-2 pt-6 pb-[max(5.5rem,calc(1.5rem+env(safe-area-inset-bottom)))] text-sm text-sand-400 sm:flex-row sm:items-center sm:justify-between md:pb-6">
           <p>© {new Date().getFullYear()} Macas Moon Glamping</p>
           <p>Monteverde, Puntarenas, Costa Rica</p>
         </Container>

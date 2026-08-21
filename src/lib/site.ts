@@ -9,9 +9,6 @@ export const sitePhone = {
 
 const whatsappUrl =
   process.env.NEXT_PUBLIC_WHATSAPP_URL ?? `https://wa.me/${sitePhone.whatsapp}`;
-const whatsappSeparator = whatsappUrl.includes("?") ? "&" : "?";
-const reservationMessage =
-  "Hola, quisiera consultar la disponibilidad en Macas Moon.";
 
 export const site = {
   name: "Macas Moon Glamping",
@@ -25,7 +22,6 @@ export const site = {
   },
   contact: {
     whatsappUrl,
-    reservationWhatsappUrl: `${whatsappUrl}${whatsappSeparator}text=${encodeURIComponent(reservationMessage)}`,
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "macasmoonglamping@gmail.com",
     phone: sitePhone.display,
     telephone: sitePhone.e164,
@@ -39,3 +35,8 @@ export const site = {
   logo: "/assets/Macamoon_logo_transparent_trimmed.webp",
   logoLight: "/assets/Macamoon_logo_light.webp",
 } as const;
+
+export function whatsappMessageUrl(text: string) {
+  const separator = site.contact.whatsappUrl.includes("?") ? "&" : "?";
+  return `${site.contact.whatsappUrl}${separator}text=${encodeURIComponent(text)}`;
+}

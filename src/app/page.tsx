@@ -6,6 +6,7 @@ import { LocationSection } from "@/components/home/LocationSection";
 import { MonteverdeSection } from "@/components/home/MonteverdeSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
+import { HomeServicesSection } from "@/components/home/HomeServicesSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { lodgingBusinessJsonLd } from "@/lib/jsonLd";
 import { createPageMetadata } from "@/lib/seo";
@@ -25,6 +26,7 @@ export default function HomePage() {
       <HomeHero />
       <IntroSection />
       <DomesSection />
+      <HomeServicesSection />
       <MonteverdeSection />
       <ReviewsSection />
       <LocationSection />

@@ -96,8 +96,10 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.classList.toggle("nav-mobile-open", mobileOpen);
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("nav-mobile-open");
     };
   }, [mobileOpen]);
 
@@ -173,19 +175,17 @@ export function Navbar() {
       <HashLink hash="#domos" role="menuitem" className={dropdownItemClass} onClick={closeMenus}>
         {t("Comparar domos")}
       </HashLink>
-      {[...domes]
-        .sort((a, b) => (a.slug === "domo-amplio" ? -1 : 1))
-        .map((dome) => (
-          <Link
-            key={dome.slug}
-            href={`/domos/${dome.slug}`}
-            role="menuitem"
-            className={dropdownItemClass}
-            onClick={() => window.setTimeout(closeMenus, 0)}
-          >
-            {t(dome.category === "ESCAPADA PARA DOS" ? "Domo 2 · Romántico" : "Domo 1 · Amplio")}
-          </Link>
-        ))}
+      {domes.map((dome) => (
+        <Link
+          key={dome.slug}
+          href={`/domos/${dome.slug}`}
+          role="menuitem"
+          className={dropdownItemClass}
+          onClick={() => window.setTimeout(closeMenus, 0)}
+        >
+          {t(dome.category === "ESCAPADA PARA DOS" ? "Domo 2 · Romántico" : "Domo 1 · Amplio")}
+        </Link>
+      ))}
     </>
   );
 
@@ -193,6 +193,9 @@ export function Navbar() {
     <>
       <HashLink hash="#experiencias" role="menuitem" className={dropdownItemClass} onClick={closeMenus}>
         {t("Experiencias")}
+      </HashLink>
+      <HashLink hash="#servicios" role="menuitem" className={dropdownItemClass} onClick={closeMenus}>
+        {t("Servicios")}
       </HashLink>
       <HashLink hash="#resenas" role="menuitem" className={dropdownItemClass} onClick={closeMenus}>
         {t("Reseñas")}
@@ -385,7 +388,7 @@ export function Navbar() {
       </header>
 
       {mobileOpen ? (
-        <div className="fixed inset-0 top-[var(--header-h)] z-40 overflow-y-auto bg-cream lg:hidden">
+        <div className="fixed inset-0 top-[var(--header-h)] z-[45] overflow-y-auto bg-cream lg:hidden">
           <nav
             className="flex min-h-[calc(100svh-var(--header-h))] flex-col px-5 py-8 sm:px-6 sm:py-10"
             aria-label={t("Móvil")}

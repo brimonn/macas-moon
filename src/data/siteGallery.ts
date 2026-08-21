@@ -102,16 +102,14 @@ const generalImages: SiteGalleryImage[] = [
   },
 ];
 
-const domeImages: SiteGalleryImage[] = [...domes]
-  .sort((a, b) => b.capacity - a.capacity)
-  .flatMap((dome) =>
-    dome.gallery.map((image) => ({
-      src: image.src,
-      alt: image.alt,
-      category: dome.slug === "domo-amplio" ? "domo1" : "domo2",
-      orientation: "landscape",
-    })),
-  );
+const domeImages: SiteGalleryImage[] = domes.flatMap((dome) =>
+  dome.gallery.map((image) => ({
+    src: image.src,
+    alt: image.alt,
+    category: dome.slug === "domo-amplio" ? "domo1" : "domo2",
+    orientation: "landscape",
+  })),
+);
 
 const monteverdeImages: SiteGalleryImage[] = [
   {
